@@ -2,9 +2,9 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Eren # the website title (if blank, full name will be used instead)
+title: Eren Arxiv. # the website title (if blank, full name will be used instead)
 first_name: Eren
-middle_name: R.
+middle_name: 
 last_name: Lee
 contact_note: >
   You can even add a little note about which of these is the best way to reach you.
@@ -16,16 +16,16 @@ footer_text: >
   Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
 keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: eren.png # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://qwertyyuiop1234.github.io # the base hostname & protocol for your site
 baseurl: # the subpath of your site, e.g. /blog/. Leave blank for root
-last_updated: false # set to true if you want to display last updated in the footer
+last_updated: true # set to true if you want to display last updated in the footer
 impressum_path: # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
 back_to_top: true # set to false to disable the back to top button
 
 # -----------------------------------------------------------------------------
-# Theme
+# region Theme
 # -----------------------------------------------------------------------------
 
 # repo color theme
@@ -44,13 +44,13 @@ external_services:
   github_profile_trophy_url: https://github-profile-trophy.vercel.app
 
 # -----------------------------------------------------------------------------
-# RSS Feed
+# region RSS Feed
 # -----------------------------------------------------------------------------
 # will use title and url fields
 # Take a look to https://github.com/jekyll/jekyll-feed for more customization
 
 # -----------------------------------------------------------------------------
-# Layout
+# region Layout
 # -----------------------------------------------------------------------------
 
 navbar_fixed: true
@@ -64,7 +64,7 @@ bib_search: true
 max_width: 930px
 
 # -----------------------------------------------------------------------------
-# Open Graph & Schema.org
+# region Open Graph & Schema.org
 # -----------------------------------------------------------------------------
 # Display links to the page with a preview object on social media.
 # see https://schema.org/docs/faq.html for more information
@@ -73,7 +73,7 @@ serve_schema_org: false # Include Schema.org in the HTML head
 og_image: # The site-wide (default for all links) Open Graph preview image
 
 # -----------------------------------------------------------------------------
-# Analytics and search engine verification
+# region Analytics and search engine verification
 # -----------------------------------------------------------------------------
 
 # For Google Analytics, see https://support.google.com/analytics/answer/10447272?hl=en&ref_topic=14088998&sjid=5129943941510317771-SA#zippy=%2Cgoogle-sites
@@ -88,11 +88,11 @@ google_site_verification: # your google-site-verification ID (Google Search Cons
 bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 
 # -----------------------------------------------------------------------------
-# Blog
+# region Blog
 # -----------------------------------------------------------------------------
 
-blog_name: al-folio # blog_name will be displayed in your blog page
-blog_description: a simple whitespace theme for academics
+blog_name: Eren Arxiv. # blog_name will be displayed in your blog page
+blog_description: Eren Arxiv is all you need # (임시 설명)
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
@@ -128,20 +128,20 @@ disqus_shortname: al-folio # put your disqus shortname
 # If you have blog posts published on medium.com or other external sources,
 # you can display them in your blog by adding a link to the RSS feed.
 # Optional: Set default categories and tags for posts from each source.
-external_sources:
-  - name: medium.com
-    rss_url: https://medium.com/@al-folio/feed
-    categories: [external-posts]
-    tags: [medium]
-  - name: Google Blog
-    posts:
-      - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
-        published_date: 2024-05-14
-    categories: [external-posts]
-    tags: [google]
-
+# external_sources:
+#   - name: medium.com
+#     rss_url: https://medium.com/@al-folio/feed
+#     categories: [external-posts]
+#     tags: [medium]
+#   - name: Google Blog
+#     posts:
+#       - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
+#         published_date: 2024-05-14
+#     categories: [external-posts]
+#     tags: [google]
+ 
 # -----------------------------------------------------------------------------
-# Newsletter
+# region Newsletter
 # -----------------------------------------------------------------------------
 
 newsletter:
@@ -150,7 +150,7 @@ newsletter:
   # https://loops.so/docs/forms/custom-form
 
 # -----------------------------------------------------------------------------
-# Collections
+# region Collections
 # -----------------------------------------------------------------------------
 
 collections:
@@ -166,7 +166,7 @@ collections:
     output: true
 
 # -----------------------------------------------------------------------------
-# Jekyll settings
+# region Jekyll settings
 # -----------------------------------------------------------------------------
 
 # Markdown and syntax highlight
@@ -198,6 +198,12 @@ exclude:
   - LICENSE
   - lighthouse_results/
   - package.json
+  - _posts_archive/
+  - _news_archive/
+  - _projects_archive/
+  - _teachings_archive/
+  - _books_archive/
+  - _bibliography/papers.bib_archive
   - package-lock.json
   - _pages/about_einstein.md
   - purgecss.config.js
@@ -242,7 +248,7 @@ sass:
   style: compressed
 
 # -----------------------------------------------------------------------------
-# Jekyll Minifier
+# region Jekyll Minifier
 # -----------------------------------------------------------------------------
 
 jekyll-minifier:
@@ -250,7 +256,7 @@ jekyll-minifier:
   exclude: ["robots.txt", "assets/js/search/*.js"]
 
 # -----------------------------------------------------------------------------
-# Terser
+# region Terser
 # -----------------------------------------------------------------------------
 
 terser:
@@ -258,7 +264,7 @@ terser:
     drop_console: true
 
 # -----------------------------------------------------------------------------
-# Jekyll Archives
+# region Jekyll Archives
 # -----------------------------------------------------------------------------
 
 jekyll-archives:
@@ -271,11 +277,11 @@ jekyll-archives:
   books:
     enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
 
-display_tags: ["formatting", "images", "links", "math", "code", "blockquotes"] # these tags will be displayed on the front page of your blog
-display_categories: ["external-services"] # these categories will be displayed on the front page of your blog
+display_tags: ["cv"] # these tags will be displayed on the front page of your blog
+display_categories: ["AI", "Computer Vision"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
-# Jekyll Scholar
+# region Jekyll Scholar
 # -----------------------------------------------------------------------------
 
 scholar:
@@ -350,7 +356,7 @@ more_authors_animation_delay: 10 # more authors are revealed on click using anim
 enable_publication_thumbnails: true
 
 # -----------------------------------------------------------------------------
-# Jekyll Link Attributes
+# region Jekyll Link Attributes
 # -----------------------------------------------------------------------------
 
 # These are the defaults
@@ -361,7 +367,7 @@ external_links:
   exclude:
 
 # -----------------------------------------------------------------------------
-# Responsive WebP Images
+# region Responsive WebP Images
 # -----------------------------------------------------------------------------
 
 # MAKE SURE imagemagick is installed and on your PATH before enabling imagemagick. In a terminal, run:
@@ -392,7 +398,7 @@ imagemagick:
 lazy_loading_images: true # enables lazy loading of images (recommended)
 
 # -----------------------------------------------------------------------------
-# Optional Features
+# region Optional Features
 # -----------------------------------------------------------------------------
 
 enable_google_analytics: false # enables google analytics
@@ -413,7 +419,7 @@ enable_progressbar: true # enables a horizontal progress bar linked to the verti
 enable_video_embedding: false # enables video embedding for bibtex entries. If false, the button opens the video link in a new window.
 
 # -----------------------------------------------------------------------------
-# Library versions
+# region Library versions
 # -----------------------------------------------------------------------------
 
 # Add the url, version and integrity hash of the libraries you use in your site.
@@ -650,7 +656,7 @@ third_party_libraries:
     version: "2.1.8"
 
 # -----------------------------------------------------------------------------
-# Get external JSON data
+# region Get external JSON data
 # -----------------------------------------------------------------------------
 
 jekyll_get_json:

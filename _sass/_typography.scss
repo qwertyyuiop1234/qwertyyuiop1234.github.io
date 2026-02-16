@@ -14,9 +14,25 @@ h6,
 em,
 div,
 li,
-span,
-strong {
+span {
   color: var(--global-text-color);
+  line-height: 1.8;
+}
+
+strong {
+  color: var(--global-theme-color);
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 2rem;
+}
+
+mark {
+  background-color: var(--global-theme-color);
+  color: var(--global-bg-color);
+  padding: 0 2px;
+  border-radius: 3px;
 }
 
 hr {
