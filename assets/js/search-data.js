@@ -23,7 +23,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-cs231n-assignment-1-q2-implement-a-softmax-classifier",
+        },{id: "post-deep-dive-into-microgpt-by-karpathy",
+        
+          title: "Deep Dive into MicroGPT by Karpathy",
+        
+        description: "A detailed walkthrough of Karpathy&#39;s MicroGPT, covering dataset preparation, character-level tokenization, a minimal autograd engine (the Value class), Python special methods, and backpropagation via topological sort.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/microgpt-karpathy/";
+          
+        },
+      },{id: "post-cs231n-assignment-1-q2-implement-a-softmax-classifier",
         
           title: "[CS231n] Assignment 1 - Q2. Implement a Softmax Classifier",
         
