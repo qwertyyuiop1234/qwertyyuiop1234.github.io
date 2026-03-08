@@ -16,14 +16,68 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/blog/";
           },
+        },{id: "nav-notes",
+          title: "notes",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/notes/index.html";
+          },
+        },{id: "nav-projects",
+          title: "projects",
+          description: "A growing collection of your cool projects.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/projects/";
+          },
+        },{id: "nav-paper-reviews",
+          title: "paper reviews",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/reviews/index.html";
+          },
         },{id: "nav-cv",
           title: "CV",
-          description: "This is a description of the page. You can modify it in &#39;_pages/cv.md&#39;. You can also change or remove the top pdf download button.",
+          description: "",
           section: "Navigation",
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-deep-dive-into-microgpt-by-karpathy",
+        },{id: "post-llm-from-scratch-1-3-multi-head-self-attention",
+        
+          title: "LLM from scratch - 1.3 Multi Head Self Attention",
+        
+        description: "Why Multi Head Attention is important, mathematical formulations, and implementation.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/llm-from-scratch-1-3/";
+          
+        },
+      },{id: "post-llm-from-scratch-1-2-single-head-self-attention",
+        
+          title: "LLM from scratch - 1.2 Single Head Self Attention",
+        
+        description: "Implementation details of single head self attention and causal masks.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/llm-from-scratch-1-2/";
+          
+        },
+      },{id: "post-llm-from-scratch-1-1-positional-encoding",
+        
+          title: "LLM from scratch - 1.1 Positional Encoding",
+        
+        description: "Positional encoding explanations and code implementations, including learned and sinusoidal encoding.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/llm-from-scratch-1-1/";
+          
+        },
+      },{id: "post-deep-dive-into-microgpt-by-karpathy",
         
           title: "Deep Dive into MicroGPT by Karpathy",
         
@@ -45,7 +99,12 @@ ninja.data = [{
             window.location.href = "/blog/2026/cs231n-softmax/";
           
         },
-      },{
+      },{id: "projects-llm-from-scratch-ongoing",
+          title: 'LLM from scratch [Ongoing]',
+          description: "a project building an LLM from scratch in python",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/llm_from_scratch/";
+            },},{
         id: 'social-cv',
         title: 'CV',
         section: 'Socials',
