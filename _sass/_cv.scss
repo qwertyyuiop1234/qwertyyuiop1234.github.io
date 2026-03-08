@@ -44,7 +44,7 @@ a.btncv:hover {
 
 p.location {
   font-size: 0.7rem;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 i.iconlocation {
@@ -218,3 +218,182 @@ ul.timeline li::before {
      color: var(--global-text-color);
 }
 */
+
+/*****************************
+ * CV PRINT styles
+ *****************************/
+@media print {
+  // Hide main site navigation, footer, and sidebars
+  header,
+  footer,
+  #toc-sidebar,
+  #back-to-top,
+  .col-sm-3,
+  .btncv,
+  .float-right {
+    display: none !important;
+  }
+
+  // FORCE EVERYTHING to full width and remove Bootstrap scaling
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .post, .card, .card-body {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+   .row {
+    display: flex !important;
+    flex-wrap: nowrap !important; // Prevent stacking - keep side by side
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  // Ensure ALL col-sm-* take appropriate space in print
+  [class*="col-sm-"], [class*="col-xs-"] {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  // Experience/Awards: date column + content column side by side
+  .col-xs-2, .col-sm-2, .col-md-2 { 
+    width: 120px !important; 
+    flex: 0 0 120px !important; 
+    max-width: 120px !important; 
+  }
+  .col-xs-10, .col-sm-10, .col-md-10 { 
+    flex: 1 1 auto !important; 
+    max-width: calc(100% - 120px) !important; 
+    padding-left: 15px !important;
+  }
+
+  // Contact: photo + info
+  .col-sm-4 { 
+    width: 30% !important; flex: 0 0 30% !important; max-width: 30% !important; 
+    padding-right: 20px !important; // Gap between photo and text
+  }
+  .col-sm-8 { 
+    width: 70% !important; flex: 0 0 70% !important; max-width: 70% !important;
+    display: flex !important;
+    align-items: center !important; // Vertically center text next to photo
+  }
+  .col-sm-9, .col-sm-12 { 
+    width: 100% !important; 
+    flex: 0 0 100% !important; 
+    max-width: 100% !important; 
+  }
+
+  body {
+    background-color: white !important;
+    background-image: none !important;
+    color: black !important;
+    padding: 1.5cm !important;
+  }
+
+  // Force white background on everything
+  .post, .card, .list-group-item, .container, div {
+    background-color: white !important;
+    background-image: none !important;
+    color: black !important;
+  }
+
+  // Fix contact info table wrapping
+  table.table-cv td {
+    white-space: nowrap !important; // Prevent labels like "Professional Title" from wrapping
+  }
+  table.table-cv td:last-child {
+    white-space: normal !important; // Content can still wrap
+    padding-left: 15px !important;
+  }
+
+  // Keep theme colors for point elements
+  .card-title,
+  .badge,
+  i.fa-solid,
+  i.fa-brands,
+  .location,
+  .iconlocation,
+  .iconinstitution,
+  .icondepartment {
+    color: var(--global-theme-color) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  // Force all content text to be black
+  h1, h2, h3, h4, h5, h6, 
+  p, span, li, tr, td, 
+  div, strong, b, a, 
+  .title, .company-name, .summary, .item, 
+  .card-text, .skill-item, .language-item, .interest-item,
+  .more-info, .post-title {
+    color: black !important;
+  }
+
+  .card-title {
+    color: var(--global-theme-color) !important;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 15px !important;
+    font-weight: bold !important;
+    background: transparent !important;
+    width: 100% !important; // Ensure divider line stretches
+  }
+
+  .card {
+    border: none !important;
+    box-shadow: none !important;
+    margin-top: 1rem !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  // Unify divider colors
+  .list-group-item {
+    border-top: 1px solid #ccc !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    background: transparent !important;
+  }
+
+  .card .list-group-item:first-child {
+    border-top: none !important;
+  }
+
+  // Date column alignment and spacing
+  .date-column {
+    padding: 0 !important;
+    margin-right: 15px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    flex: 0 0 110px !important;
+    text-align: center !important;
+  }
+
+  .badge {
+    display: inline-block !important;
+    width: 100% !important;
+    padding: 4px 0 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    font-size: 0.8rem !important;
+  }
+
+  .ml-1, .ml-md-4 {
+    margin-left: 10px !important;
+  }
+
+  .card, .row, .list-group-item {
+    page-break-inside: avoid;
+  }
+}
