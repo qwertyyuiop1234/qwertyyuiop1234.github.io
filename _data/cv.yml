@@ -3,7 +3,7 @@ cv:
   label: Student
   email: dltmdgus6665@gmail.com
   location: Seoul, Korea
-  image: "me.JPG"
+  # image: "me.JPG"
 
   social_networks:
     - network: GitHub
@@ -37,7 +37,22 @@ cv:
         highlights:
           - Provided medical support and emergency care in a joint military environment.
 
+      - company: GDGOC(Google Developer Group On Campus) 
+        position: Member
+        location: Seoul, Korea
+        start_date: 2025-07
+        end_date: Present
+        summary: Participated in a developer community hosted by Google, focusing on AI research and paper reviews.
+        highlights:
+          - Studied and analyzed research papers on AI topics including LLMs and Computer Vision.
+          - Engaged in collaborative discussions and knowledge sharing with colleagues.
+
     Awards:
+      - title: K-Hackathon 
+        date: 2025
+        awarder: MSIT (Ministry of Science and ICT)
+        summary: Ranked in the top 20 out of 550 teams nationwide.
+      
       - title: Academic Scholarship (70% Tuition Waiver)
         date: 2026
         awarder: Konkuk University
@@ -48,6 +63,16 @@ cv:
         awarder: Konkuk University
         summary: Recognized for being within the top 5% of academic achievers.
 
+      - title: Gwacheon Scholarship
+        date: 2026
+        awarder: Gwacheon Aehyang Scholarship Association
+        summary: Awarded for outstanding academic performance in the second semester of sophomore year.
+
+      - title: Certificate of Appreciation (COA)
+        date: 2025-01
+        awarder: 1-23 Infantry Battalion, United States Army
+        summary: Received for outstanding service and dedication to duty as a KATUSA Medic in the 7th Infantry Division.
+
     GPA:
       - label: Cumulative GPA
         details: 4.09 / 4.5
@@ -56,8 +81,12 @@ cv:
 
     Skills:
       - name: Programming Languages
-        keywords: "Python"
+        keywords: "Python, C++"
         icon: fa-brands fa-python
+
+      - name: Libraries & Frameworks
+        keywords: "PyTorch, NumPy, Pandas"
+        icon: fa-solid fa-code-branch
 
     Languages:
       - name: Korean
@@ -69,7 +98,7 @@ cv:
     Interests:
       - name: AI & Machine Learning
         icon: fa-solid fa-microchip
-        keywords: "AI Performance Optimization, Computer Vision (CV), Large Language Models (LLM)"
+        keywords: "AI Performance Optimization, AI Hardware accelerator, Computer Vision (CV), Large Language Models (LLM), Reinforcement Learning(RL), World Model"
 
     Certificates:
       - name: "BOOSTRUN : 인공지능 전문가 특강 1기"
@@ -77,6 +106,7 @@ cv:
 
     Projects:
       - name: juchajang
+        position: Tech Lead
         summary: A solution for finding vacant parking spots.
         start_date: "2025"
         end_date: "2025"
@@ -84,12 +114,13 @@ cv:
       - name: bargate
         position: Tech Lead
         summary: A specialized consultation assistant for lawyers.
-        start_date: "2025.12"
+        start_date: "2025-12"
         end_date: Present
 
-      - name: llmfromscratch (Personal Project)
+      - name: LLM from Scratch
+        position: Personal project
         summary: Implementing a Large Language Model from scratch using PyTorch.
-        start_date: "2026.03"
+        start_date: "2026-03"
         end_date: Present
 
     References:
