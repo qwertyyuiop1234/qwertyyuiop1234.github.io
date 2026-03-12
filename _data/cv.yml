@@ -98,7 +98,7 @@ cv:
     Interests:
       - name: AI & Machine Learning
         icon: fa-solid fa-microchip
-        keywords: "AI Performance Optimization, AI Hardware accelerator, Computer Vision (CV), Large Language Models (LLM), Reinforcement Learning(RL), World Model"
+        keywords: "AI Performance Optimization, AI Hardware Accelerator, AI System, Robotics, DRL, Computer Vision (CV), Large Language Models (LLM), Reinforcement Learning(RL), World Model"
 
     Certificates:
       - name: "BOOSTRUN : 인공지능 전문가 특강 1기"
