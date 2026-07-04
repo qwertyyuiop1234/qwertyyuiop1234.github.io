@@ -2,7 +2,7 @@
 layout: post
 title: "Deep Dive into MicroGPT by Karpathy"
 date: 2026-02-18 02:00:00 +0900
-categories: [AI, NLP]
+categories: [LLM]
 tags: [microgpt, karpathy, autograd, backpropagation, nlp]
 description: A detailed walkthrough of Karpathy's MicroGPT, covering dataset preparation, character-level tokenization, a minimal autograd engine (the Value class), Python special methods, and backpropagation via topological sort.
 toc:

@@ -4,7 +4,7 @@ title: "LLM from scratch - 1.2 Single Head Self Attention"
 date: 2026-03-08 12:00:00
 description: "Implementation details of single head self attention and causal masks."
 tags: [llm-project, nlp, transformer, attention]
-categories: [project, study]
+categories: [LLM]
 ---
 
 # 1. Causal Mask

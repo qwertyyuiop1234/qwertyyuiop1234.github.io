@@ -8,6 +8,11 @@ body {
   padding-bottom: 70px;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
+  font-family: var(--global-font);
+  font-size: 1.0625rem; // ~17px comfortable reading base
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 
   h1,
   h2,

@@ -4,7 +4,7 @@ title: "LLM from scratch - 1.3 Multi Head Self Attention"
 date: 2026-03-08 13:00:00
 description: "Why Multi Head Attention is important, mathematical formulations, and implementation."
 tags: [llm-project, nlp, transformer, attention]
-categories: [project, study]
+categories: [LLM]
 ---
 
 # 1. What Is Multi Head Self Attention?

@@ -19,13 +19,34 @@ span {
   line-height: 1.8;
 }
 
-strong {
-  color: var(--global-theme-color);
-  font-weight: bold;
+strong,
+b {
+  color: inherit;
+  font-weight: 700;
 }
 
 p {
-  margin-bottom: 2rem;
+  margin-bottom: 1.6rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.011em;
+  text-wrap: balance;
+}
+
+code,
+pre,
+kbd,
+samp,
+tt {
+  font-family: var(--global-mono-font);
 }
 
 mark {

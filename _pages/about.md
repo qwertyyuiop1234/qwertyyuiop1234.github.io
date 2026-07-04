@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-# subtitle: <a href='#'>Affiliations</a>. Univ.
+# subtitle:
 
 profile:
   align: left
@@ -20,14 +20,13 @@ announcements:
   limit: 5 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
-  enabled: false
+  enabled: true
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Hello, I'm **Eren**, a Computer Science major. 
+Hello, I'm **Eren**, a Computer Science major.
 
 This is my personal archive where I document what I learn, share my projects, and organize useful information about computer science.
 
 Whether you are a fellow developer, a student, or just someone curious about tech, I hope you find the content here helpful and inspiring. Feel free to explore my latest posts and projects!
-

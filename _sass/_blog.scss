@@ -39,6 +39,28 @@
   }
 }
 
+// Home landing hero (about page only)
+.about-hero {
+  margin-bottom: 2.25rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--global-divider-color);
+
+  .post-title {
+    font-size: 2.7rem;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.55rem;
+  }
+
+  .desc {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: var(--global-text-color-light);
+    margin: 0;
+    max-width: 42ch;
+  }
+}
+
 .post-list {
   margin: 0;
   margin-bottom: 40px;
@@ -101,6 +123,10 @@
 }
 
 .post {
+  max-width: 46rem; // ~70ch reading measure for scannable long-form
+  margin-left: auto;
+  margin-right: auto;
+
   .post-meta {
     color: var(--global-text-color-light);
     font-size: 0.875rem;

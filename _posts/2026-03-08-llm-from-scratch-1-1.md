@@ -4,7 +4,7 @@ title: "LLM from scratch - 1.1 Positional Encoding"
 date: 2026-03-08 11:00:00
 description: "Positional encoding explanations and code implementations, including learned and sinusoidal encoding."
 tags: [llm-project, nlp, transformer]
-categories: [project, study]
+categories: [LLM]
 ---
 
 # 1. Positional Encoding

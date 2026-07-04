@@ -34,7 +34,19 @@ $black-color: #000000 !default;
 
 // Theme colors
 
-$code-bg-color-light: rgba($purple-color, 0.05);
+// Distill Research redesign — accent + neutrals
+$lab-blue-color: #25478b !default; // primary accent (light ground)
+$lab-blue-color-light: #8fb0ea !default; // accent on dark ground
+$paper-color: #fbfbf9 !default; // light page ground (cool ivory)
+$ink-color: #191b20 !default; // light body text
+$paper-color-dark: #16181c !default; // dark page ground (deep slate)
+$ink-color-on-dark: #e9eaec !default; // dark body text
+
+// Font stacks
+$font-serif: "Source Serif Pro", "Iowan Old Style", "Charter", "Palatino", Georgia, Cambria, "Times New Roman", serif !default;
+$font-mono: "JetBrains Mono", ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace !default;
+
+$code-bg-color-light: rgba($lab-blue-color, 0.05);
 $code-bg-color-dark: #2c3237 !default;
 
 // Font awesome location
