@@ -17,6 +17,9 @@
 
   <!-- Body -->
   <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+    {% if site.enable_shader_background and page.url == '/' %}
+      {% include shader_background.liquid %}
+    {% endif %}
     <!-- Header -->
     {% include header.liquid %}
 

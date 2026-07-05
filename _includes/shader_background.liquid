@@ -1,0 +1,76 @@
+<!-- Animated WebGL background via @paper-design/shaders (LiquidMetal). -->
+<!-- Toggle with `enable_shader_background` in _config.yml. Tune colors/opacity below. -->
+<style>
+  :root {
+    --paper-shader-opacity: 0.35; /* shader canvas opacity (0..1) — lower = fainter */
+    --paper-shader-veil: 0.82; /* themed veil over shader: higher = more readable, less shader */
+  }
+  #paper-shader-bg,
+  #paper-shader-veil {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+  #paper-shader-bg {
+    opacity: var(--paper-shader-opacity);
+  }
+  #paper-shader-veil {
+    background-color: var(--global-bg-color); /* al-folio theme var, adapts to dark mode */
+    opacity: var(--paper-shader-veil);
+  }
+  /* Let the shader show through the themed body background. */
+  html,
+  body {
+    background-color: transparent !important;
+  }
+</style>
+
+<div id="paper-shader-bg" aria-hidden="true"></div>
+<div id="paper-shader-veil" aria-hidden="true"></div>
+
+<script type="module">
+  import { ShaderMount, liquidMetalFragmentShader, getShaderColorFromString } from 'https://esm.sh/@paper-design/shaders@0.0.77';
+
+  // --- Tune here ---
+  const colorBack = '#AAAAAC'; // base metal color
+  const colorTint = '#ffffff'; // highlight/tint color
+  const speed = 0.1; // animation speed (0 = static)
+  const shape = 0; // 0=full-fill, 1=circle, 2=daisy, 3=diamond, 4=metaballs
+  const scale = 1.1; // pattern zoom (react default 0.6)
+  const softness = 1.0; // edge blur: higher = blurrier/softer edges (max ~1)
+  const contour = 0.0; // contour strength: 0 = no bands, smoothest mesh-like blend
+  const colorShift = 0.05; // chromatic separation: lower = more muted color
+  // -----------------
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Uniforms mirror @paper-design/shaders-react <LiquidMetal> defaults. No image => u_isImage:false, u_image omitted.
+  const uniforms = {
+    u_colorBack: getShaderColorFromString(colorBack),
+    u_colorTint: getShaderColorFromString(colorTint),
+    u_contour: contour,
+    u_distortion: 0.04,
+    u_softness: softness,
+    u_repetition: 1.0,
+    u_shiftRed: colorShift,
+    u_shiftBlue: colorShift,
+    u_angle: 70,
+    u_isImage: false,
+    u_shape: shape,
+    // sizing
+    u_fit: 1, // 'contain'
+    u_scale: scale,
+    u_rotation: 0,
+    u_offsetX: 0,
+    u_offsetY: 0,
+    u_originX: 0.5,
+    u_originY: 0.5,
+    u_worldWidth: 0,
+    u_worldHeight: 0,
+  };
+
+  const el = document.getElementById('paper-shader-bg');
+  // new ShaderMount(parentElement, fragmentShader, uniforms, webGlContextAttributes?, speed, frame)
+  new ShaderMount(el, liquidMetalFragmentShader, uniforms, undefined, reduceMotion ? 0 : speed, 0);
+</script>
