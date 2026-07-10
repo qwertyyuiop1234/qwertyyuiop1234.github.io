@@ -3,5 +3,6 @@ design:
   theme: classic
   page:
     size: a4
-    show_footer: false
-    show_top_note: false
+  entries:
+    allow_page_break_in_sections: false
+    allow_page_break_in_entries: false
