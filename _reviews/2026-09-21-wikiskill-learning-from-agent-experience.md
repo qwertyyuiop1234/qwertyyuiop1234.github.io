@@ -2,7 +2,7 @@
 layout: post
 title: "WikiSkill: Learning from Agent Experience"
 date: 2026-09-21 00:00:00 +0900
-description: "How persistent knowledge turns execution traces and failed interventions into better reusable skills."
+description: "How a persistent knowledge layer turns execution traces and failed interventions into better reusable skills."
 tags: ["agent-skills","memory","skill-evolution"]
 toc:
   sidebar: left
@@ -14,34 +14,34 @@ toc:
   </div>
 </div>
 
-## Problem &amp; Background {#problem}
+## Problem and background {#problem}
 
-An agent can finish a task yet fail to learn a reusable lesson from it. Its execution trace records what happened, but a future run does not automatically inherit a reliable procedure. WikiSkill addresses the additional problem that the process of improving those procedures can itself forget: why a change was proposed, why it failed, and which recurring failure it was meant to fix.
+An agent can finish a task without learning anything reusable from it. Its execution trace records what happened, but a later run does not automatically inherit a reliable procedure. WikiSkill also targets a second problem: the process that improves those procedures can itself forget things, such as why a change was proposed, why it failed, and which recurring failure it was supposed to fix.
 
-A skill packages procedural knowledge in a filesystem directory, usually with a SKILL.md containing applicability conditions and instructions. It changes the agent’s available guidance without changing model weights. Manual skills make expertise reusable, but their author must anticipate the relevant failure modes. Experience-driven skill evolution instead runs tasks, studies trajectories, proposes skill edits, and evaluates the edits. This turns observed successes and failures into candidate instructions.
+A skill packages procedural knowledge in a filesystem directory, usually with a SKILL.md file that holds applicability conditions and instructions. It changes the guidance available to the agent without changing model weights. Manual skills make expertise reusable, but whoever writes them has to anticipate the relevant failure modes. Experience-driven skill evolution takes a different route. It runs tasks, studies the trajectories, proposes skill edits and evaluates them, so that observed successes and failures become candidate instructions.
 
 | Earlier approach | What it preserves or improves | Remaining distinction |
 | --- | --- | --- |
 | Manual skills | Reusable workflows written in advance | Unanticipated failures still require diagnosis and maintenance. |
 | EvoSkill | Candidate skill search and a history of proposal outcomes | A feedback history is not a separately maintained catalog of mechanisms and evidence. |
 | Trace2Skill | Lessons from individual trajectories, merged into skill patches | Consolidation produces procedures without a distinct evolving knowledge layer. |
-| SkillOpt | Reflections, patch synthesis, rejected-edit feedback and meta guidance | Optimization artifacts do not constitute the persistent structured wiki studied here. |
+| SkillOpt | Reflections, patch synthesis, rejected-edit feedback and meta guidance | Optimization artifacts are not the persistent structured wiki studied here. |
 
 <div class="caption">The relevant contrast is how knowledge is organized, not whether earlier methods remember anything.</div>
 
-Consider a household-task agent that repeatedly takes an object, examines it, and returns it to its starting location. An optimizer may propose “stay goal-directed.” If validation rejects this advice and the rejection becomes just another buried log entry, a later optimizer can rediscover the same vague fix. Conversely, putting every observation directly into the executable skill risks a long, contradictory procedure. Raw evidence, evolving explanations, and instructions have different jobs.
+Consider a household-task agent that keeps picking up an object, examining it, and putting it back where it started. An optimizer might propose "stay goal-directed." If validation rejects that advice and the rejection ends up as one more buried log entry, a later optimizer can rediscover the same vague fix. Writing every observation straight into the executable skill has the opposite risk: a long, contradictory procedure. Raw evidence, evolving explanations and instructions each have a different job.
 
-WikiSkill asks whether an explicit intermediate knowledge representation can make later skill edits better informed. The proposed wiki preserves patterns across iterations, including supporting traces and rejected interventions. The skill becomes a selected operational consequence of that knowledge, rather than the only durable location where learning can survive. The contribution is architectural and empirical: no new model-training objective is introduced, and it is not a solution to selecting the right skill from a large library.
+WikiSkill asks whether an explicit intermediate knowledge representation can make later skill edits better informed. The proposed wiki keeps patterns across iterations, together with the traces that support them and the interventions that were rejected. The skill then holds a selected operational consequence of that knowledge and is no longer the only durable place where learning can survive. The contribution is architectural and empirical. The paper introduces no new model-training objective, and it does not address how to select the right skill from a large library.
 
 <div class="row mt-3 justify-content-center">
   <div class="col-sm-10 mt-3 mt-md-0">
-    {% include figure.liquid loading="lazy" path="assets/img/reviews/wikiskill-learning-from-agent-experience/5cb0ac06d63f0152cd39969e1275a91f48a45742976497bdd1c7f870710896b5.svg" class="img-fluid rounded z-depth-1" zoomable=true alt="Three layers separate immutable evidence, editable persistent knowledge, and reversible executable skills." caption="Raw traces explain what happened; the wiki explains recurring patterns; skills tell the executor what to do. These layers have different retention policies." %}
+    {% include figure.liquid loading="lazy" path="assets/img/reviews/wikiskill-learning-from-agent-experience/5cb0ac06d63f0152cd39969e1275a91f48a45742976497bdd1c7f870710896b5.svg" class="img-fluid rounded z-depth-1" zoomable=true alt="Three layers separate immutable evidence, editable persistent knowledge, and reversible executable skills." caption="Raw traces explain what happened, the wiki explains recurring patterns, and skills tell the executor what to do. Each layer has its own retention policy." %}
   </div>
 </div>
 
-## Core Idea &amp; Method {#method}
+## Core idea and method {#method}
 
-The evolving state contains a skill set S and a wiki W. Both begin empty. Training, validation and test tasks are disjoint: training trajectories supply diagnostic experience, validation chooses whether a candidate is accepted, and held-out tests measure final performance. The inference agent, wiki maintainer and skill proposer are functional roles around an LLM; they need not imply different model families.
+The evolving state is a skill set S and a wiki W, and both start empty. Training, validation and test tasks are disjoint. Training trajectories supply diagnostic experience, validation decides whether a candidate is accepted, and held-out tests measure final performance. The inference agent, wiki maintainer and skill proposer are functional roles built around an LLM. Having three roles does not imply three different model families.
 
 | Layer | Stored information | Update policy |
 | --- | --- | --- |
@@ -51,19 +51,19 @@ The evolving state contains a skill set S and a wiki W. Both begin empty. Traini
 
 <div class="caption">PURPOSE.md preserves the reason for a procedure; skill-impact.md records what was tried and its measured outcome.</div>
 
-1. Execute training tasks using the current skills. Full skill content is injected into the system prompt; the default executor cannot consult the wiki during these rollouts.
-2. Consolidate evidence. The maintainer receives the current wiki and up to eight sampled traces: at most five failures and three successes, each capped at 15,000 characters. It diagnoses causes and patches existing patterns or adds new ones.
-3. Propose one targeted intervention. A ReAct-style proposer consults the wiki index, impact history and task-outcome summary, then reads selected pattern pages and raw traces. It creates or patches one skill. The published prompt requires at least four trace reads before a change.
-4. Evaluate the candidate on validation tasks. Keep it only if its score strictly exceeds the best accepted score; otherwise restore the previous skill set.
-5. Always append the proposal diff, score and decision to the wiki. A rejected procedure therefore becomes evidence for the next attempt.
+1. Run the training tasks with the current skills. The full skill content goes into the system prompt, and by default the executor cannot consult the wiki during these rollouts.
+2. Consolidate the evidence. The maintainer gets the current wiki and up to eight sampled traces (at most five failures and three successes), each capped at 15,000 characters. It diagnoses causes, then patches existing patterns or adds new ones.
+3. Propose one targeted intervention. A ReAct-style proposer looks at the wiki index, the impact history and a task-outcome summary, then reads the pattern pages and raw traces it picks. It creates or patches one skill. The published prompt requires at least four trace reads before any change.
+4. Score the candidate on the validation tasks. Keep it only if its score is strictly higher than the best accepted score. Otherwise, restore the previous skill set.
+5. Append the proposal diff, score and decision to the wiki every time. A rejected procedure is then evidence for the next attempt.
 
 <div class="row mt-3 justify-content-center">
   <div class="col-sm-10 mt-3 mt-md-0">
-    {% include figure.liquid loading="lazy" path="assets/img/reviews/wikiskill-learning-from-agent-experience/558f394b16fc32ef4efd32009d968674b348e349ef728243009081fad05895f3.svg" class="img-fluid rounded z-depth-1" zoomable=true alt="Training execution flows into wiki consolidation, one skill proposal and validation. Rejection returns to the prior skill but preserves accumulated wiki knowledge." caption="The asymmetric loop is the central mechanism: knowledge survives failure while active behavior can be rolled back." %}
+    {% include figure.liquid loading="lazy" path="assets/img/reviews/wikiskill-learning-from-agent-experience/558f394b16fc32ef4efd32009d968674b348e349ef728243009081fad05895f3.svg" class="img-fluid rounded z-depth-1" zoomable=true alt="Training execution flows into wiki consolidation, one skill proposal and validation. Rejection returns to the prior skill but preserves accumulated wiki knowledge." caption="The main mechanism is an asymmetric loop. Knowledge survives a failure, but active behavior can be rolled back." %}
   </div>
 </div>
 
-The maintainer and proposer see experience differently. The maintainer compiles a small stratified sample into a coherent knowledge base. The proposer starts from an index and actively fetches evidence, rather than receiving all trajectories in a single prompt. Incremental patch operations reduce unnecessary rewriting. The impact tracker is updated by the outer orchestration code after evaluation, so acceptance outcomes are not merely the model’s recollection of its own success.
+The maintainer and the proposer see experience differently. The maintainer compiles a small stratified sample into a coherent knowledge base. The proposer starts from an index and fetches evidence on demand instead of receiving every trajectory in a single prompt. Patch operations are incremental, which cuts down on unnecessary rewriting. The outer orchestration code updates the impact tracker after evaluation, so acceptance outcomes are not just the model's recollection of its own success.
 
 $$
 W'_k=\operatorname{Maintain}(W_{k-1},\mathcal{T}_{\mathrm{sample},k}),\qquad S'_k=\operatorname{Apply}(S_{k-1},P_k)
@@ -73,25 +73,25 @@ $$
 S_k=\begin{cases}S'_k,&R_{\mathrm{val}}(S'_k)>R_{\mathrm{best}},\\ S_{k-1},&\text{otherwise}.\end{cases}
 $$
 
-Here k indexes iterations, P is the proposed edit, and R is average task score. The best score starts at the empty-skill validation baseline and updates only on acceptance. Equal scores are rejected. Reaching validation score 1.0 stops evolution early. In both branches, the intermediate wiki is updated with the proposal and result to become the next persistent wiki.
+Here k indexes iterations, P is the proposed edit, and R is the average task score. The best score starts at the empty-skill validation baseline and changes only when a candidate is accepted. A candidate that only ties the best score is rejected. Evolution stops early if the validation score reaches 1.0. In both branches, the proposal and its result are added to the intermediate wiki, which becomes the next persistent wiki.
 
-> ##### Worked intuition: a failed experiment still changes knowledge
+> ##### Worked example: a failed experiment still changes knowledge
 >
-> Suppose the best validation score is 0.70. A new skill scoring 0.70 is rejected, as is one scoring 0.65; a candidate scoring 0.75 is accepted. These are illustrative numbers, not paper measurements. All three outcomes can still refine the wiki. Rollback means reverting executable instructions, not erasing the experiment.
+> Suppose the best validation score is 0.70. A new skill scoring 0.70 is rejected, and so is one scoring 0.65. A candidate scoring 0.75 is accepted. These are illustrative numbers, not paper measurements. All three outcomes can still refine the wiki. A rollback reverts the executable instructions but keeps the record of the experiment.
 {: .block-tip }
 
-The ALFWorld case study makes this concrete. At iteration 0, a broad goal-directed-action skill is rejected. The persistent record exposes that failure to the next proposer. At iteration 1, a more concrete break-repetition-loop skill is accepted; subsequent evidence of multi-operation loops motivates another accepted refinement at iteration 4. The paper’s simplified figure contrasts vague goal-directed advice with explicit action patterns that stop repetition.
+The ALFWorld case study is a concrete example. At iteration 0, a broad goal-directed-action skill is rejected, and the persistent record shows that failure to the next proposer. At iteration 1, a more concrete break-repetition-loop skill is accepted. Later evidence of multi-operation loops leads to another accepted refinement at iteration 4. A simplified figure in the paper contrasts the vague goal-directed advice with explicit action patterns that stop repetition.
 
-These domain-specific rules should not be copied as universal laws. “Never return an item to its origin” can be wrong for another task. The transferable lesson is to identify the state transition that causes a failure, state the intervention concretely, and validate its scope. PURPOSE.md and pattern evidence make that reasoning inspectable.
+These domain-specific rules should not be copied as universal laws. "Never return an item to its origin" can be wrong for another task. The lesson that transfers is to identify the state transition that causes a failure, state the intervention concretely, and validate its scope. PURPOSE.md and the pattern evidence make that reasoning inspectable.
 
 > ##### Why not let the executor read the entire wiki?
 >
-> The authors hypothesize that direct wiki access lets an executor solve tasks using knowledge that never enters the skill. Training traces then become less diagnostic of skill quality. This explanation is plausible and consistent with their ablation, but it is a hypothesis about the mechanism, not a proven general prohibition on memory access.
+> The authors hypothesize that direct wiki access lets an executor solve tasks with knowledge that never enters the skill, which makes training traces less diagnostic of skill quality. The explanation is plausible and consistent with their ablation. It is still a hypothesis about the mechanism, not a proven general rule against memory access.
 {: .block-tip }
 
-## Evidence &amp; Results {#evidence}
+## Evidence and results {#evidence}
 
-The evaluation covers five task families and five inference models. Each method starts with an empty skill set and injects evolved skills into the executor’s prompt, holding skill retrieval out of the comparison. Reported test scores average three independent runs of the full evolution process. Paired bootstrap testing uses 1,000 resamples at p \< 0.05; cross-benchmark summaries give each benchmark equal weight.
+The evaluation covers five task families and five inference models. Every method starts from an empty skill set and injects the evolved skills into the executor's prompt, so skill retrieval is held out of the comparison. Each reported test score is the average of three independent runs of the full evolution process. Paired bootstrap tests use 1,000 resamples at p \< 0.05, and cross-benchmark summaries weight each benchmark equally.
 
 | Benchmark | Train / validation / test | What is tested |
 | --- | --- | --- |
@@ -101,7 +101,7 @@ The evaluation covers five task families and five inference models. Each method 
 | OfficeQA | 50 / 24 / 172 | Treasury-document reasoning with local search tools. |
 | ALFWorld | 39 / 18 / 134 | Text-action household tasks in a simulator. |
 
-<div class="caption">OfficeQA starts with pre-parsed oracle reference pages as evidence while allowing searches over full files; this is not unrestricted document discovery from scratch.</div>
+<div class="caption">OfficeQA starts with pre-parsed oracle reference pages as evidence and allows searches over the full files. This is not unrestricted document discovery from scratch.</div>
 
 | Inference model | No skill | Best other method | WikiSkill | Gain vs no skill |
 | --- | --- | --- | --- | --- |
@@ -115,13 +115,13 @@ The evaluation covers five task families and five inference models. Each method 
 
 <div class="row mt-3 justify-content-center">
   <div class="col-sm-10 mt-3 mt-md-0">
-    {% include figure.liquid loading="lazy" path="assets/img/reviews/wikiskill-learning-from-agent-experience/fea8de063f22bd26908c878c11264a1c54ba67b8808bff6c7cfaed3a0150fff5.svg" class="img-fluid rounded z-depth-1" zoomable=true alt="Paired horizontal bars compare no-skill and WikiSkill average accuracy across the five models, with a zero-based accuracy axis." caption="WikiSkill improves every model’s average, but an average does not imply improvement on every dataset." %}
+    {% include figure.liquid loading="lazy" path="assets/img/reviews/wikiskill-learning-from-agent-experience/fea8de063f22bd26908c878c11264a1c54ba67b8808bff6c7cfaed3a0150fff5.svg" class="img-fluid rounded z-depth-1" zoomable=true alt="Paired horizontal bars compare no-skill and WikiSkill average accuracy across the five models, with a zero-based accuracy axis." caption="WikiSkill improves every model&#39;s average, but a better average does not mean improvement on every dataset." %}
   </div>
 </div>
 
-The gains can be large: Qwen-3.6-27B rises from 40.8% to 81.7% on SpreadSheet, while Gemini-3.5-Flash rises from 33.0% to 72.6% on LiveMath. Yet Qwen-3.5-4B falls from 30.2% to 28.5% on OfficeQA. WikiSkill is also not the numerical winner in every comparison with another evolution method: Qwen-3.5-9B obtains 56.3% on LiveMath versus EvoSkill’s 58.1%. Statistical ties in the original table matter; these examples should not be read as independently established significant differences.
+Some gains are large. Qwen-3.6-27B rises from 40.8% to 81.7% on SpreadSheet, and Gemini-3.5-Flash rises from 33.0% to 72.6% on LiveMath. But Qwen-3.5-4B falls from 30.2% to 28.5% on OfficeQA. WikiSkill also does not have the top number in every comparison with another evolution method. On LiveMath, Qwen-3.5-9B gets 56.3% with WikiSkill and 58.1% with EvoSkill. The original table includes statistical ties, so these examples should not be read as independently established significant differences.
 
-Within the reported Qwen models, gains increase with size, and the 9B model with skills averages 47.4%, above the 27B no-skill result of 39.4%. This demonstrates a useful interaction between model capability and procedural guidance in this setup. It is not a controlled scaling law: the compared models span versions as well as parameter counts, and the comparison does not establish equal total compute or deployment cost.
+Among the reported Qwen models, gains grow with size. With skills, the 9B model averages 47.4%, which is above the 27B model's no-skill result of 39.4%. This shows a useful interaction between model capability and procedural guidance in this setup. It is not a controlled scaling law: the compared models differ in version as well as parameter count, and the comparison does not establish equal total compute or deployment cost.
 
 | Executor wiki access | Proposer wiki access | Four-task average |
 | --- | --- | --- |
@@ -129,28 +129,28 @@ Within the reported Qwen models, gains increase with size, and the 9B model with
 | Yes | No | 45\.3 |
 | No | No | 48\.7 |
 | Yes | Yes | 60\.9 |
-| No | Yes — default | 63\.7 |
+| No | Yes (default) | 63\.7 |
 
 <div class="caption">Gemini-3.5-Flash ablation, Table 3. ALFWorld is excluded, so this average is not the 68.1&#37; five-task result above.</div>
 
-With executor wiki access disabled, enabling proposer wiki access raises the average from 48.7% to 63.7%, a 15.0-point difference. However, the no-proposer-wiki condition also removes the maintainer. This supports the value of the combined persistent-knowledge pathway; it does not isolate persistence, structured representation, and additional maintenance computation individually. Giving both roles wiki access lowers the average to 60.9%, although SpreadSheet improves from 76.6% to 80.2%. The direction depends on the task.
+With executor wiki access disabled, enabling proposer wiki access raises the average from 48.7% to 63.7%, a 15.0-point difference. The no-proposer-wiki condition, however, also removes the maintainer. The result supports the combined persistent-knowledge pathway, but it does not isolate persistence, structured representation and the extra maintenance computation from one another. Giving both roles wiki access lowers the average to 60.9%, although SpreadSheet improves from 76.6% to 80.2%. The direction depends on the task.
 
-Cross-model transfer separates finding a useful procedure from executing it. Qwen-3.5-9B reaches 50.5% on SpreadSheet using 27B-evolved skills, versus 33.6% with its own skills and 24.3% with none. Transfer can also be harmful: Gemini-3.5-Flash falls from 50.5% to 18.1% using 4B-evolved spreadsheet skills, while 27B-evolved skills yield 63.4%. The authors attribute this negative transfer to low-level workarounds and fragmented diagnostic steps that constrain stronger models or consume their interaction budget.
+Cross-model transfer separates finding a useful procedure from executing it. On SpreadSheet, Qwen-3.5-9B reaches 50.5% with 27B-evolved skills, compared with 33.6% with its own skills and 24.3% with none. Transfer can also hurt. Gemini-3.5-Flash falls from 50.5% to 18.1% with 4B-evolved spreadsheet skills, while 27B-evolved skills give it 63.4%. The authors attribute this negative transfer to low-level workarounds and fragmented diagnostic steps that constrain stronger models or use up their interaction budget.
 
 > ##### A ceiling can prevent learning before test performance is perfect
 >
-> Gemini-3.5-Flash scores 100% on the small ALFWorld validation split before evolution. All methods stop without evolving a skill, but its test score is only 85.9%. Thus this row is not evidence that learned skills reach 85.9%; it illustrates how validation saturation can suppress further search.
+> Gemini-3.5-Flash scores 100% on the small ALFWorld validation split before any evolution. Every method stops without evolving a skill, yet its test score is only 85.9%. So this row is not evidence that learned skills reach 85.9%. It shows how a saturated validation set can cut off further search.
 {: .block-tip }
 
 $$
 C_{\mathrm{opt}}=(1+T_{\mathrm{ReAct}})\frac{N_{\mathrm{train}}}{B};\qquad B=N_{\mathrm{train}}\implies C_{\mathrm{opt}}=1+T_{\mathrm{ReAct}}
 $$
 
-The appendix reports roughly 10–20 proposer turns per iteration. Its constant-in-training-size optimizer call count applies to full-batch operation and excludes training/validation rollouts. It also does not make tokens per call, wiki size, latency, or monetary cost constant. Therefore the complexity statement cannot establish that WikiSkill is the cheapest method.
+The appendix reports roughly 10 to 20 proposer turns per iteration. Its claim that the optimizer call count stays constant as training size grows holds for full-batch operation only, and the count excludes training and validation rollouts. A constant call count also does not keep tokens per call, wiki size, latency or monetary cost constant. The complexity statement therefore cannot establish that WikiSkill is the cheapest method.
 
-## Limitations &amp; Confidence {#limits}
+## Limitations and confidence {#limits}
 
-The evidence is strongest for a bounded offline claim: under the tested harnesses, a persistent wiki plus a wiki-informed proposer yields better average evolved-skill performance than the selected baselines. The paper is a preprint, and this brief analyzes reported experiments rather than independently reproducing them. Long-running autonomous improvement and general production reliability remain broader claims than these results support.
+The evidence is strongest for a bounded, offline claim. Under the tested harnesses, a persistent wiki plus a wiki-informed proposer gives better average evolved-skill performance than the selected baselines. The paper is a preprint, and this review analyzes the reported experiments rather than reproducing them independently. Long-running autonomous improvement and general production reliability are broader claims than these results support.
 
 | Boundary | Why it matters | What would strengthen confidence |
 | --- | --- | --- |
@@ -162,15 +162,15 @@ The evidence is strongest for a bounded offline claim: under the tested harnesse
 
 <div class="caption">These are research boundaries, not reasons to dismiss the measured gains.</div>
 
-The bootstrap tests and three evolution runs improve robustness, but they do not eliminate adaptive overfitting to validation. For a binary task with ten validation examples, one changed answer shifts the score by ten percentage points. That illustrative granularity is relevant to SealQA’s validation size, not an estimate of its actual uncertainty. An observed “best” score can reflect both real improvement and stochastic variation.
+The bootstrap tests and the three evolution runs make the results more robust, but they do not rule out adaptive overfitting to validation. On a binary task with ten validation examples, one changed answer moves the score by ten percentage points. That illustrative granularity is relevant at SealQA's validation size; it is not an estimate of SealQA's actual uncertainty. An observed "best" score can mix real improvement with stochastic variation.
 
-The wiki is retained, not guaranteed correct or literally immutable. Pattern pages can be revised, while flawed diagnoses can also persist. The paper supplies trace-level evidence and objective proposal outcomes, but does not demonstrate automatic truth maintenance under adversarial traces, changing tools, or distribution shifts. Treating retention as guaranteed compounding knowledge would overstate what is established.
+The wiki is retained, but it is not guaranteed to be correct, and it is not literally immutable. Pattern pages can be revised, and flawed diagnoses can also persist. The paper supplies trace-level evidence and objective proposal outcomes. It does not demonstrate automatic truth maintenance under adversarial traces, changing tools or distribution shifts. Treating retention as guaranteed compounding knowledge would overstate what has been established.
 
-A further design question is which component earns the benefit. A persistence-only ablation, a flat-memory baseline with matched token budget, and an equally interactive proposer without structured patterns would help distinguish representation from compute and retrieval strategy. Those are proposed follow-up experiments, not results reported by WikiSkill. Likewise, cross-model negative transfer argues for target-model evaluation before reusing another agent’s skills.
+Another open design question is which component produces the benefit. Three experiments would help separate representation from compute and retrieval strategy: a persistence-only ablation, a flat-memory baseline with a matched token budget, and an equally interactive proposer without structured patterns. These are proposed follow-up experiments, not results reported by WikiSkill. The negative cross-model transfer also argues for evaluating on the target model before reusing another agent's skills.
 
-## Reusable Research Insights {#insights}
+## Reusable research insights {#insights}
 
-The most reusable idea is to separate experimental evidence, evolving hypotheses and deployed behavior. When all three live in one prompt, rejecting a procedure can erase its rationale, and retaining its rationale can burden execution. Three layers let a system remember failed experiments without executing their failed instructions. This pattern can apply to tool workflows, code-repair recipes, data-cleaning procedures and other tasks with inspectable outcomes.
+The most reusable idea is the separation of experimental evidence, evolving hypotheses and deployed behavior. When all three live in one prompt, rejecting a procedure can erase its rationale, and keeping the rationale can weigh down execution. With three layers, a system can remember failed experiments without executing their failed instructions. The same pattern can apply to tool workflows, code-repair recipes, data-cleaning procedures and other tasks with inspectable outcomes.
 
 <div class="row mt-3 justify-content-center">
   <div class="col-sm-10 mt-3 mt-md-0">
@@ -188,26 +188,26 @@ The most reusable idea is to separate experimental evidence, evolving hypotheses
 
 <div class="caption">Each technique is a testable design choice; none guarantees improvement by itself.</div>
 
-A practical pattern record can contain a trigger, observed action sequence, hypothesized cause, supporting successes and failures, proposed fix, and counterexamples. A skill should then express only the operational procedure and its applicability conditions. For example, “avoid loops” is too vague; “after an operation, check whether the target state changed before repeating it” exposes a measurable decision point. This is an illustrative generalization, not the exact ALFWorld rule evaluated in the paper.
+A practical pattern record can contain a trigger, the observed action sequence, a hypothesized cause, supporting successes and failures, a proposed fix, and counterexamples. The skill should then express only the operational procedure and its applicability conditions. For example, "avoid loops" is too vague, while "after an operation, check whether the target state changed before repeating it" gives a decision point that can be measured. This is an illustrative generalization, not the exact ALFWorld rule evaluated in the paper.
 
-The gate also provides a reusable experimental unit: hold the previous accepted artifact fixed, modify one component, evaluate the candidate, and preserve the diff with its score. If adapting this to a noisy task, estimate uncertainty and reserve an untouched test set. A stricter numerical gate alone does not prevent false acceptance after many comparisons. If adapting it to changing tools, attach the tool/model version and applicability conditions to remembered rejections so history does not become dogma.
+The gate is also a reusable experimental unit. Hold the previous accepted artifact fixed, modify one component, evaluate the candidate, and keep the diff with its score. To adapt this to a noisy task, estimate uncertainty and reserve an untouched test set. A stricter numerical gate on its own does not prevent false acceptance after many comparisons. To adapt it to tools that change, attach the tool/model version and the applicability conditions to each remembered rejection, so that an old rejection is not applied after it stops being valid.
 
 $$
 \Delta_{A\rightarrow B}=R_B(S_A)-R_B(\emptyset)
 $$
 
-This diagnostic notation is introduced here to clarify transfer, not as a new formula claimed by the paper. Measure both this gain and performance with the target’s self-evolved skill. Positive transfer answers whether the imported procedure helps; beating self-evolution answers a different question. Reporting only the strongest source-target pair hides harmful transfers such as the spreadsheet example.
+The diagnostic notation above is introduced here to clarify transfer; it is not a new formula claimed by the paper. Measure both this gain and the target's performance with its own self-evolved skill. A positive transfer gain says whether the imported procedure helps. Whether it beats self-evolution is a separate question. Reporting only the strongest source-target pair hides harmful transfers such as the spreadsheet example.
 
-A promising follow-up study would hold proposer turns, wiki token budget and task splits constant while varying persistent structured memory, persistent flat history and reset memory. Another would test whether neutral-but-shorter skill edits improve later evolution under a fixed context budget. Both turn a broad enthusiasm for “memory” into specific hypotheses about what information is stored, who reads it, and how its utility is measured.
+One promising follow-up study would hold proposer turns, wiki token budget and task splits constant while varying the memory: persistent structured memory, persistent flat history, or memory that resets. Another would test whether skill edits that are neutral but shorter improve later evolution under a fixed context budget. Both would turn a broad enthusiasm for "memory" into specific hypotheses about what information is stored, who reads it, and how its usefulness is measured.
 
-## Related Reading {#related}
+## Related reading {#related}
 
-These short comparisons identify the closest methodological neighbors through WikiSkill’s related-work discussion and baseline appendix. They are reading pointers, not full independent reviews.
+The short comparisons below cover the closest methodological neighbors, as identified in WikiSkill's related-work discussion and baseline appendix. They are reading pointers, not full independent reviews.
 
-EvoSkill: Automated Skill Discovery for Multi-Agent Systems — explores candidate skill programs using rollout feedback and a frontier of evaluated candidates. Read it to compare search over candidates with WikiSkill’s explicit persistent pattern layer. Paper: <https://arxiv.org/abs/2603.02766>
+EvoSkill: Automated Skill Discovery for Multi-Agent Systems. The paper explores candidate skill programs using rollout feedback and a frontier of evaluated candidates. Read it to compare search over candidates with WikiSkill's explicit persistent pattern layer. Paper: <https://arxiv.org/abs/2603.02766>
 
-Trace2Skill: Distill Trajectory-Local Lessons into Transferable Agent Skills — analyzes individual successful and failed trajectories, then hierarchically merges patches. Read it to contrast systematic trace-level consolidation with cross-iteration wiki maintenance. Paper: <https://arxiv.org/abs/2603.25158>
+Trace2Skill: Distill Trajectory-Local Lessons into Transferable Agent Skills. It analyzes individual successful and failed trajectories, then merges patches hierarchically. Read it to contrast systematic trace-level consolidation with WikiSkill's cross-iteration wiki maintenance. Paper: <https://arxiv.org/abs/2603.25158>
 
-SkillOpt: Executive Strategy for Self-Evolving Agent Skills — organizes optimization into rollout, reflection, aggregation, selection, update and evaluation. Read it to compare reflection-driven patch synthesis with the wiki-informed proposer and retained rejection history. Paper: <https://arxiv.org/abs/2605.23904>
+SkillOpt: Executive Strategy for Self-Evolving Agent Skills. The paper organizes optimization into rollout, reflection, aggregation, selection, update and evaluation. Read it to compare reflection-driven patch synthesis with WikiSkill's wiki-informed proposer and retained rejection history. Paper: <https://arxiv.org/abs/2605.23904>
 
 Main paper: WikiSkill: Compiling Agent Experience into Persistent Knowledge for Skill Evolution. <https://arxiv.org/abs/2608.27454v1>
