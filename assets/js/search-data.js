@@ -99,17 +99,17 @@ ninja.data = [{
               window.location.href = "/projects/llm_from_scratch/";
             },},{id: "reviews-skillrl-learning-to-reuse-experience",
           title: 'SkillRL: Learning to Reuse Experience',
-          description: "How distilled skills, supervised preparation, and failure-driven revision work together in agent reinforcement learning.",
+          description: "How SkillRL combines distilled skills, supervised fine-tuning, and failure-driven revision in agent reinforcement learning.",
           section: "Reviews",handler: () => {
               window.location.href = "/reviews/2026-09-21-skillrl-learning-to-reuse-experience/";
             },},{id: "reviews-wikiskill-learning-from-agent-experience",
           title: 'WikiSkill: Learning from Agent Experience',
-          description: "How persistent knowledge turns execution traces and failed interventions into better reusable skills.",
+          description: "How a persistent knowledge layer turns execution traces and failed interventions into better reusable skills.",
           section: "Reviews",handler: () => {
               window.location.href = "/reviews/2026-09-21-wikiskill-learning-from-agent-experience/";
             },},{id: "reviews-agentkvshift-correcting-reused-kv",
           title: 'AgentKVShift: Correcting Reused KV',
-          description: "How a small probe set can repair a much larger KV cache—and where the evidence stops.",
+          description: "How a small probe set can repair a much larger KV cache, and where the evidence stops.",
           section: "Reviews",handler: () => {
               window.location.href = "/reviews/2026-09-24-agentkvshift-correcting-reused-kv/";
             },},{
