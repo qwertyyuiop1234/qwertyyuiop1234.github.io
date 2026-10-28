@@ -37,7 +37,7 @@ The problem therefore has two coupled parts. The memory has to hold information 
 > ##### What "skill" means here
 >
 > A skill is a short text strategy with a condition for when it applies. It is not a separately executable program, and it is not a formally learned temporal abstraction with its own termination rule. "General" means broadly applicable within an environment; calling a skill general does not establish transfer across arbitrary domains.
-{: .block-tip }
+{: .block-note }
 
 ## Core idea and method {#method}
 
@@ -70,7 +70,7 @@ Here d is the task description, k is its task category, and the two embeddings r
 > ##### Illustrative example: a changing price
 >
 > Suppose a product first shows \\\$38, but choosing the required size raises the price to \\\$52, and the budget is \\\$50. "This product was cheap" is a memory tied to one instance. "Verify the final configured price before purchase" is still useful for a different product. These numbers are for explanation only; they are not experimental observations.
-{: .block-tip }
+{: .block-note }
 
 The applicability field matters as much as the principle. A price check has to happen after configuration; running it only before the size is chosen does not prevent this failure. Household tasks have the same issue. They can require finding an object, changing its state, and then placing it, so a general instruction to deliver a held object has to be read together with the task-specific requirement to clean or heat it first. More entries are not enough on their own; the library also needs a consistent order of precedence.
 
@@ -165,7 +165,7 @@ SkillRL has the best reported average over all seven tasks, but the printed aver
 > ##### Two different efficiency quantities
 >
 > The method description claims that turning trajectories into skills compresses them 10 to 20-fold. The prompt-length analysis reports roughly 1,450 tokens for raw memory versus fewer than 1,300 for SkillRL, a reduction of about 10.3%. Compressing one memory component does not imply a 10 to 20-fold reduction in total inference context, latency, or cost.
-{: .block-tip }
+{: .block-note }
 
 In the illustration, the library grows from 55 to 100 skills by training step 150. In the reported breakdown, general skills go from 12 to 20 and task-specific skills from 43 to 80. The learning curves also favor evolution, but plotted curves are not a substitute for confidence intervals over repeated seeds. The reported compute budget includes a 24-hour RL stage and does not show that every baseline was compared at equal cost.
 
@@ -195,7 +195,7 @@ Evolution guided by validation failures uses validation data as training informa
 > ##### What the evidence supports
 >
 > The evidence supports the joint design as useful: compact conditional guidance, an agent trained to use it, and targeted revision. It does not yet establish unlimited self-improvement, universal cross-domain skills, or a net cost advantage once teacher calls and all training expenses are counted.
-{: .block-tip }
+{: .block-note }
 
 ## Reusable research insights {#insights}
 

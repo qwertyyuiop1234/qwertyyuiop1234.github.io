@@ -78,7 +78,7 @@ Here k indexes iterations, P is the proposed edit, and R is the average task sco
 > ##### Worked example: a failed experiment still changes knowledge
 >
 > Suppose the best validation score is 0.70. A new skill scoring 0.70 is rejected, and so is one scoring 0.65. A candidate scoring 0.75 is accepted. These are illustrative numbers, not paper measurements. All three outcomes can still refine the wiki. A rollback reverts the executable instructions but keeps the record of the experiment.
-{: .block-tip }
+{: .block-note }
 
 The ALFWorld case study is a concrete example. At iteration 0, a broad goal-directed-action skill is rejected, and the persistent record shows that failure to the next proposer. At iteration 1, a more concrete break-repetition-loop skill is accepted. Later evidence of multi-operation loops leads to another accepted refinement at iteration 4. A simplified figure in the paper contrasts the vague goal-directed advice with explicit action patterns that stop repetition.
 
@@ -87,7 +87,7 @@ These domain-specific rules should not be copied as universal laws. "Never retur
 > ##### Why not let the executor read the entire wiki?
 >
 > The authors hypothesize that direct wiki access lets an executor solve tasks with knowledge that never enters the skill, which makes training traces less diagnostic of skill quality. The explanation is plausible and consistent with their ablation. It is still a hypothesis about the mechanism, not a proven general rule against memory access.
-{: .block-tip }
+{: .block-note }
 
 ## Evidence and results {#evidence}
 
@@ -140,7 +140,7 @@ Cross-model transfer separates finding a useful procedure from executing it. On 
 > ##### A ceiling can prevent learning before test performance is perfect
 >
 > Gemini-3.5-Flash scores 100% on the small ALFWorld validation split before any evolution. Every method stops without evolving a skill, yet its test score is only 85.9%. So this row is not evidence that learned skills reach 85.9%. It shows how a saturated validation set can cut off further search.
-{: .block-tip }
+{: .block-note }
 
 $$
 C_{\mathrm{opt}}=(1+T_{\mathrm{ReAct}})\frac{N_{\mathrm{train}}}{B};\qquad B=N_{\mathrm{train}}\implies C_{\mathrm{opt}}=1+T_{\mathrm{ReAct}}

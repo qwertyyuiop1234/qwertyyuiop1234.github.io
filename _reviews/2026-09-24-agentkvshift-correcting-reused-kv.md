@@ -78,7 +78,7 @@ Values use the same equations with their own scores, probe set, and mean. The me
 > ##### A nominal 10% budget is not automatically 10% of total work
 >
 > The key and value probe sets can differ, so their union has between b and min(2b, n) distinct tokens. Check-layer scoring, loading cached states, moving tensors, and correcting non-probes also take time. The reported recompute ratio is therefore not the same as the positions actually refreshed, the FLOPs, or the wall-clock latency.
-{: .block-tip }
+{: .block-note }
 
 As a small numerical example, take one scalar coordinate of a value vector. Suppose the two selected probe residuals are 2.2 and 1.8, which gives an estimated offset of 2.0. The example is explanatory and not a reported experiment. In the real method the coordinates are corrected together as a vector.
 
@@ -169,7 +169,7 @@ With KIVI 2-bit at r = 0.1, AgentKVShift's 0.203 is about 2.67 times CacheBlend'
 > ##### Strong experimental direction, qualified theoretical support
 >
 > In the evaluated settings, the reported comparisons support useful quality recovery at low refresh ratios. They do not establish that the method dominates everywhere or that every cell shows a statistically significant improvement. Nor do they guarantee that the practical algorithm approaches full recomputation on arbitrary agent workloads.
-{: .block-tip }
+{: .block-note }
 
 The theory has two separate gaps. First, uniform random sampling supports a mean-estimation argument, but top-b divergence selection can bias the estimator. The weighted update used in practice also differs from applying one unweighted shift to all entries. And an analysis of single-layer attention with a fixed query does not directly control the hidden-state evolution of a multilayer transformer, or downstream generation.
 
