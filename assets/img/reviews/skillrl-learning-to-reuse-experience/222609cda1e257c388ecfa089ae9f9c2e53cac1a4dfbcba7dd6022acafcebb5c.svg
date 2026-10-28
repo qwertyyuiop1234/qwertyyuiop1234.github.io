@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="572.4pt" height="347.04pt" viewBox="0 0 572.4 347.04" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ 
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 347.04 
+L 572.4 347.04 
+L 572.4 -0 
+L 0 -0 
+z
+" style="fill: #faf9f5"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 18.36 86.4792 
+L 152.28 86.4792 
+Q 156.744 86.4792 156.744 82.044 
+L 156.744 26.604 
+Q 156.744 22.1688 152.28 22.1688 
+L 18.36 22.1688 
+Q 13.896 22.1688 13.896 26.604 
+L 13.896 82.044 
+Q 13.896 86.4792 18.36 86.4792 
+z
+" clip-path="url(#pbbc7869203)" style="fill: #efeee7; stroke: #b6b6aa; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 213.66 86.4792 
+L 347.58 86.4792 
+Q 352.044 86.4792 352.044 82.044 
+L 352.044 26.604 
+Q 352.044 22.1688 347.58 22.1688 
+L 213.66 22.1688 
+Q 209.196 22.1688 209.196 26.604 
+L 209.196 82.044 
+Q 209.196 86.4792 213.66 86.4792 
+z
+" clip-path="url(#pbbc7869203)" style="fill: #efeee7; stroke: #b6b6aa; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 408.96 86.4792 
+L 542.88 86.4792 
+Q 547.344 86.4792 547.344 82.044 
+L 547.344 26.604 
+Q 547.344 22.1688 542.88 22.1688 
+L 408.96 22.1688 
+Q 404.496 22.1688 404.496 26.604 
+L 404.496 82.044 
+Q 404.496 86.4792 408.96 86.4792 
+z
+" clip-path="url(#pbbc7869203)" style="fill: #efeee7; stroke: #b6b6aa; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 408.96 202.9032 
+L 542.88 202.9032 
+Q 547.344 202.9032 547.344 198.468 
+L 547.344 143.028 
+Q 547.344 138.5928 542.88 138.5928 
+L 408.96 138.5928 
+Q 404.496 138.5928 404.496 143.028 
+L 404.496 198.468 
+Q 404.496 202.9032 408.96 202.9032 
+z
+" clip-path="url(#pbbc7869203)" style="fill: #efeee7; stroke: #b6b6aa; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 213.66 202.9032 
+L 347.58 202.9032 
+Q 352.044 202.9032 352.044 198.468 
+L 352.044 143.028 
+Q 352.044 138.5928 347.58 138.5928 
+L 213.66 138.5928 
+Q 209.196 138.5928 209.196 143.028 
+L 209.196 198.468 
+Q 209.196 202.9032 213.66 202.9032 
+z
+" clip-path="url(#pbbc7869203)" style="fill: #efeee7; stroke: #b6b6aa; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 18.36 202.9032 
+L 152.28 202.9032 
+Q 156.744 202.9032 156.744 198.468 
+L 156.744 143.028 
+Q 156.744 138.5928 152.28 138.5928 
+L 18.36 138.5928 
+Q 13.896 138.5928 13.896 143.028 
+L 13.896 198.468 
+Q 13.896 202.9032 18.36 202.9032 
+z
+" clip-path="url(#pbbc7869203)" style="fill: #efeee7; stroke: #b6b6aa; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 18.36 322.0992 
+L 152.28 322.0992 
+Q 156.744 322.0992 156.744 317.664 
+L 156.744 262.224 
+Q 156.744 257.7888 152.28 257.7888 
+L 18.36 257.7888 
+Q 13.896 257.7888 13.896 262.224 
+L 13.896 317.664 
+Q 13.896 322.0992 18.36 322.0992 
+z
+" clip-path="url(#pbbc7869203)" style="fill: #efeee7; stroke: #b6b6aa; stroke-linejoin: miter"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 157.86 289.944 
+L 556.83 289.944 
+L 556.83 112.536 
+" clip-path="url(#pbbc7869203)" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="85.32" y="47.881206" transform="rotate(-0 85.32 47.881206)">Base-agent rollouts</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="85.32" y="69.556112" transform="rotate(-0 85.32 69.556112)">Successes + failures</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="280.62" y="47.931988" transform="rotate(-0 280.62 47.931988)">Teacher distillation</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="280.62" y="69.556112" transform="rotate(-0 280.62 69.556112)">Patterns + corrections</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="475.92" y="47.931988" transform="rotate(-0 475.92 47.931988)">SkillBank</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="475.92" y="69.556112" transform="rotate(-0 475.92 69.556112)">General + task-specific</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 159.861566 54.324 
+Q 182.971628 54.324 203.845622 54.324 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 199.045622 51.924 
+L 203.845622 54.324 
+L 199.045622 56.724 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 355.161566 54.324 
+Q 378.271628 54.324 399.145622 54.324 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 394.345622 51.924 
+L 399.145622 54.324 
+L 394.345622 56.724 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="475.92" y="164.355987" transform="rotate(-0 475.92 164.355987)">Cold-start SFT</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="475.92" y="185.980112" transform="rotate(-0 475.92 185.980112)">Learn to apply skills</text>
+   </g>
+   <g id="patch_11">
+    <path d="M 475.92 89.588834 
+Q 475.92 112.535191 475.92 133.245479 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 478.32 128.445479 
+L 475.92 133.245479 
+L 473.52 128.445479 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="280.62" y="164.355987" transform="rotate(-0 280.62 164.355987)">Skill-conditioned RL</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="280.62" y="185.980112" transform="rotate(-0 280.62 185.980112)">Retrieve + act + GRPO</text>
+   </g>
+   <g id="patch_12">
+    <path d="M 401.378434 170.748 
+Q 378.268372 170.748 357.394378 170.748 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 362.194378 173.148 
+L 357.394378 170.748 
+L 362.194378 168.348 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="85.32" y="164.355987" transform="rotate(-0 85.32 164.355987)">Validation failures</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="85.32" y="185.980112" transform="rotate(-0 85.32 185.980112)">Identify missing guidance</text>
+   </g>
+   <g id="patch_13">
+    <path d="M 206.078434 170.748 
+Q 182.968372 170.748 162.094378 170.748 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 166.894378 173.148 
+L 162.094378 170.748 
+L 166.894378 168.348 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="85.32" y="283.551987" transform="rotate(-0 85.32 283.551987)">Teacher revision</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #242420" x="85.32" y="305.176113" transform="rotate(-0 85.32 305.176113)">Propose or refine skills</text>
+   </g>
+   <g id="patch_14">
+    <path d="M 85.32 206.014696 
+Q 85.32 230.346968 85.32 252.443172 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 87.72 247.643172 
+L 85.32 252.443172 
+L 82.92 247.643172 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 554.831917 112.536 
+L 483.92 112.536 
+Q 475.92 112.536 475.92 104.536 
+L 475.92 91.822575 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+    <path d="M 473.52 96.622575 
+L 475.92 91.822575 
+L 478.32 96.622575 
+" style="fill: none; stroke: #aa6048; stroke-width: 2; stroke-linecap: round"/>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #aa6048" x="314.1" y="273.312" transform="rotate(-0 314.1 273.312)">Update the external library at checkpoints</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pbbc7869203">
+   <rect x="7.2" y="7.2" width="558" height="332.64"/>
+  </clipPath>
+ </defs>
+</svg>

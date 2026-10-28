@@ -176,6 +176,8 @@ collections:
 # region Jekyll settings
 # -----------------------------------------------------------------------------
 
+timezone: Asia/Seoul # post dates; GitHub Actions builds in UTC
+
 # Markdown and syntax highlight
 markdown: kramdown
 highlighter: rouge
