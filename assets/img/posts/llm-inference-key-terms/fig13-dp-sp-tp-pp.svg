@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 290" width="760" height="290" role="img" aria-label="What DP, SP, TP and PP each split across two GPUs: the batch, the sequence, the hidden dimension, or the layers">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .ml { font-size: 16px; }
+  </style>
+  <rect width="760" height="290" fill="#faf9f5"/>
+
+  <!-- header -->
+  <text x="380" y="32" text-anchor="middle" class="m ml">activations = [ <tspan class="tc b">bs</tspan> , <tspan class="sg b">seq_len</tspan> , <tspan class="bl b">hidden</tspan> ]</text>
+
+  <!-- DP: two full copies -->
+  <rect x="46" y="58" width="130" height="90" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="111" y="75" text-anchor="middle" class="m">GPU1</text>
+  <rect x="30" y="80" width="130" height="90" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="95" y="120" text-anchor="middle" class="m">GPU0</text>
+  <text x="95" y="142" text-anchor="middle" class="s">requests 1-2</text>
+
+  <!-- SP: split along the sequence -->
+  <rect x="210" y="70" width="160" height="50" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <rect x="210" y="120" width="160" height="50" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <line x1="204" y1="120" x2="376" y2="120" stroke="#4f6f5c" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="290" y="100" text-anchor="middle" class="s">first tokens · GPU0</text>
+  <text x="290" y="150" text-anchor="middle" class="s">last tokens · GPU1</text>
+
+  <!-- TP: split along hidden -->
+  <rect x="405" y="70" width="70" height="100" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <rect x="475" y="70" width="70" height="100" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <line x1="475" y1="64" x2="475" y2="176" stroke="#35548a" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="440" y="125" text-anchor="middle" class="m">GPU0</text>
+  <text x="510" y="125" text-anchor="middle" class="m">GPU1</text>
+
+  <!-- PP: split by layers -->
+  <g stroke-width="1.4">
+    <rect x="585" y="64" width="150" height="24" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="585" y="91" width="150" height="24" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="585" y="118" width="150" height="24" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="585" y="145" width="150" height="24" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <line x1="579" y1="116.5" x2="741" y2="116.5" stroke="#414b48" stroke-width="2" stroke-dasharray="5 3"/>
+  <g text-anchor="middle">
+    <text x="660" y="81" class="s">layer 1 · GPU0</text>
+    <text x="660" y="108" class="s">layer 2 · GPU0</text>
+    <text x="660" y="135" class="s">layer 3 · GPU1</text>
+    <text x="660" y="162" class="s">layer 4 · GPU1</text>
+  </g>
+
+  <!-- captions -->
+  <g text-anchor="middle">
+    <text x="103" y="206" class="b tc">DP: splits bs</text>
+    <text x="290" y="206" class="b sg">SP: splits seq_len</text>
+    <text x="475" y="206" class="b bl">TP: splits hidden</text>
+    <text x="660" y="206" class="b">PP: splits layers</text>
+  </g>
+  <g text-anchor="middle">
+    <text x="103" y="228" class="s">requests split by GPU</text>
+    <text x="290" y="228" class="s">tokens split by range</text>
+    <text x="475" y="228" class="s">matrices by column/row</text>
+    <text x="660" y="228" class="s">layer groups = stages</text>
+  </g>
+  <g text-anchor="middle">
+    <text x="103" y="252" class="s i sg">almost no</text>
+    <text x="103" y="269" class="s i sg">communication</text>
+    <text x="290" y="252" class="s i sg">pass KV in a ring</text>
+    <text x="290" y="269" class="s i sg">during attention</text>
+    <text x="475" y="252" class="s i sg">all-reduce</text>
+    <text x="475" y="269" class="s i sg">every layer</text>
+    <text x="660" y="252" class="s i sg">pass activations</text>
+    <text x="660" y="269" class="s i sg">at stage edges</text>
+  </g>
+</svg>

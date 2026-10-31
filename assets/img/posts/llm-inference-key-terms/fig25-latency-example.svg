@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 248" width="760" height="248" role="img" aria-label="Worked example on a time axis: TTFT 200 ms, four 80 ms gaps between five tokens, E2EL 520 ms">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; } .ms { font-size: 13px; } .xl { font-size: 17px; } .lg { font-size: 16px; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-tc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a4502f"/></marker>
+    <marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#35548a"/></marker>
+    <marker id="a-sg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f6f5c"/></marker>
+  </defs>
+  <rect width="760" height="248" fill="#faf9f5"/>
+  <line x1="48" y1="44" x2="568" y2="44" stroke="#35548a" stroke-width="1.8" marker-start="url(#a-bl)" marker-end="url(#a-bl)"/>
+  <text x="308" y="34" text-anchor="middle" class="b bl">E2EL = 520 ms</text>
+  <line x1="48" y1="86" x2="248" y2="86" stroke="#a4502f" stroke-width="1.8" marker-start="url(#a-tc)" marker-end="url(#a-tc)"/>
+  <text x="148" y="76" text-anchor="middle" class="b tc">TTFT = 200 ms</text>
+  <g stroke="#4f6f5c" stroke-width="1.6">
+    <line x1="250" y1="118" x2="326" y2="118" marker-start="url(#a-sg)" marker-end="url(#a-sg)"/>
+    <line x1="330" y1="118" x2="406" y2="118" marker-start="url(#a-sg)" marker-end="url(#a-sg)"/>
+    <line x1="410" y1="118" x2="486" y2="118" marker-start="url(#a-sg)" marker-end="url(#a-sg)"/>
+    <line x1="490" y1="118" x2="566" y2="118" marker-start="url(#a-sg)" marker-end="url(#a-sg)"/>
+  </g>
+  <text x="288" y="109" text-anchor="middle" class="m ms sg">80 ms</text>
+  <text x="368" y="109" text-anchor="middle" class="m ms sg">80 ms</text>
+  <text x="448" y="109" text-anchor="middle" class="m ms sg">80 ms</text>
+  <text x="528" y="109" text-anchor="middle" class="m ms sg">80 ms</text>
+  <g stroke-width="1.4">
+    <rect x="48" y="132" width="200" height="36" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="248" y="132" width="80" height="36" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="328" y="132" width="80" height="36" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="408" y="132" width="80" height="36" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="488" y="132" width="80" height="36" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <text x="148" y="155" text-anchor="middle">prefill (+ queue)</text>
+  <text x="288" y="155" text-anchor="middle">decode</text>
+  <text x="368" y="155" text-anchor="middle">decode</text>
+  <text x="448" y="155" text-anchor="middle">decode</text>
+  <text x="528" y="155" text-anchor="middle">decode</text>
+  <line x1="36" y1="186" x2="614" y2="186" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <text x="620" y="190" class="s mu">time</text>
+  <circle cx="48" cy="186" r="4.5" fill="#faf9f5" stroke="#141413" stroke-width="1.6"/>
+  <circle cx="248" cy="186" r="4.5" fill="#141413"/>
+  <circle cx="328" cy="186" r="4.5" fill="#141413"/>
+  <circle cx="408" cy="186" r="4.5" fill="#141413"/>
+  <circle cx="488" cy="186" r="4.5" fill="#141413"/>
+  <circle cx="568" cy="186" r="4.5" fill="#141413"/>
+  <text x="48" y="208" text-anchor="middle" class="s">request</text>
+  <text x="248" y="208" text-anchor="middle" class="s">token 1</text>
+  <text x="328" y="208" text-anchor="middle" class="s">token 2</text>
+  <text x="408" y="208" text-anchor="middle" class="s">token 3</text>
+  <text x="488" y="208" text-anchor="middle" class="s">token 4</text>
+  <text x="568" y="208" text-anchor="middle" class="s">token 5</text>
+  <text x="48" y="228" text-anchor="middle" class="m ms mu">0</text>
+  <text x="248" y="228" text-anchor="middle" class="m ms mu">200</text>
+  <text x="328" y="228" text-anchor="middle" class="m ms mu">280</text>
+  <text x="408" y="228" text-anchor="middle" class="m ms mu">360</text>
+  <text x="488" y="228" text-anchor="middle" class="m ms mu">440</text>
+  <text x="568" y="228" text-anchor="middle" class="m ms mu">520 ms</text>
+  <text x="676" y="128" text-anchor="middle" class="i sg">even gaps are</text>
+  <text x="676" y="148" text-anchor="middle" class="i sg">easier to read</text>
+</svg>

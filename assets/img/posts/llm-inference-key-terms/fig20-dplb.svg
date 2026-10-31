@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="Four DP engines report load stats to a DP coordinator, which publishes them to the API server; the load balancer inside the API server picks the least busy engine, engine 0, and sends the new request there">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-tc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a4502f"/></marker>
+    <marker id="a-sg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f6f5c"/></marker>
+  </defs>
+  <rect width="760" height="400" fill="#faf9f5"/>
+
+  <!-- API server with its load balancer (DPLB) -->
+  <rect x="20" y="36" width="290" height="92" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="165" y="58" text-anchor="middle" class="b">API server</text>
+  <rect x="34" y="68" width="262" height="50" rx="5" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="165" y="89" text-anchor="middle" class="s b sg">load balancer (DPLB)</text>
+  <text x="165" y="107" text-anchor="middle" class="s">picks least busy engine</text>
+
+  <!-- DP coordinator -->
+  <rect x="460" y="56" width="240" height="52" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="580" y="87" text-anchor="middle" class="b">DP coordinator</text>
+
+  <!-- new request in -->
+  <line x1="70" y1="6" x2="70" y2="36" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <text x="80" y="26" class="sg">new request</text>
+
+  <!-- coordinator publishes stats to the API server -->
+  <line x1="460" y1="82" x2="310" y2="82" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <text x="385" y="74" text-anchor="middle">publish stats</text>
+
+  <!-- load stats (engine -> coordinator) -->
+  <g stroke="#a4502f" stroke-width="1.6" fill="none" marker-end="url(#a-tc)">
+    <path d="M160,236 V168 H490 V108"/>
+    <path d="M300,236 V192 H540 V108"/>
+    <path d="M470,236 V214 H590 V108"/>
+    <line x1="650" y1="236" x2="650" y2="108"/>
+  </g>
+  <text x="172" y="158" class="i tc">load stats (waiting, running, KV usage)</text>
+
+  <!-- request to engine 0 -->
+  <line x1="70" y1="128" x2="70" y2="236" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <text x="80" y="186" class="b sg">request</text>
+  <text x="80" y="204" class="s sg">to engine 0</text>
+
+  <!-- engines -->
+  <rect x="16" y="236" width="170" height="114" rx="6" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="2"/>
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="202" y="236" width="170" height="114" rx="6"/>
+    <rect x="388" y="236" width="170" height="114" rx="6"/>
+    <rect x="574" y="236" width="170" height="114" rx="6"/>
+  </g>
+  <g text-anchor="middle">
+    <text class="b" x="101" y="258">engine 0</text>
+    <text class="b" x="287" y="258">engine 1</text>
+    <text class="b" x="473" y="258">engine 2</text>
+    <text class="b" x="659" y="258">engine 3</text>
+  </g>
+  <g>
+    <text class="s" x="26" y="284">running</text><text class="s" x="26" y="309">waiting</text><text class="s" x="26" y="334">KV usage</text>
+    <text class="s" x="212" y="284">running</text><text class="s" x="212" y="309">waiting</text><text class="s" x="212" y="334">KV usage</text>
+    <text class="s" x="398" y="284">running</text><text class="s" x="398" y="309">waiting</text><text class="s" x="398" y="334">KV usage</text>
+    <text class="s" x="584" y="284">running</text><text class="s" x="584" y="309">waiting</text><text class="s" x="584" y="334">KV usage</text>
+  </g>
+
+  <!-- bars: one cell = one request; KV bar = share of KV cache in use; slots shown faint -->
+  <g fill="none" stroke="#d8d7d0" stroke-width="1">
+    <path d="M92,273 h84 v14 h-84 z M92,298 h84 v14 h-84 z M92,323 h84 v14 h-84 z"/>
+    <path d="M278,273 h84 v14 h-84 z M278,298 h84 v14 h-84 z M278,323 h84 v14 h-84 z"/>
+    <path d="M464,273 h84 v14 h-84 z M464,298 h84 v14 h-84 z M464,323 h84 v14 h-84 z"/>
+    <path d="M650,273 h84 v14 h-84 z M650,298 h84 v14 h-84 z M650,323 h84 v14 h-84 z"/>
+  </g>
+  <!-- running (blue) -->
+  <g fill="#d9e1ee" stroke="#35548a" stroke-width="1">
+    <rect x="92" y="273" width="12" height="14"/><rect x="104" y="273" width="12" height="14"/>
+    <rect x="278" y="273" width="12" height="14"/><rect x="290" y="273" width="12" height="14"/><rect x="302" y="273" width="12" height="14"/><rect x="314" y="273" width="12" height="14"/><rect x="326" y="273" width="12" height="14"/>
+    <rect x="464" y="273" width="12" height="14"/><rect x="476" y="273" width="12" height="14"/><rect x="488" y="273" width="12" height="14"/><rect x="500" y="273" width="12" height="14"/>
+    <rect x="650" y="273" width="12" height="14"/><rect x="662" y="273" width="12" height="14"/><rect x="674" y="273" width="12" height="14"/><rect x="686" y="273" width="12" height="14"/><rect x="698" y="273" width="12" height="14"/><rect x="710" y="273" width="12" height="14"/>
+  </g>
+  <!-- waiting (terracotta) -->
+  <g fill="#ecd5c8" stroke="#a4502f" stroke-width="1">
+    <rect x="278" y="298" width="12" height="14"/><rect x="290" y="298" width="12" height="14"/><rect x="302" y="298" width="12" height="14"/>
+    <rect x="464" y="298" width="12" height="14"/><rect x="476" y="298" width="12" height="14"/>
+    <rect x="650" y="298" width="12" height="14"/><rect x="662" y="298" width="12" height="14"/><rect x="674" y="298" width="12" height="14"/><rect x="686" y="298" width="12" height="14"/>
+  </g>
+  <!-- KV usage (ochre) -->
+  <g fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1">
+    <rect x="92" y="323" width="21" height="14"/>
+    <rect x="278" y="323" width="59" height="14"/>
+    <rect x="464" y="323" width="46" height="14"/>
+    <rect x="650" y="323" width="71" height="14"/>
+  </g>
+
+  <text x="16" y="380" class="s mu">Engines 0-3 are DP replicas of the same model. One small cell = one request.</text>
+</svg>

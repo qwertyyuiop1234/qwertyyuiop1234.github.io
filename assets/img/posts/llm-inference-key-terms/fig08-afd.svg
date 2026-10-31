@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 556" width="760" height="556" role="img" aria-label="Attention-FFN disaggregation: attention instances send hidden states in fp8 to FFN instances that run the experts and send outputs back in bf16, once per layer">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .t16 { font-size: 16px; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-sg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f6f5c"/></marker>
+  </defs>
+  <rect width="760" height="556" fill="#faf9f5"/>
+
+  <!-- ===== attention device group ===== -->
+  <rect x="36" y="36" width="276" height="432" rx="8" fill="#faf9f5" stroke="#d8d7d0" stroke-width="1.4"/>
+  <rect x="30" y="42" width="276" height="432" rx="8" fill="#faf9f5" stroke="#d8d7d0" stroke-width="1.4"/>
+  <rect x="24" y="48" width="276" height="432" rx="8" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="162" y="76" text-anchor="middle" class="b t16">Attention instances (A)</text>
+
+  <g fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4">
+    <rect x="72" y="96" width="180" height="36" rx="6"/>
+    <rect x="72" y="152" width="180" height="36" rx="6"/>
+    <rect x="72" y="208" width="180" height="36" rx="6"/>
+    <rect x="72" y="264" width="180" height="36" rx="6"/>
+    <rect x="72" y="392" width="180" height="52" rx="6"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="162" y="119">Norm</text>
+    <text x="162" y="175">Attention</text>
+    <text x="162" y="231">Norm</text>
+    <text x="162" y="287">Router</text>
+    <text x="162" y="414" class="b">Expert combine</text>
+    <text x="162" y="433" class="s">(router top-k weights)</text>
+  </g>
+  <g stroke="#64645d" stroke-width="1.6">
+    <line x1="162" y1="132" x2="162" y2="151" marker-end="url(#a-ink)"/>
+    <line x1="162" y1="188" x2="162" y2="207" marker-end="url(#a-ink)"/>
+    <line x1="162" y1="244" x2="162" y2="263" marker-end="url(#a-ink)"/>
+    <line x1="162" y1="300" x2="162" y2="391" marker-end="url(#a-ink)"/>
+    <line x1="162" y1="444" x2="162" y2="470" marker-end="url(#a-ink)"/>
+  </g>
+  <text x="172" y="463" class="s mu">to next layer</text>
+  <text x="172" y="350" class="s i mu">top-k weights</text>
+
+  <!-- ===== FFN device group ===== -->
+  <rect x="460" y="188" width="292" height="280" rx="8" fill="#faf9f5" stroke="#d8d7d0" stroke-width="1.4"/>
+  <rect x="454" y="194" width="292" height="280" rx="8" fill="#faf9f5" stroke="#d8d7d0" stroke-width="1.4"/>
+  <rect x="448" y="200" width="292" height="280" rx="8" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="594" y="228" text-anchor="middle" class="b t16">FFN instances (F)</text>
+
+  <g fill="#d9e1ee" stroke="#35548a" stroke-width="1.4">
+    <rect x="494" y="264" width="200" height="36" rx="6"/>
+    <rect x="462" y="330" width="57" height="46" rx="6"/>
+    <rect x="531" y="330" width="57" height="46" rx="6"/>
+    <rect x="600" y="330" width="57" height="46" rx="6"/>
+    <rect x="669" y="330" width="57" height="46" rx="6"/>
+    <rect x="494" y="400" width="200" height="36" rx="6"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="594" y="287">EP scatter</text>
+    <text x="490.5" y="349" class="s">Expert</text><text x="490.5" y="368" class="b">0</text>
+    <text x="559.5" y="349" class="s">Expert</text><text x="559.5" y="368" class="b">1</text>
+    <text x="628.5" y="349" class="s">Expert</text><text x="628.5" y="368" class="b">2</text>
+    <text x="697.5" y="349" class="s">Expert</text><text x="697.5" y="368" class="b">3</text>
+    <text x="594" y="423">results</text>
+  </g>
+  <g stroke="#64645d" stroke-width="1.6">
+    <line x1="530" y1="300" x2="491.4" y2="329.3" marker-end="url(#a-ink)"/>
+    <line x1="576" y1="300" x2="560.0" y2="329.0" marker-end="url(#a-ink)"/>
+    <line x1="612" y1="300" x2="628.0" y2="329.0" marker-end="url(#a-ink)"/>
+    <line x1="658" y1="300" x2="696.6" y2="329.3" marker-end="url(#a-ink)"/>
+    <line x1="490.5" y1="376" x2="529.0" y2="399.4" marker-end="url(#a-ink)"/>
+    <line x1="559.5" y1="376" x2="575.4" y2="399.1" marker-end="url(#a-ink)"/>
+    <line x1="628.5" y1="376" x2="612.6" y2="399.1" marker-end="url(#a-ink)"/>
+    <line x1="697.5" y1="376" x2="659.0" y2="399.4" marker-end="url(#a-ink)"/>
+  </g>
+
+  <!-- ===== round trip between device groups ===== -->
+  <line x1="252" y1="282" x2="493" y2="282" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <text x="374" y="252" text-anchor="middle" class="b sg">hidden states</text>
+  <text x="374" y="271" text-anchor="middle" class="sg">(fp8)</text>
+  <line x1="494" y1="418" x2="253" y2="418" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <text x="374" y="390" text-anchor="middle" class="b sg">outputs</text>
+  <text x="374" y="409" text-anchor="middle" class="sg">(bf16)</text>
+
+  <!-- notes -->
+  <text x="380" y="512" text-anchor="middle" class="i">every layer makes one round trip between the device groups</text>
+  <text x="380" y="536" text-anchor="middle" class="i">tune the ratio A : F so both sides stay busy</text>
+</svg>

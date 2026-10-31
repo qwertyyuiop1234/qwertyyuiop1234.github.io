@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "entries": {
+    "466399dafa2d20f60587180bad0a07358eb7f2bce724df0ff682f038ad33f5ad": {
+      "last_emitted_at_ms": 1793474715156,
+      "message": "Read multiple files in parallel when possible for faster analysis."
+    },
+    "79a93d4a2f8f50b95f852280616242fee1855dc99a3c75211917f55e72e95fae": {
+      "last_emitted_at_ms": 1793474712881,
+      "message": "Use parallel execution for independent tasks. Use run_in_background for long operations (npm install, builds, tests)."
+    },
+    "e0578ecb4f5598a7a24fb897c41efc3e833336bfe93670460c376fa2bbaaca3a": {
+      "last_emitted_at_ms": 1793474042043,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Fact-check E: basics, libs, sources"
+    },
+    "9a200ca8aa6fd4a7bfd0ca34f1ddf4f6a168c0fd4f5cb1b1ba5a6e06ac92ae94": {
+      "last_emitted_at_ms": 1793474031403,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Fact-check D: engines and vLLM"
+    },
+    "9dcea2ad6b82a9aae6eecba4e0111d26a8fb49cd79c14a3d77f0f23f3d776805": {
+      "last_emitted_at_ms": 1793474019858,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Fact-check C: metrics and sampling"
+    },
+    "4ba7043094a4bb03825eedda9b4dc1f4e9c46bc90e456d2302747d4ea9b61738": {
+      "last_emitted_at_ms": 1793474008374,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Fact-check B: features part 2"
+    },
+    "567322ab0fb318e3c55f9817fe33af36829b7576b81c6fec855907ad976734db": {
+      "last_emitted_at_ms": 1793473998566,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Fact-check A: prefill to decode"
+    }
+  },
+  "updated_at": "2026-10-31T19:25:15.156Z"
+}

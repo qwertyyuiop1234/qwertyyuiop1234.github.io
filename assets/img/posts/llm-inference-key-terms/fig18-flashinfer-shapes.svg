@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" width="760" height="380" role="img" aria-label="Attention masks for decode, append or verify, and prefill over the same five keys, with the amount of work for each">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .t16 { font-size: 16px; }
+  </style>
+  <rect width="760" height="380" fill="#faf9f5"/>
+  <!-- Decode -->
+  <text x="137" y="30" text-anchor="middle" class="b t16 bl">Decode</text>
+  <text x="137" y="51" text-anchor="middle" class="s mu">one new token</text>
+  <text x="137" y="68" text-anchor="middle" class="s mu">sees every key</text>
+  <rect x="67" y="82" width="28" height="20" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/>
+  <text x="81" y="97" text-anchor="middle" class="s mu">k1</text>
+  <rect x="95" y="82" width="28" height="20" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/>
+  <text x="109" y="97" text-anchor="middle" class="s mu">k2</text>
+  <rect x="123" y="82" width="28" height="20" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/>
+  <text x="137" y="97" text-anchor="middle" class="s mu">k3</text>
+  <rect x="151" y="82" width="28" height="20" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/>
+  <text x="165" y="97" text-anchor="middle" class="s mu">k4</text>
+  <text x="193" y="97" text-anchor="middle" class="s mu">k5</text>
+  <g fill="none" stroke="#d8d7d0" stroke-width="1">
+    <rect x="67" y="108" width="28" height="28"/>
+    <rect x="95" y="108" width="28" height="28"/>
+    <rect x="123" y="108" width="28" height="28"/>
+    <rect x="151" y="108" width="28" height="28"/>
+    <rect x="179" y="108" width="28" height="28"/>
+    <rect x="67" y="136" width="28" height="28"/>
+    <rect x="95" y="136" width="28" height="28"/>
+    <rect x="123" y="136" width="28" height="28"/>
+    <rect x="151" y="136" width="28" height="28"/>
+    <rect x="179" y="136" width="28" height="28"/>
+    <rect x="67" y="164" width="28" height="28"/>
+    <rect x="95" y="164" width="28" height="28"/>
+    <rect x="123" y="164" width="28" height="28"/>
+    <rect x="151" y="164" width="28" height="28"/>
+    <rect x="179" y="164" width="28" height="28"/>
+    <rect x="67" y="192" width="28" height="28"/>
+    <rect x="95" y="192" width="28" height="28"/>
+    <rect x="123" y="192" width="28" height="28"/>
+    <rect x="151" y="192" width="28" height="28"/>
+    <rect x="179" y="192" width="28" height="28"/>
+    <rect x="67" y="220" width="28" height="28"/>
+    <rect x="95" y="220" width="28" height="28"/>
+    <rect x="123" y="220" width="28" height="28"/>
+    <rect x="151" y="220" width="28" height="28"/>
+    <rect x="179" y="220" width="28" height="28"/>
+  </g>
+  <g fill="#d9e1ee" stroke="#35548a" stroke-width="1.2">
+    <rect x="67" y="220" width="28" height="28"/>
+    <rect x="95" y="220" width="28" height="28"/>
+    <rect x="123" y="220" width="28" height="28"/>
+    <rect x="151" y="220" width="28" height="28"/>
+    <rect x="179" y="220" width="28" height="28"/>
+  </g>
+  <text x="59" y="127" text-anchor="end" class="s mu">q1</text>
+  <text x="59" y="155" text-anchor="end" class="s mu">q2</text>
+  <text x="59" y="183" text-anchor="end" class="s mu">q3</text>
+  <text x="59" y="211" text-anchor="end" class="s mu">q4</text>
+  <text x="59" y="239" text-anchor="end" class="s b">q5</text>
+  <text x="67" y="276" class="s"><tspan class="b">work</tspan>: 5 cells</text>
+  <rect x="67" y="284" width="140" height="14" fill="none" stroke="#d8d7d0" stroke-width="1"/>
+  <rect x="67" y="284" width="46.7" height="14" fill="#35548a"/>
+  <!-- Append / verify -->
+  <text x="390" y="30" text-anchor="middle" class="b t16 sg">Append / verify</text>
+  <text x="390" y="51" text-anchor="middle" class="s mu">draft tokens or added prompt</text>
+  <text x="390" y="68" text-anchor="middle" class="s mu">earlier keys + causal triangle</text>
+  <rect x="320" y="82" width="28" height="20" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/>
+  <text x="334" y="97" text-anchor="middle" class="s mu">k1</text>
+  <rect x="348" y="82" width="28" height="20" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/>
+  <text x="362" y="97" text-anchor="middle" class="s mu">k2</text>
+  <text x="390" y="97" text-anchor="middle" class="s mu">k3</text>
+  <text x="418" y="97" text-anchor="middle" class="s mu">k4</text>
+  <text x="446" y="97" text-anchor="middle" class="s mu">k5</text>
+  <g fill="none" stroke="#d8d7d0" stroke-width="1">
+    <rect x="320" y="108" width="28" height="28"/>
+    <rect x="348" y="108" width="28" height="28"/>
+    <rect x="376" y="108" width="28" height="28"/>
+    <rect x="404" y="108" width="28" height="28"/>
+    <rect x="432" y="108" width="28" height="28"/>
+    <rect x="320" y="136" width="28" height="28"/>
+    <rect x="348" y="136" width="28" height="28"/>
+    <rect x="376" y="136" width="28" height="28"/>
+    <rect x="404" y="136" width="28" height="28"/>
+    <rect x="432" y="136" width="28" height="28"/>
+    <rect x="320" y="164" width="28" height="28"/>
+    <rect x="348" y="164" width="28" height="28"/>
+    <rect x="376" y="164" width="28" height="28"/>
+    <rect x="404" y="164" width="28" height="28"/>
+    <rect x="432" y="164" width="28" height="28"/>
+    <rect x="320" y="192" width="28" height="28"/>
+    <rect x="348" y="192" width="28" height="28"/>
+    <rect x="376" y="192" width="28" height="28"/>
+    <rect x="404" y="192" width="28" height="28"/>
+    <rect x="432" y="192" width="28" height="28"/>
+    <rect x="320" y="220" width="28" height="28"/>
+    <rect x="348" y="220" width="28" height="28"/>
+    <rect x="376" y="220" width="28" height="28"/>
+    <rect x="404" y="220" width="28" height="28"/>
+    <rect x="432" y="220" width="28" height="28"/>
+  </g>
+  <g fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.2">
+    <rect x="320" y="164" width="28" height="28"/>
+    <rect x="348" y="164" width="28" height="28"/>
+    <rect x="376" y="164" width="28" height="28"/>
+    <rect x="320" y="192" width="28" height="28"/>
+    <rect x="348" y="192" width="28" height="28"/>
+    <rect x="376" y="192" width="28" height="28"/>
+    <rect x="404" y="192" width="28" height="28"/>
+    <rect x="320" y="220" width="28" height="28"/>
+    <rect x="348" y="220" width="28" height="28"/>
+    <rect x="376" y="220" width="28" height="28"/>
+    <rect x="404" y="220" width="28" height="28"/>
+    <rect x="432" y="220" width="28" height="28"/>
+  </g>
+  <text x="312" y="127" text-anchor="end" class="s mu">q1</text>
+  <text x="312" y="155" text-anchor="end" class="s mu">q2</text>
+  <text x="312" y="183" text-anchor="end" class="s b">q3</text>
+  <text x="312" y="211" text-anchor="end" class="s b">q4</text>
+  <text x="312" y="239" text-anchor="end" class="s b">q5</text>
+  <text x="320" y="276" class="s"><tspan class="b">work</tspan>: 12 cells</text>
+  <rect x="320" y="284" width="140" height="14" fill="none" stroke="#d8d7d0" stroke-width="1"/>
+  <rect x="320" y="284" width="112.0" height="14" fill="#4f6f5c"/>
+  <!-- Prefill -->
+  <text x="643" y="30" text-anchor="middle" class="b t16 tc">Prefill</text>
+  <text x="643" y="51" text-anchor="middle" class="s mu">5 prompt tokens</text>
+  <text x="643" y="68" text-anchor="middle" class="s mu">full causal triangle</text>
+  <text x="587" y="97" text-anchor="middle" class="s mu">k1</text>
+  <text x="615" y="97" text-anchor="middle" class="s mu">k2</text>
+  <text x="643" y="97" text-anchor="middle" class="s mu">k3</text>
+  <text x="671" y="97" text-anchor="middle" class="s mu">k4</text>
+  <text x="699" y="97" text-anchor="middle" class="s mu">k5</text>
+  <g fill="none" stroke="#d8d7d0" stroke-width="1">
+    <rect x="573" y="108" width="28" height="28"/>
+    <rect x="601" y="108" width="28" height="28"/>
+    <rect x="629" y="108" width="28" height="28"/>
+    <rect x="657" y="108" width="28" height="28"/>
+    <rect x="685" y="108" width="28" height="28"/>
+    <rect x="573" y="136" width="28" height="28"/>
+    <rect x="601" y="136" width="28" height="28"/>
+    <rect x="629" y="136" width="28" height="28"/>
+    <rect x="657" y="136" width="28" height="28"/>
+    <rect x="685" y="136" width="28" height="28"/>
+    <rect x="573" y="164" width="28" height="28"/>
+    <rect x="601" y="164" width="28" height="28"/>
+    <rect x="629" y="164" width="28" height="28"/>
+    <rect x="657" y="164" width="28" height="28"/>
+    <rect x="685" y="164" width="28" height="28"/>
+    <rect x="573" y="192" width="28" height="28"/>
+    <rect x="601" y="192" width="28" height="28"/>
+    <rect x="629" y="192" width="28" height="28"/>
+    <rect x="657" y="192" width="28" height="28"/>
+    <rect x="685" y="192" width="28" height="28"/>
+    <rect x="573" y="220" width="28" height="28"/>
+    <rect x="601" y="220" width="28" height="28"/>
+    <rect x="629" y="220" width="28" height="28"/>
+    <rect x="657" y="220" width="28" height="28"/>
+    <rect x="685" y="220" width="28" height="28"/>
+  </g>
+  <g fill="#ecd5c8" stroke="#a4502f" stroke-width="1.2">
+    <rect x="573" y="108" width="28" height="28"/>
+    <rect x="573" y="136" width="28" height="28"/>
+    <rect x="601" y="136" width="28" height="28"/>
+    <rect x="573" y="164" width="28" height="28"/>
+    <rect x="601" y="164" width="28" height="28"/>
+    <rect x="629" y="164" width="28" height="28"/>
+    <rect x="573" y="192" width="28" height="28"/>
+    <rect x="601" y="192" width="28" height="28"/>
+    <rect x="629" y="192" width="28" height="28"/>
+    <rect x="657" y="192" width="28" height="28"/>
+    <rect x="573" y="220" width="28" height="28"/>
+    <rect x="601" y="220" width="28" height="28"/>
+    <rect x="629" y="220" width="28" height="28"/>
+    <rect x="657" y="220" width="28" height="28"/>
+    <rect x="685" y="220" width="28" height="28"/>
+  </g>
+  <text x="565" y="127" text-anchor="end" class="s b">q1</text>
+  <text x="565" y="155" text-anchor="end" class="s b">q2</text>
+  <text x="565" y="183" text-anchor="end" class="s b">q3</text>
+  <text x="565" y="211" text-anchor="end" class="s b">q4</text>
+  <text x="565" y="239" text-anchor="end" class="s b">q5</text>
+  <text x="573" y="276" class="s"><tspan class="b">work</tspan>: 15 cells</text>
+  <rect x="573" y="284" width="140" height="14" fill="none" stroke="#d8d7d0" stroke-width="1"/>
+  <rect x="573" y="284" width="140.0" height="14" fill="#a4502f"/>
+  <!-- legend -->
+  <rect x="40" y="321" width="12" height="18" fill="#d9e1ee" stroke="#35548a" stroke-width="1.2"/>
+  <rect x="52" y="321" width="12" height="18" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.2"/>
+  <rect x="64" y="321" width="12" height="18" fill="#ecd5c8" stroke="#a4502f" stroke-width="1.2"/>
+  <text x="84" y="335" class="s">shaded = score computed in this step</text>
+  <rect x="330" y="321" width="18" height="18" fill="none" stroke="#d8d7d0" stroke-width="1"/>
+  <text x="356" y="335" class="s">blank = masked or not part of this step</text>
+  <rect x="40" y="347" width="36" height="18" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/>
+  <text x="84" y="361" class="s">key already in the KV cache</text>
+  <text x="330" y="361" class="s mu">columns = keys k1-k5, rows = queries q1-q5</text>
+</svg>

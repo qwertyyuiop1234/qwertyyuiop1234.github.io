@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 444" width="760" height="444" role="img" aria-label="PD-disaggregated serving: load balancers inside the API server (DPLB layer) pick the least busy prefill and decode instances; inside each instance an EPLB placement planner uses expert load stats to place experts on GPUs and replicates the hot expert E0 on GPU0 and GPU2; prefill sends its KV cache to decode">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; }
+    .lt { fill: #faf9f5; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-oc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a1f"/></marker>
+  </defs>
+  <rect width="760" height="444" fill="#faf9f5"/>
+  <!-- layer bands -->
+  <g fill="none" stroke="#d8d7d0" stroke-width="1.4">
+    <rect x="8" y="8" width="744" height="128" rx="10"/>
+    <rect x="8" y="148" width="744" height="222" rx="10"/>
+  </g>
+  <text class="b mu" x="18" y="66">DPLB</text>
+  <text class="b mu" x="18" y="85">layer</text>
+  <text class="b mu" x="18" y="250">EPLB</text>
+  <text class="b mu" x="18" y="269">layer</text>
+  <!-- API server holds the prefill and decode load balancers (DPLB) -->
+  <rect x="78" y="16" width="666" height="112" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="411" y="38" text-anchor="middle" class="b">API server</text>
+  <rect x="96" y="50" width="264" height="64" rx="5" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="228" y="76" text-anchor="middle" class="b sg">Prefill load balancer</text>
+  <text x="228" y="98" text-anchor="middle" class="s">picks least busy, from load stats</text>
+  <rect x="462" y="50" width="264" height="64" rx="5" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="594" y="76" text-anchor="middle" class="b sg">Decode load balancer</text>
+  <text x="594" y="98" text-anchor="middle" class="s">picks least busy, from load stats</text>
+  <g stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)">
+    <line x1="151" y1="114" x2="151" y2="164"/>
+    <line x1="305" y1="114" x2="305" y2="164"/>
+    <line x1="515" y1="114" x2="515" y2="164"/>
+    <line x1="669" y1="114" x2="669" y2="164"/>
+  </g>
+  <!-- instances: GPUs hold experts; hot expert E0 has a copy on GPU0 and GPU2 -->
+  <rect x="78" y="164" width="146" height="118" rx="6" fill="#ecd5c8" stroke="#a4502f" stroke-width="1.4"/>
+  <text x="151" y="185" text-anchor="middle" class="b tc">prefill 0</text>
+  <rect x="86" y="194" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="94" y="211" class="s mu">GPU0</text>
+  <rect x="146" y="197" width="28" height="18" rx="3" fill="#414b48" stroke="#414b48" stroke-width="1.2"/>
+  <text x="160" y="211" text-anchor="middle" class="s b lt">E0</text>
+  <rect x="180" y="197" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="194" y="211" text-anchor="middle" class="s">E1</text>
+  <rect x="86" y="222" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="94" y="239" class="s mu">GPU1</text>
+  <rect x="146" y="225" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="160" y="239" text-anchor="middle" class="s">E2</text>
+  <rect x="180" y="225" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="194" y="239" text-anchor="middle" class="s">E3</text>
+  <rect x="86" y="250" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="94" y="267" class="s mu">GPU2</text>
+  <rect x="146" y="253" width="28" height="18" rx="3" fill="#414b48" stroke="#414b48" stroke-width="1.2"/>
+  <text x="160" y="267" text-anchor="middle" class="s b lt">E0</text>
+  <rect x="180" y="253" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="194" y="267" text-anchor="middle" class="s">E4</text>
+  <rect x="232" y="164" width="146" height="118" rx="6" fill="#ecd5c8" stroke="#a4502f" stroke-width="1.4"/>
+  <text x="305" y="185" text-anchor="middle" class="b tc">prefill 1</text>
+  <rect x="240" y="194" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="248" y="211" class="s mu">GPU0</text>
+  <rect x="300" y="197" width="28" height="18" rx="3" fill="#414b48" stroke="#414b48" stroke-width="1.2"/>
+  <text x="314" y="211" text-anchor="middle" class="s b lt">E0</text>
+  <rect x="334" y="197" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="348" y="211" text-anchor="middle" class="s">E1</text>
+  <rect x="240" y="222" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="248" y="239" class="s mu">GPU1</text>
+  <rect x="300" y="225" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="314" y="239" text-anchor="middle" class="s">E2</text>
+  <rect x="334" y="225" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="348" y="239" text-anchor="middle" class="s">E3</text>
+  <rect x="240" y="250" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="248" y="267" class="s mu">GPU2</text>
+  <rect x="300" y="253" width="28" height="18" rx="3" fill="#414b48" stroke="#414b48" stroke-width="1.2"/>
+  <text x="314" y="267" text-anchor="middle" class="s b lt">E0</text>
+  <rect x="334" y="253" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="348" y="267" text-anchor="middle" class="s">E4</text>
+  <rect x="442" y="164" width="146" height="118" rx="6" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="515" y="185" text-anchor="middle" class="b bl">decode 0</text>
+  <rect x="450" y="194" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="458" y="211" class="s mu">GPU0</text>
+  <rect x="510" y="197" width="28" height="18" rx="3" fill="#414b48" stroke="#414b48" stroke-width="1.2"/>
+  <text x="524" y="211" text-anchor="middle" class="s b lt">E0</text>
+  <rect x="544" y="197" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="558" y="211" text-anchor="middle" class="s">E1</text>
+  <rect x="450" y="222" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="458" y="239" class="s mu">GPU1</text>
+  <rect x="510" y="225" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="524" y="239" text-anchor="middle" class="s">E2</text>
+  <rect x="544" y="225" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="558" y="239" text-anchor="middle" class="s">E3</text>
+  <rect x="450" y="250" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="458" y="267" class="s mu">GPU2</text>
+  <rect x="510" y="253" width="28" height="18" rx="3" fill="#414b48" stroke="#414b48" stroke-width="1.2"/>
+  <text x="524" y="267" text-anchor="middle" class="s b lt">E0</text>
+  <rect x="544" y="253" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="558" y="267" text-anchor="middle" class="s">E4</text>
+  <rect x="596" y="164" width="146" height="118" rx="6" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="669" y="185" text-anchor="middle" class="b bl">decode 1</text>
+  <rect x="604" y="194" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="612" y="211" class="s mu">GPU0</text>
+  <rect x="664" y="197" width="28" height="18" rx="3" fill="#414b48" stroke="#414b48" stroke-width="1.2"/>
+  <text x="678" y="211" text-anchor="middle" class="s b lt">E0</text>
+  <rect x="698" y="197" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="712" y="211" text-anchor="middle" class="s">E1</text>
+  <rect x="604" y="222" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="612" y="239" class="s mu">GPU1</text>
+  <rect x="664" y="225" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="678" y="239" text-anchor="middle" class="s">E2</text>
+  <rect x="698" y="225" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="712" y="239" text-anchor="middle" class="s">E3</text>
+  <rect x="604" y="250" width="130" height="24" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.2"/>
+  <text x="612" y="267" class="s mu">GPU2</text>
+  <rect x="664" y="253" width="28" height="18" rx="3" fill="#414b48" stroke="#414b48" stroke-width="1.2"/>
+  <text x="678" y="267" text-anchor="middle" class="s b lt">E0</text>
+  <rect x="698" y="253" width="28" height="18" rx="3" fill="#efeee7" stroke="#64645d" stroke-width="1.2"/>
+  <text x="712" y="267" text-anchor="middle" class="s">E4</text>
+  <!-- KV transfer prefill -> decode -->
+  <line x1="378" y1="234" x2="442" y2="234" stroke="#8a6a1f" stroke-width="1.8" marker-end="url(#a-oc)"/>
+  <text x="410" y="225" text-anchor="middle" class="s b oc">KV</text>
+  <text x="410" y="251" text-anchor="middle" class="s b oc">transfer</text>
+  <!-- EPLB placement planner: off the token path, linked by a dashed line -->
+  <path d="M151,282 V296 M305,282 V296 M515,282 V296 M669,282 V296 M151,296 H669 M410,296 V308" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="4 3"/>
+  <rect x="300" y="308" width="220" height="50" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="410" y="328" text-anchor="middle" class="b">EPLB: placement planner</text>
+  <text x="410" y="347" text-anchor="middle" class="s mu">(from expert load stats)</text>
+  <!-- legend: hot expert -->
+  <rect x="546" y="324" width="28" height="18" rx="3" fill="#414b48" stroke="#414b48" stroke-width="1.2"/>
+  <text x="560" y="338" text-anchor="middle" class="s b lt">E0</text>
+  <text x="582" y="329" class="s">hot expert,</text>
+  <text x="582" y="346" class="s">on two GPUs</text>
+  <!-- external KV storage (optional) -->
+  <g stroke="#8a6a1f" stroke-width="1.6" stroke-dasharray="5 4" fill="none" marker-end="url(#a-oc)">
+    <line x1="100" y1="282" x2="100" y2="384"/>
+    <line x1="720" y1="384" x2="720" y2="282"/>
+  </g>
+  <rect x="78" y="384" width="664" height="44" rx="8" fill="none" stroke="#8a6a1f" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="410" y="411" text-anchor="middle" class="b">External KV cache storage (optional)</text>
+</svg>

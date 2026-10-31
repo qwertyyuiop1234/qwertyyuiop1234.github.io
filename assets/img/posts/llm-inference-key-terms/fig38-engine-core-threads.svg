@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 572" width="760" height="572" role="img" aria-label="The three threads inside a vLLM engine core: input socket thread, busy loop thread and output socket thread">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-tc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a4502f"/></marker>
+  </defs>
+  <rect width="760" height="572" fill="#faf9f5"/>
+
+  <!-- outer process -->
+  <rect x="12" y="32" width="736" height="500" rx="10" fill="none" stroke="#35548a" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="734" y="60" text-anchor="end" class="b bl">engine core process</text>
+  <text x="734" y="80" text-anchor="end" class="s mu">three threads</text>
+
+  <!-- thread 1: input socket -->
+  <text x="112" y="18" text-anchor="middle" class="s mu">requests in (zmq)</text>
+  <rect x="24" y="44" width="446" height="60" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <rect x="40" y="60" width="144" height="28" rx="4" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="112" y="79" text-anchor="middle" class="m">zmq DEALER</text>
+  <text x="200" y="79"><tspan class="s mu">thread </tspan><tspan class="m b">process_input_sockets</tspan></text>
+
+  <!-- input_queue -->
+  <g fill="#faf9f5" stroke="#64645d" stroke-width="1.4">
+    <rect x="62" y="128" width="20" height="22"/><rect x="82" y="128" width="20" height="22"/>
+    <rect x="102" y="128" width="20" height="22"/><rect x="122" y="128" width="20" height="22"/>
+    <rect x="142" y="128" width="20" height="22"/>
+  </g>
+  <text x="174" y="144" class="m">input_queue</text>
+
+  <!-- thread 2: busy loop -->
+  <rect x="24" y="176" width="712" height="212" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="720" y="200" text-anchor="end"><tspan class="s mu">thread </tspan><tspan class="m b">run_busy_loop</tspan></text>
+
+  <rect x="40" y="212" width="220" height="116" rx="5" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="150" y="236" text-anchor="middle" class="b">drain input_queue</text>
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="60" y="250" width="180" height="26" rx="4"/>
+    <rect x="60" y="286" width="180" height="26" rx="4"/>
+  </g>
+  <text x="150" y="268" text-anchor="middle" class="m">add_request</text>
+  <text x="150" y="304" text-anchor="middle" class="m">abort_requests</text>
+
+  <rect x="300" y="212" width="420" height="132" rx="5" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="316" y="236" class="m b">_process_engine_step</text>
+  <rect x="340" y="248" width="340" height="30" rx="4" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="510" y="268" text-anchor="middle" class="m">scheduler.schedule()</text>
+  <rect x="340" y="300" width="340" height="30" rx="4" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="510" y="320" text-anchor="middle" class="m">execute_model(scheduler_output)</text>
+
+  <!-- output_queue -->
+  <g fill="#faf9f5" stroke="#64645d" stroke-width="1.4">
+    <rect x="600" y="412" width="20" height="22"/><rect x="620" y="412" width="20" height="22"/>
+    <rect x="640" y="412" width="20" height="22"/><rect x="660" y="412" width="20" height="22"/>
+    <rect x="680" y="412" width="20" height="22"/>
+  </g>
+  <text x="588" y="428" text-anchor="end" class="m">output_queue</text>
+
+  <!-- thread 3: output socket -->
+  <rect x="290" y="460" width="446" height="60" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="306" y="495"><tspan class="s mu">thread </tspan><tspan class="m b">process_output_sockets</tspan></text>
+  <rect x="578" y="476" width="144" height="28" rx="4" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="650" y="495" text-anchor="middle" class="m">zmq PUSH</text>
+  <text x="650" y="564" text-anchor="middle" class="s mu">results out (zmq)</text>
+
+  <!-- arrows -->
+  <g stroke="#64645d" stroke-width="1.6" fill="none">
+    <line x1="112" y1="24" x2="112" y2="59" marker-end="url(#a-ink)"/>
+    <line x1="112" y1="88" x2="112" y2="127" marker-end="url(#a-ink)"/>
+    <line x1="112" y1="150" x2="112" y2="211" marker-end="url(#a-ink)"/>
+    <line x1="260" y1="270" x2="299" y2="270" marker-end="url(#a-ink)"/>
+    <line x1="510" y1="278" x2="510" y2="299" marker-end="url(#a-ink)"/>
+    <line x1="650" y1="344" x2="650" y2="411" marker-end="url(#a-ink)"/>
+    <line x1="650" y1="434" x2="650" y2="475" marker-end="url(#a-ink)"/>
+    <line x1="650" y1="504" x2="650" y2="547" marker-end="url(#a-ink)"/>
+  </g>
+  <path d="M480,344 L480,366 L180,366 L180,329" fill="none" stroke="#a4502f" stroke-width="1.8" marker-end="url(#a-tc)"/>
+  <text x="330" y="360" text-anchor="middle" class="s i tc">repeat every step</text>
+
+  <!-- note -->
+  <text x="32" y="474" class="i sg">I/O threads keep the GPU loop</text>
+  <text x="32" y="494" class="i sg">from waiting on the network</text>
+</svg>

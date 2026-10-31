@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" width="760" height="560" role="img" aria-label="State-space model update rule and a timeline from Linear Attention in 2020 to Gated DeltaNet in 2024">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .xl { font-size: 17px; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#35548a"/></marker>
+  </defs>
+  <rect width="760" height="560" fill="#faf9f5"/>
+
+  <!-- update rule -->
+  <text x="32" y="30" class="s b mu">STATE UPDATE, ONE STEP PER TOKEN</text>
+  <text x="32" y="66" class="xl">hₜ = A·hₜ₋₁ + B·xₜ</text>
+  <text x="32" y="96" class="xl">yₜ = C·hₜ</text>
+
+  <!-- mini recurrence diagram -->
+  <text x="390" y="76" text-anchor="end" class="xl">xₜ</text>
+  <line x1="398" y1="70" x2="470" y2="70" stroke="#35548a" stroke-width="1.6" marker-end="url(#a-bl)"/>
+  <text x="434" y="62" text-anchor="middle" class="b bl">B</text>
+  <rect x="470" y="46" width="130" height="48" rx="6" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="535" y="66" text-anchor="middle" class="b">state h</text>
+  <text x="535" y="85" text-anchor="middle" class="s">fixed size</text>
+  <line x1="600" y1="70" x2="672" y2="70" stroke="#35548a" stroke-width="1.6" marker-end="url(#a-bl)"/>
+  <text x="636" y="62" text-anchor="middle" class="b bl">C</text>
+  <text x="680" y="76" class="xl">yₜ</text>
+  <path d="M570,46 C570,18 500,18 500,44" fill="none" stroke="#35548a" stroke-width="1.6" marker-end="url(#a-bl)"/>
+  <text x="582" y="28" class="b bl">A</text>
+
+  <text x="32" y="132" class="i sg">The state has a fixed size, so there is no KV cache that grows with length.</text>
+  <line x1="16" y1="152" x2="744" y2="152" stroke="#d8d7d0" stroke-width="1.4"/>
+
+  <!-- timeline spine -->
+  <line x1="116" y1="182" x2="116" y2="536" stroke="#64645d" stroke-width="1.6"/>
+
+  <!-- cards -->
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="140" y="171" width="560" height="58" rx="6"/>
+    <rect x="140" y="245" width="560" height="58" rx="6"/>
+    <rect x="140" y="319" width="560" height="58" rx="6"/>
+    <rect x="140" y="393" width="560" height="58" rx="6"/>
+    <rect x="140" y="467" width="560" height="58" rx="6"/>
+  </g>
+  <g fill="#faf9f5" stroke="#35548a" stroke-width="2">
+    <circle cx="116" cy="200" r="7"/>
+    <circle cx="116" cy="274" r="7"/>
+    <circle cx="116" cy="348" r="7"/>
+    <circle cx="116" cy="422" r="7"/>
+    <circle cx="116" cy="496" r="7"/>
+  </g>
+  <g stroke="#64645d" stroke-width="1.4">
+    <line x1="123" y1="200" x2="140" y2="200"/>
+    <line x1="123" y1="274" x2="140" y2="274"/>
+    <line x1="123" y1="348" x2="140" y2="348"/>
+    <line x1="123" y1="422" x2="140" y2="422"/>
+    <line x1="123" y1="496" x2="140" y2="496"/>
+  </g>
+
+  <!-- years -->
+  <g text-anchor="end">
+    <text class="b xl" x="98" y="206">2020</text>
+    <text class="b xl" x="98" y="280">2021</text>
+    <text class="b xl" x="98" y="354">2023</text>
+    <text class="b xl" x="98" y="428">2024</text>
+    <text class="b xl" x="98" y="502">2024</text>
+  </g>
+
+  <!-- titles and notes -->
+  <text x="156" y="194" class="b">Linear Attention</text>
+  <text x="156" y="216">softmax swapped for feature maps, so attention becomes a running state</text>
+
+  <text x="156" y="268" class="b">S4</text>
+  <text x="156" y="290"><tspan class="sg">✓ linear in sequence length</tspan><tspan dx="22" class="tc">✗ weak at selective copying</tspan></text>
+
+  <text x="156" y="342" class="b">Mamba</text>
+  <text x="156" y="364">A, B, C depend on the input at each step (selective SSM)</text>
+
+  <text x="156" y="416" class="b">Mamba-2</text>
+  <text x="156" y="438">SSM ≡ a form of linear attention, so it can use tensor cores</text>
+
+  <text x="156" y="490" class="b">Gated DeltaNet</text>
+  <text x="156" y="512">gating plus a delta-rule update for sharper key-value memory</text>
+</svg>

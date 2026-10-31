@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 328" width="760" height="328" role="img" aria-label="Two-batch overlap in prefill: the CPU queues compute kernels before each CPU-blocking dispatch, so the communication stream runs one micro-batch's dispatch and combine while the compute stream runs the other's attention and MLP">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-oc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a1f"/></marker>
+  </defs>
+  <rect width="760" height="328" fill="#faf9f5"/>
+
+  <!-- lane labels -->
+  <text x="20" y="139" class="b">Compute</text>
+  <text x="20" y="156" class="s mu">stream</text>
+  <text x="20" y="203" class="b">Communication</text>
+  <text x="20" y="220" class="s mu">stream</text>
+
+  <!-- CPU launch order (prefill: compute is queued before each CPU-blocking dispatch) -->
+  <text x="20" y="26" class="b">CPU</text>
+  <text x="62" y="26" class="s mu">launches kernels in this order</text>
+  <g stroke-width="1.4">
+    <rect x="20" y="36" width="80" height="44" rx="5" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="106" y="36" width="80" height="44" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="192" y="36" width="122" height="44" rx="5" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="320" y="36" width="74" height="44" rx="5" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="400" y="36" width="122" height="44" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="528" y="36" width="74" height="44" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="608" y="36" width="116" height="44" rx="5" fill="#f0e3bf" stroke="#8a6a1f"/>
+  </g>
+  <text x="60" y="63" text-anchor="middle">ATTN(0)</text>
+  <text x="146" y="63" text-anchor="middle">ATTN(1)</text>
+  <text x="253" y="55" text-anchor="middle">DISPATCH(0)</text>
+  <text x="253" y="72" text-anchor="middle" class="s i tc">blocks CPU</text>
+  <text x="357" y="63" text-anchor="middle">MLP(0)</text>
+  <text x="461" y="55" text-anchor="middle">DISPATCH(1)</text>
+  <text x="461" y="72" text-anchor="middle" class="s i tc">blocks CPU</text>
+  <text x="565" y="63" text-anchor="middle">MLP(1)</text>
+  <text x="666" y="63" text-anchor="middle">COMBINE(0)</text>
+  <text x="731" y="63" class="b mu">...</text>
+  <text x="20" y="98" class="s i mu">compute is queued before each CPU-blocking dispatch (not to time scale)</text>
+
+  <line x1="20" y1="110" x2="740" y2="110" stroke="#d8d7d0" stroke-width="1" stroke-dasharray="5 4"/>
+
+  <!-- overlap highlight (drawn first, behind) -->
+  <rect x="387" y="121" width="126" height="114" rx="6" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4" stroke-dasharray="5 3"/>
+
+  <!-- compute stream -->
+  <g stroke-width="1.4">
+    <rect x="162" y="126" width="112" height="44" rx="4" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="278" y="126" width="112" height="44" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="394" y="126" width="112" height="44" rx="4" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="510" y="126" width="112" height="44" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="626" y="126" width="112" height="44" rx="4" fill="none" stroke="#8a6a1f" stroke-dasharray="5 3"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="218" y="145">ATTN</text>
+    <text x="334" y="145">ATTN</text>
+    <text x="450" y="145">MLP</text>
+    <text x="566" y="145">MLP</text>
+    <text x="682" y="145">ATTN mb0</text>
+  </g>
+  <g text-anchor="middle">
+    <text x="218" y="162" class="s mu">mb0</text>
+    <text x="334" y="162" class="s mu">mb1</text>
+    <text x="450" y="162" class="s mu">mb0</text>
+    <text x="566" y="162" class="s mu">mb1</text>
+    <text x="682" y="162" class="s mu">next layer</text>
+  </g>
+
+  <!-- communication stream -->
+  <g stroke-width="1.4">
+    <rect x="278" y="190" width="112" height="44" rx="4" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="394" y="190" width="112" height="44" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="510" y="190" width="112" height="44" rx="4" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="626" y="190" width="112" height="44" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="334" y="209">DISPATCH</text>
+    <text x="450" y="209">DISPATCH</text>
+    <text x="566" y="209">COMBINE</text>
+    <text x="682" y="209">COMBINE</text>
+  </g>
+  <g text-anchor="middle">
+    <text x="334" y="226" class="s mu">mb0</text>
+    <text x="450" y="226" class="s mu">mb1</text>
+    <text x="566" y="226" class="s mu">mb0</text>
+    <text x="682" y="226" class="s mu">mb1</text>
+  </g>
+
+  <!-- mb0 dependency chain -->
+  <g stroke="#8a6a1f" stroke-width="1.6">
+    <line x1="266" y1="170" x2="285.5" y2="189.2" marker-end="url(#a-oc)"/>
+    <line x1="382" y1="190" x2="401.5" y2="170.8" marker-end="url(#a-oc)"/>
+    <line x1="498" y1="170" x2="517.5" y2="189.2" marker-end="url(#a-oc)"/>
+    <line x1="614" y1="190" x2="633.5" y2="170.8" marker-end="url(#a-oc)"/>
+  </g>
+
+  <text x="450" y="254" text-anchor="middle" class="s i sg">communication hidden behind compute</text>
+
+  <!-- time axis -->
+  <line x1="160" y1="268" x2="738" y2="268" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <text x="160" y="286" class="s mu">time</text>
+
+  <!-- legend -->
+  <g stroke-width="1.4">
+    <rect x="160" y="298" width="22" height="14" rx="3" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="320" y="298" width="22" height="14" rx="3" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <line x1="480" y1="305" x2="505" y2="305" stroke="#8a6a1f" stroke-width="1.6" marker-end="url(#a-oc)"/>
+  <text x="188" y="309" class="s">micro-batch 0 (mb0)</text>
+  <text x="348" y="309" class="s">micro-batch 1 (mb1)</text>
+  <text x="514" y="309" class="s">mb0 waits for its previous step</text>
+</svg>

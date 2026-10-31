@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="vLLM chunked prefill: new requests' prefill chunks join running decodes in the same step, and a token budget of 10 per step splits the prompts">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+  </defs>
+  <rect width="760" height="300" fill="#faf9f5"/>
+
+  <!-- ===== left: timeline ===== -->
+  <text x="20" y="30" class="b">New prefills join R1's decode steps</text>
+  <text x="210" y="52" text-anchor="middle" class="s i mu">one step = one batch</text>
+
+  <g>
+    <text x="20" y="79" class="b">R1</text>
+    <text x="20" y="109" class="b">R2</text>
+    <text x="20" y="139" class="b">R3</text>
+    <text x="20" y="169" class="b">R4</text>
+  </g>
+
+  <g stroke-width="1.4">
+    <!-- R1: decode every step -->
+    <g fill="#d9e1ee" stroke="#35548a">
+      <rect x="56" y="64" width="20" height="20" rx="4"/>
+      <rect x="80" y="64" width="20" height="20" rx="4"/>
+      <rect x="104" y="64" width="20" height="20" rx="4"/>
+      <rect x="128" y="64" width="20" height="20" rx="4"/>
+      <rect x="152" y="64" width="20" height="20" rx="4"/>
+      <rect x="176" y="64" width="20" height="20" rx="4"/>
+      <rect x="200" y="64" width="20" height="20" rx="4"/>
+      <rect x="224" y="64" width="20" height="20" rx="4"/>
+      <rect x="248" y="64" width="20" height="20" rx="4"/>
+      <rect x="272" y="64" width="20" height="20" rx="4"/>
+    </g>
+    <!-- R2: arrives at step 1 -->
+    <g fill="#ecd5c8" stroke="#a4502f">
+      <rect x="80" y="94" width="20" height="20" rx="4"/>
+      <rect x="104" y="94" width="20" height="20" rx="4"/>
+    </g>
+    <g fill="#d9e1ee" stroke="#35548a">
+      <rect x="128" y="94" width="20" height="20" rx="4"/>
+      <rect x="152" y="94" width="20" height="20" rx="4"/>
+      <rect x="176" y="94" width="20" height="20" rx="4"/>
+      <rect x="200" y="94" width="20" height="20" rx="4"/>
+      <rect x="224" y="94" width="20" height="20" rx="4"/>
+      <rect x="248" y="94" width="20" height="20" rx="4"/>
+      <rect x="272" y="94" width="20" height="20" rx="4"/>
+    </g>
+    <!-- R3: arrives at step 4 -->
+    <g fill="#ecd5c8" stroke="#a4502f">
+      <rect x="152" y="124" width="20" height="20" rx="4"/>
+    </g>
+    <g fill="#d9e1ee" stroke="#35548a">
+      <rect x="176" y="124" width="20" height="20" rx="4"/>
+      <rect x="200" y="124" width="20" height="20" rx="4"/>
+      <rect x="224" y="124" width="20" height="20" rx="4"/>
+      <rect x="248" y="124" width="20" height="20" rx="4"/>
+      <rect x="272" y="124" width="20" height="20" rx="4"/>
+    </g>
+    <!-- R4: arrives at step 6 -->
+    <g fill="#ecd5c8" stroke="#a4502f">
+      <rect x="200" y="154" width="20" height="20" rx="4"/>
+      <rect x="224" y="154" width="20" height="20" rx="4"/>
+      <rect x="248" y="154" width="20" height="20" rx="4"/>
+    </g>
+    <g fill="#d9e1ee" stroke="#35548a">
+      <rect x="272" y="154" width="20" height="20" rx="4"/>
+    </g>
+  </g>
+  <!-- one step highlighted -->
+  <rect x="195" y="59" width="30" height="120" rx="5" fill="none" stroke="#414b48" stroke-width="1.4" stroke-dasharray="4 3"/>
+
+  <!-- step axis and arrivals -->
+  <line x1="52" y1="192" x2="304" y2="192" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <text x="304" y="212" text-anchor="end" class="s mu">step</text>
+  <g stroke="#64645d" stroke-width="1.6">
+    <line x1="90" y1="212" x2="90" y2="194" marker-end="url(#a-ink)"/>
+    <line x1="162" y1="212" x2="162" y2="194" marker-end="url(#a-ink)"/>
+    <line x1="210" y1="212" x2="210" y2="194" marker-end="url(#a-ink)"/>
+  </g>
+  <text x="20" y="230" class="s mu">arrives</text>
+  <g text-anchor="middle">
+    <text x="90" y="230" class="s b">R2</text>
+    <text x="162" y="230" class="s b">R3</text>
+    <text x="210" y="230" class="s b">R4</text>
+  </g>
+
+  <!-- legend -->
+  <g stroke-width="1.4">
+    <rect x="20" y="258" width="18" height="18" rx="4" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="120" y="258" width="18" height="18" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <text x="46" y="272" class="s">prefill</text>
+  <text x="146" y="272" class="s">decode</text>
+
+  <!-- divider -->
+  <line x1="316" y1="16" x2="316" y2="284" stroke="#d8d7d0" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- ===== right: token budget table ===== -->
+  <text x="330" y="30" class="b">token budget = 10 per step</text>
+  <text x="330" y="52" class="s mu">prompts: R1 = 3, R2 = 5, R3 = 12 tokens</text>
+
+  <!-- header -->
+  <g text-anchor="middle">
+    <text x="359" y="84" class="s b mu">step</text>
+    <text x="437" y="84" class="b">R1</text>
+    <text x="535" y="84" class="b">R2</text>
+    <text x="633" y="84" class="b">R3</text>
+    <text x="709" y="84" class="s b mu">sum</text>
+  </g>
+  <g stroke="#d8d7d0" stroke-width="1">
+    <line x1="330" y1="92" x2="736" y2="92"/>
+    <line x1="330" y1="130" x2="736" y2="130"/>
+    <line x1="330" y1="168" x2="736" y2="168"/>
+    <line x1="330" y1="206" x2="736" y2="206"/>
+    <line x1="330" y1="244" x2="736" y2="244"/>
+    <line x1="682" y1="68" x2="682" y2="244"/>
+  </g>
+
+  <!-- cells -->
+  <g stroke-width="1.4">
+    <rect x="392" y="96" width="90" height="30" rx="4" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="490" y="96" width="90" height="30" rx="4" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="588" y="96" width="90" height="30" rx="4" fill="#ecd5c8" stroke="#a4502f"/>
+
+    <rect x="392" y="134" width="90" height="30" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="490" y="134" width="90" height="30" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="588" y="134" width="90" height="30" rx="4" fill="#ecd5c8" stroke="#a4502f"/>
+
+    <rect x="392" y="172" width="90" height="30" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="490" y="172" width="90" height="30" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="588" y="172" width="90" height="30" rx="4" fill="#ecd5c8" stroke="#a4502f"/>
+
+    <rect x="392" y="210" width="90" height="30" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="490" y="210" width="90" height="30" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="588" y="210" width="90" height="30" rx="4" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="359" y="116">Step 0</text>
+    <text x="437" y="116">prefill 3</text>
+    <text x="535" y="116">prefill 5</text>
+    <text x="633" y="116">prefill 2</text>
+    <text x="709" y="116" class="b">10</text>
+
+    <text x="359" y="154">Step 1</text>
+    <text x="437" y="154">decode 1</text>
+    <text x="535" y="154">decode 1</text>
+    <text x="633" y="154">prefill 8</text>
+    <text x="709" y="154" class="b">10</text>
+
+    <text x="359" y="192">Step 2</text>
+    <text x="437" y="192">decode 1</text>
+    <text x="535" y="192">decode 1</text>
+    <text x="633" y="192">prefill 2</text>
+    <text x="709" y="192">4</text>
+
+    <text x="359" y="230">Step 3</text>
+    <text x="437" y="230">decode 1</text>
+    <text x="535" y="230">decode 1</text>
+    <text x="633" y="230">decode 1</text>
+    <text x="709" y="230">3</text>
+  </g>
+
+  <text x="330" y="268" class="s i mu">Running requests first (queue order), then new ones.</text>
+  <text x="330" y="286" class="s i tc">R3's 12 prompt tokens = 2 + 8 + 2 over three steps</text>
+</svg>

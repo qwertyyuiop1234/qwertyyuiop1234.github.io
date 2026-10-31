@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 410" width="760" height="410" role="img" aria-label="Flash-Decoding splits a long KV cache into five parts, computes a partial output per part in parallel, then rescales and sums them">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .lv { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; }
+    .oc { fill: #8a6a1f; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#35548a"/></marker>
+  </defs>
+  <rect width="760" height="410" fill="#faf9f5"/>
+
+  <!-- query -->
+  <rect x="280" y="16" width="200" height="34" rx="6" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="380" y="38" text-anchor="middle" class="b">query (1 decode token)</text>
+  <text x="496" y="38" class="s i bl">same query goes to every split</text>
+  <g stroke="#35548a" stroke-width="1.6" fill="none">
+    <path d="M380,50 V70 M155,70 H675"/>
+  </g>
+  <g stroke="#35548a" stroke-width="1.6" fill="none" marker-end="url(#a-bl)">
+    <line x1="155" y1="70" x2="155" y2="96"/>
+    <line x1="285" y1="70" x2="285" y2="96"/>
+    <line x1="415" y1="70" x2="415" y2="96"/>
+    <line x1="545" y1="70" x2="545" y2="96"/>
+    <line x1="675" y1="70" x2="675" y2="96"/>
+  </g>
+
+  <!-- KV strips -->
+  <text x="82" y="115" text-anchor="end">Keys</text>
+  <text x="82" y="149" text-anchor="end">Values</text>
+  <g fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4">
+    <rect x="90" y="96" width="650" height="28"/>
+    <rect x="90" y="130" width="650" height="28"/>
+  </g>
+  <path d="M106.25,96 V124 M106.25,130 V158 M122.50,96 V124 M122.50,130 V158 M138.75,96 V124 M138.75,130 V158 M155.00,96 V124 M155.00,130 V158 M171.25,96 V124 M171.25,130 V158 M187.50,96 V124 M187.50,130 V158 M203.75,96 V124 M203.75,130 V158 M236.25,96 V124 M236.25,130 V158 M252.50,96 V124 M252.50,130 V158 M268.75,96 V124 M268.75,130 V158 M285.00,96 V124 M285.00,130 V158 M301.25,96 V124 M301.25,130 V158 M317.50,96 V124 M317.50,130 V158 M333.75,96 V124 M333.75,130 V158 M366.25,96 V124 M366.25,130 V158 M382.50,96 V124 M382.50,130 V158 M398.75,96 V124 M398.75,130 V158 M415.00,96 V124 M415.00,130 V158 M431.25,96 V124 M431.25,130 V158 M447.50,96 V124 M447.50,130 V158 M463.75,96 V124 M463.75,130 V158 M496.25,96 V124 M496.25,130 V158 M512.50,96 V124 M512.50,130 V158 M528.75,96 V124 M528.75,130 V158 M545.00,96 V124 M545.00,130 V158 M561.25,96 V124 M561.25,130 V158 M577.50,96 V124 M577.50,130 V158 M593.75,96 V124 M593.75,130 V158 M626.25,96 V124 M626.25,130 V158 M642.50,96 V124 M642.50,130 V158 M658.75,96 V124 M658.75,130 V158 M675.00,96 V124 M675.00,130 V158 M691.25,96 V124 M691.25,130 V158 M707.50,96 V124 M707.50,130 V158 M723.75,96 V124 M723.75,130 V158" stroke="#8a6a1f" stroke-width="0.8" stroke-opacity="0.45" fill="none"/>
+
+  <!-- split dividers -->
+  <g stroke="#414b48" stroke-width="1.6">
+    <line x1="220" y1="86" x2="220" y2="248"/>
+    <line x1="350" y1="86" x2="350" y2="248"/>
+    <line x1="480" y1="86" x2="480" y2="248"/>
+    <line x1="610" y1="86" x2="610" y2="248"/>
+  </g>
+
+  <!-- split labels -->
+  <g text-anchor="middle">
+    <text class="b" x="155" y="184">split 1/5</text>
+    <text class="b" x="285" y="184">split 2/5</text>
+    <text class="b" x="415" y="184">split 3/5</text>
+    <text class="b" x="545" y="184">split 4/5</text>
+    <text class="b" x="675" y="184">split 5/5</text>
+  </g>
+
+  <!-- partial outputs + softmax stats -->
+  <g fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4">
+    <rect x="109" y="200" width="40" height="40" rx="3"/>
+    <rect x="239" y="200" width="40" height="40" rx="3"/>
+    <rect x="369" y="200" width="40" height="40" rx="3"/>
+    <rect x="499" y="200" width="40" height="40" rx="3"/>
+    <rect x="629" y="200" width="40" height="40" rx="3"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="129" y="225">O₁</text>
+    <text x="259" y="225">O₂</text>
+    <text x="389" y="225">O₃</text>
+    <text x="519" y="225">O₄</text>
+    <text x="649" y="225">O₅</text>
+  </g>
+  <g>
+    <text x="157" y="225" class="oc">m₁, <tspan class="lv">l</tspan>₁</text>
+    <text x="287" y="225" class="oc">m₂, <tspan class="lv">l</tspan>₂</text>
+    <text x="417" y="225" class="oc">m₃, <tspan class="lv">l</tspan>₃</text>
+    <text x="547" y="225" class="oc">m₄, <tspan class="lv">l</tspan>₄</text>
+    <text x="677" y="225" class="oc">m₅, <tspan class="lv">l</tspan>₅</text>
+  </g>
+
+  <!-- merge -->
+  <g stroke="#64645d" stroke-width="1.6" fill="none" marker-end="url(#a-ink)">
+    <line x1="129" y1="240" x2="320" y2="296"/>
+    <line x1="259" y1="240" x2="360" y2="296"/>
+    <line x1="389" y1="240" x2="400" y2="296"/>
+    <line x1="519" y1="240" x2="440" y2="296"/>
+    <line x1="649" y1="240" x2="480" y2="296"/>
+  </g>
+  <rect x="300" y="296" width="200" height="40" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="400" y="321" text-anchor="middle" class="b">rescale and sum</text>
+  <line x1="500" y1="316" x2="560" y2="316" stroke="#35548a" stroke-width="1.6" marker-end="url(#a-bl)"/>
+  <rect x="560" y="296" width="120" height="40" rx="6" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="620" y="321" text-anchor="middle" class="b">output</text>
+
+  <!-- notes -->
+  <text x="16" y="372" class="i">Splits run in parallel on different SMs.</text>
+  <text x="16" y="394" class="s mu">Oₖ = partial output of split k;  mₖ, <tspan class="lv">l</tspan>ₖ = its softmax stats (row max, sum of exp).</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 466" width="760" height="466" role="img" aria-label="TPS measurement window: requests R1 to Rm all lie between Tx, when the first request is sent, and Ty, when the last response of the last request arrives, so all their output tokens are divided by Ty minus Tx; benchmark setup before Tx and teardown after Ty are not counted">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; } .ms { font-size: 13px; } .xl { font-size: 17px; } .lg { font-size: 16px; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+  </defs>
+  <rect width="760" height="466" fill="#faf9f5"/>
+
+  <!-- measured window Tx .. Ty -->
+  <rect x="190" y="66" width="400" height="272" fill="#d9e3d9"/>
+  <g stroke="#4f6f5c" stroke-width="1.4" stroke-dasharray="5 4">
+    <line x1="190" y1="58" x2="190" y2="338"/>
+    <line x1="590" y1="58" x2="590" y2="338"/>
+  </g>
+
+  <!-- time axis -->
+  <line x1="30" y1="58" x2="742" y2="58" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <circle cx="60" cy="58" r="4.5" fill="#141413"/>
+  <text x="60" y="44" text-anchor="middle" class="m">T_start</text>
+  <circle cx="190" cy="58" r="4.5" fill="#141413"/>
+  <text x="190" y="44" text-anchor="middle" class="m">Tx</text>
+  <circle cx="590" cy="58" r="4.5" fill="#141413"/>
+  <text x="590" y="44" text-anchor="middle" class="m">Ty</text>
+  <circle cx="710" cy="58" r="4.5" fill="#141413"/>
+  <text x="710" y="44" text-anchor="middle" class="m">T_end</text>
+
+  <!-- span labels -->
+  <text x="390" y="90" text-anchor="middle" class="b sg">all output tokens of R1 to Rm count</text>
+  <text x="125" y="88" text-anchor="middle" class="s i mu">benchmark setup</text>
+  <text x="125" y="105" text-anchor="middle" class="s i mu">(not counted)</text>
+  <text x="650" y="88" text-anchor="middle" class="s i mu">teardown</text>
+  <text x="650" y="105" text-anchor="middle" class="s i mu">(not counted)</text>
+
+  <!-- requests: every bar lies fully inside Tx .. Ty -->
+  <rect x="190" y="122" width="120" height="12" fill="#35548a"/>
+  <text x="183" y="133" text-anchor="end" class="m ms">R1</text>
+  <rect x="236" y="150" width="170" height="12" fill="#35548a"/>
+  <text x="229" y="161" text-anchor="end" class="m ms">R2</text>
+  <rect x="250" y="178" width="220" height="12" fill="#35548a"/>
+  <text x="243" y="189" text-anchor="end" class="m ms">R3</text>
+  <rect x="300" y="206" width="130" height="12" fill="#35548a"/>
+  <text x="293" y="217" text-anchor="end" class="m ms">R4</text>
+  <circle cx="390" cy="232" r="2.2" fill="#64645d"/>
+  <circle cx="390" cy="240" r="2.2" fill="#64645d"/>
+  <circle cx="390" cy="248" r="2.2" fill="#64645d"/>
+  <rect x="380" y="262" width="176" height="12" fill="#35548a"/>
+  <text x="373" y="273" text-anchor="end" class="m ms">Rm-2</text>
+  <rect x="430" y="290" width="144" height="12" fill="#35548a"/>
+  <text x="423" y="301" text-anchor="end" class="m ms">Rm-1</text>
+  <rect x="490" y="318" width="100" height="12" fill="#35548a"/>
+  <text x="483" y="329" text-anchor="end" class="m ms">Rm</text>
+
+  <!-- window edge definitions -->
+  <text x="190" y="358" text-anchor="middle" class="s sg">Tx: first request sent</text>
+  <text x="590" y="358" text-anchor="middle" class="s sg">Ty: last response of Rm</text>
+
+  <!-- legend -->
+  <rect x="226" y="377" width="28" height="12" fill="#35548a"/>
+  <text x="262" y="388" class="s">one request, from send to its last response</text>
+
+  <!-- formula -->
+  <rect x="210" y="408" width="340" height="40" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="380" y="434" text-anchor="middle" class="m b lg">TPS = n_tokens / (Ty − Tx)</text>
+</svg>

@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" width="760" height="470" role="img" aria-label="Speculative decoding: a small draft model guesses three tokens, the large target model checks them in one pass over the uncached positions, two are accepted and the third is replaced">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .w { fill: #faf9f5; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#35548a"/></marker>
+    <marker id="a-oc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a1f"/></marker>
+    <marker id="a-sg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f6f5c"/></marker>
+  </defs>
+  <rect width="760" height="470" fill="#faf9f5"/>
+
+  <!-- step labels (left column) -->
+  <circle cx="31" cy="56" r="11" fill="#414b48"/>
+  <text x="31" y="60.5" text-anchor="middle" class="s b w">1</text>
+  <text x="50" y="61" class="b">Draft</text>
+  <text x="20" y="84" class="s">draft model</text>
+  <text x="20" y="100" class="s mu">(small, fast)</text>
+
+  <circle cx="31" cy="144" r="11" fill="#414b48"/>
+  <text x="31" y="148.5" text-anchor="middle" class="s b w">2</text>
+  <text x="50" y="149" class="b">Verify</text>
+  <text x="20" y="172" class="s">target model</text>
+  <text x="20" y="188" class="s mu">(large)</text>
+
+  <circle cx="31" cy="332" r="11" fill="#414b48"/>
+  <text x="31" y="336.5" text-anchor="middle" class="s b w">3</text>
+  <text x="50" y="337" class="b">Accept</text>
+  <text x="20" y="360" class="s mu">compare left</text>
+  <text x="20" y="376" class="s mu">to right</text>
+
+  <!-- 1: draft proposes three tokens one by one -->
+  <g stroke-width="1.4">
+    <rect x="150" y="40" width="60" height="32" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="242" y="40" width="60" height="32" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="334" y="40" width="60" height="32" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="426" y="40" width="60" height="32" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="518" y="40" width="60" height="32" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="610" y="40" width="60" height="32" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="180" y="61">The</text>
+    <text x="272" y="61">sky</text>
+    <text x="364" y="61">is</text>
+    <text x="456" y="61">blue</text>
+    <text x="548" y="61">and</text>
+    <text x="640" y="61">cold</text>
+  </g>
+  <g stroke="#35548a" stroke-width="1.6" stroke-dasharray="4 3">
+    <line x1="394" y1="56" x2="425" y2="56" marker-end="url(#a-bl)"/>
+    <line x1="486" y1="56" x2="517" y2="56" marker-end="url(#a-bl)"/>
+    <line x1="578" y1="56" x2="609" y2="56" marker-end="url(#a-bl)"/>
+  </g>
+  <text x="548" y="96" text-anchor="middle" class="s i bl">one token per step, 3 quick steps</text>
+
+  <!-- 2: target checks the whole sequence in one pass -->
+  <g stroke-width="1.4">
+    <rect x="150" y="128" width="60" height="32" rx="5" fill="#efeee7" stroke="#64645d" stroke-dasharray="5 3"/>
+    <rect x="242" y="128" width="60" height="32" rx="5" fill="#efeee7" stroke="#64645d" stroke-dasharray="5 3"/>
+    <rect x="334" y="128" width="60" height="32" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="426" y="128" width="60" height="32" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="518" y="128" width="60" height="32" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="610" y="128" width="60" height="32" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="180" y="149">The</text>
+    <text x="272" y="149">sky</text>
+    <text x="364" y="149">is</text>
+    <text x="456" y="149">blue</text>
+    <text x="548" y="149">and</text>
+    <text x="640" y="149">cold</text>
+  </g>
+  <g stroke="#64645d" stroke-width="1.6">
+    <line x1="364" y1="160" x2="364" y2="183" marker-end="url(#a-ink)"/>
+    <line x1="456" y1="160" x2="456" y2="183" marker-end="url(#a-ink)"/>
+    <line x1="548" y1="160" x2="548" y2="183" marker-end="url(#a-ink)"/>
+    <line x1="640" y1="160" x2="640" y2="183" marker-end="url(#a-ink)"/>
+  </g>
+  <rect x="334" y="184" width="336" height="44" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="502" y="211" text-anchor="middle" class="b">one forward pass over 4 new positions</text>
+  <text x="226" y="200" text-anchor="middle" class="s i mu">already in</text>
+  <text x="226" y="217" text-anchor="middle" class="s i mu">the KV cache</text>
+
+  <g stroke="#8a6a1f" stroke-width="1.6">
+    <line x1="364" y1="228" x2="455.2" y2="251" marker-end="url(#a-oc)"/>
+    <line x1="456" y1="228" x2="547.2" y2="251" marker-end="url(#a-oc)"/>
+    <line x1="548" y1="228" x2="639.2" y2="251" marker-end="url(#a-oc)"/>
+  </g>
+  <g stroke-width="1.4">
+    <rect x="426" y="252" width="60" height="32" rx="5" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="518" y="252" width="60" height="32" rx="5" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="610" y="252" width="60" height="32" rx="5" fill="#f0e3bf" stroke="#8a6a1f"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="456" y="273">blue</text>
+    <text x="548" y="273">and</text>
+    <text x="640" y="273">clear</text>
+  </g>
+  <text x="150" y="262" class="s mu">each position predicts</text>
+  <text x="150" y="278" class="s mu">the next token</text>
+
+  <!-- 3: result -->
+  <g stroke-width="1.4">
+    <rect x="150" y="316" width="60" height="32" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="218" y="316" width="60" height="32" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="286" y="316" width="60" height="32" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="362" y="316" width="72" height="32" rx="5" fill="#d9e3d9" stroke="#4f6f5c"/>
+    <rect x="442" y="316" width="72" height="32" rx="5" fill="#d9e3d9" stroke="#4f6f5c"/>
+    <rect x="530" y="316" width="72" height="32" rx="5" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="636" y="316" width="64" height="32" rx="5" fill="#d9e3d9" stroke="#4f6f5c"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="180" y="337">The</text>
+    <text x="248" y="337">sky</text>
+    <text x="316" y="337">is</text>
+    <text x="668" y="337">clear</text>
+  </g>
+  <g text-anchor="end">
+    <text x="406" y="337">blue</text>
+    <text x="486" y="337">and</text>
+    <text x="574" y="337" class="tc">cold</text>
+  </g>
+  <!-- check and cross marks -->
+  <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M412,332 L416,337 L423,326" stroke="#4f6f5c"/>
+    <path d="M492,332 L496,337 L503,326" stroke="#4f6f5c"/>
+    <path d="M581,327 L590,336 M590,327 L581,336" stroke="#a4502f"/>
+  </g>
+  <line x1="542" y1="332" x2="576" y2="332" stroke="#a4502f" stroke-width="1.4"/>
+  <line x1="602" y1="332" x2="635" y2="332" stroke="#4f6f5c" stroke-width="1.6" marker-end="url(#a-sg)"/>
+  <g text-anchor="middle">
+    <text x="438" y="368" class="s sg">accepted</text>
+    <text x="566" y="368" class="s tc">rejected</text>
+    <text x="668" y="368" class="s sg">from target</text>
+  </g>
+  <text x="150" y="400" class="i sg">3 new tokens (blue, and, clear) from one target pass</text>
+
+  <!-- legend -->
+  <g stroke-width="1.4">
+    <rect x="150" y="430" width="22" height="14" rx="3" fill="#efeee7" stroke="#64645d"/>
+    <rect x="250" y="430" width="22" height="14" rx="3" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="370" y="430" width="22" height="14" rx="3" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="496" y="430" width="22" height="14" rx="3" fill="#d9e3d9" stroke="#4f6f5c"/>
+    <rect x="600" y="430" width="22" height="14" rx="3" fill="#ecd5c8" stroke="#a4502f"/>
+  </g>
+  <g>
+    <text x="178" y="441" class="s">context</text>
+    <text x="278" y="441" class="s">draft token</text>
+    <text x="398" y="441" class="s">target token</text>
+    <text x="524" y="441" class="s">accepted</text>
+    <text x="628" y="441" class="s">rejected</text>
+  </g>
+</svg>

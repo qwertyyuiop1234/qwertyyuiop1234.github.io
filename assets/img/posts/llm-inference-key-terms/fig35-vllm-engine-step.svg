@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 328" width="760" height="328" role="img" aria-label="One step of the vLLM engine across the API server process and the EngineCore process">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .w { fill: #faf9f5; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+  </defs>
+  <rect width="760" height="328" fill="#faf9f5"/>
+
+  <!-- process 1 -->
+  <rect x="16" y="16" width="190" height="252" rx="8" fill="none" stroke="#64645d" stroke-width="1.4"/>
+  <text x="111" y="42" text-anchor="middle" class="b">API server</text>
+  <text x="111" y="62" text-anchor="middle" class="m b">AsyncLLM</text>
+  <text x="111" y="80" text-anchor="middle" class="s mu">(process 1)</text>
+  <rect x="28" y="94" width="166" height="50" rx="5" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="111" y="115" text-anchor="middle">receive +</text>
+  <text x="111" y="134" text-anchor="middle">tokenize</text>
+  <rect x="28" y="198" width="166" height="50" rx="5" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="111" y="219" text-anchor="middle">detokenize +</text>
+  <text x="111" y="238" text-anchor="middle">stream</text>
+
+  <!-- EngineCore process -->
+  <rect x="252" y="16" width="496" height="296" rx="8" fill="none" stroke="#35548a" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="500" y="44" text-anchor="middle" class="b bl">EngineCore (process 2) · <tspan class="m b bl">run_busy_loop</tspan></text>
+
+  <rect x="264" y="96" width="128" height="46" rx="5" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="328" y="124" text-anchor="middle" class="m">input_queue</text>
+  <rect x="448" y="96" width="112" height="46" rx="5" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="504" y="124" text-anchor="middle" class="b">scheduler</text>
+  <rect x="616" y="96" width="120" height="46" rx="5" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="676" y="124" text-anchor="middle" class="b">KV manager</text>
+
+  <rect x="264" y="200" width="128" height="46" rx="5" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="328" y="228" text-anchor="middle" class="m">output_queue</text>
+  <rect x="448" y="200" width="112" height="46" rx="5" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="504" y="228" text-anchor="middle" class="b">sampler</text>
+  <rect x="616" y="200" width="120" height="46" rx="5" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="676" y="219" text-anchor="middle" class="b">model</text>
+  <text x="676" y="238" text-anchor="middle" class="b">execution</text>
+
+  <!-- arrows -->
+  <g stroke="#64645d" stroke-width="1.6" fill="none">
+    <line x1="194" y1="119" x2="263" y2="119" marker-end="url(#a-ink)"/>
+    <line x1="392" y1="119" x2="447" y2="119" marker-end="url(#a-ink)"/>
+    <line x1="560" y1="111" x2="615" y2="111" marker-end="url(#a-ink)"/>
+    <line x1="616" y1="129" x2="561" y2="129" marker-end="url(#a-ink)"/>
+    <path d="M504,142 L504,171 L676,171 L676,199" marker-end="url(#a-ink)"/>
+    <line x1="616" y1="223" x2="561" y2="223" marker-end="url(#a-ink)"/>
+    <line x1="448" y1="223" x2="393" y2="223" marker-end="url(#a-ink)"/>
+    <line x1="264" y1="223" x2="195" y2="223" marker-end="url(#a-ink)"/>
+  </g>
+  <text x="229" y="111" text-anchor="middle" class="m">zmq</text>
+  <text x="229" y="215" text-anchor="middle" class="m">zmq</text>
+  <text x="588" y="101" text-anchor="middle" class="s">blocks</text>
+  <text x="590" y="164" text-anchor="middle" class="s">execution plan</text>
+
+  <!-- step badges -->
+  <g fill="#414b48">
+    <circle cx="29" cy="95" r="10"/>
+    <circle cx="449" cy="97" r="10"/>
+    <circle cx="617" cy="201" r="10"/>
+    <circle cx="29" cy="199" r="10"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="29" y="100" class="s b w">1</text>
+    <text x="449" y="102" class="s b w">2</text>
+    <text x="617" y="206" class="s b w">3</text>
+    <text x="29" y="204" class="s b w">4</text>
+  </g>
+
+  <!-- loop note -->
+  <text x="500" y="278" text-anchor="middle" class="i tc">one loop = one step</text>
+  <text x="500" y="298" text-anchor="middle" class="s i tc">(each scheduled request runs the tokens it was given)</text>
+</svg>

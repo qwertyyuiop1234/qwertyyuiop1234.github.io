@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 526" width="760" height="526" role="img" aria-label="MoE model on 4 GPUs with DP = 2 and TP = 2 for attention and EP = 4 for the experts">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-oc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a1f"/></marker>
+    <marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#35548a"/></marker>
+  </defs>
+  <rect width="760" height="526" fill="#faf9f5"/>
+
+  <!-- inputs -->
+  <rect x="98" y="16" width="96" height="28" rx="14" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="146" y="35" text-anchor="middle">batch0</text>
+  <rect x="374" y="16" width="96" height="28" rx="14" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="422" y="35" text-anchor="middle">batch1</text>
+  <line x1="146" y1="44" x2="146" y2="59" stroke="#8a6a1f" stroke-width="1.6" marker-end="url(#a-oc)"/>
+  <line x1="422" y1="44" x2="422" y2="59" stroke="#35548a" stroke-width="1.6" marker-end="url(#a-bl)"/>
+
+  <!-- attention: two DP groups, TP = 2 each -->
+  <rect x="16" y="60" width="260" height="96" rx="8" fill="none" stroke="#8a6a1f" stroke-width="1.4"/>
+  <rect x="292" y="60" width="260" height="96" rx="8" fill="none" stroke="#35548a" stroke-width="1.4"/>
+  <text x="146" y="82" text-anchor="middle" class="b">Attention · DP group 0</text>
+  <text x="422" y="82" text-anchor="middle" class="b">Attention · DP group 1</text>
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="28" y="94" width="114" height="52" rx="5"/>
+    <rect x="150" y="94" width="114" height="52" rx="5"/>
+    <rect x="304" y="94" width="114" height="52" rx="5"/>
+    <rect x="426" y="94" width="114" height="52" rx="5"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="85" y="116" class="b">GPU0</text>
+    <text x="207" y="116" class="b">GPU1</text>
+    <text x="361" y="116" class="b">GPU2</text>
+    <text x="483" y="116" class="b">GPU3</text>
+    <text x="85" y="136" class="s mu">TP rank 0</text>
+    <text x="207" y="136" class="s mu">TP rank 1</text>
+    <text x="361" y="136" class="s mu">TP rank 0</text>
+    <text x="483" y="136" class="s mu">TP rank 1</text>
+  </g>
+  <line x1="146" y1="156" x2="146" y2="171" stroke="#8a6a1f" stroke-width="1.6" marker-end="url(#a-oc)"/>
+  <line x1="422" y1="156" x2="422" y2="171" stroke="#35548a" stroke-width="1.6" marker-end="url(#a-bl)"/>
+
+  <!-- all-reduce inside each group -->
+  <g fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4">
+    <rect x="16" y="172" width="260" height="28" rx="5"/>
+    <rect x="292" y="172" width="260" height="28" rx="5"/>
+  </g>
+  <text x="146" y="191" text-anchor="middle">All-Reduce (TP = 2)</text>
+  <text x="422" y="191" text-anchor="middle">All-Reduce (TP = 2)</text>
+  <line x1="146" y1="200" x2="146" y2="227" stroke="#8a6a1f" stroke-width="1.6" marker-end="url(#a-oc)"/>
+  <line x1="422" y1="200" x2="422" y2="227" stroke="#35548a" stroke-width="1.6" marker-end="url(#a-bl)"/>
+
+  <!-- all-gather -->
+  <rect x="16" y="228" width="536" height="30" rx="5" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="284" y="248" text-anchor="middle"><tspan class="b">AllGather</tspan>: every GPU gets batch0 + batch1</text>
+  <g stroke="#64645d" stroke-width="1.6">
+    <line x1="85" y1="258" x2="85" y2="285" marker-end="url(#a-ink)"/>
+    <line x1="207" y1="258" x2="207" y2="285" marker-end="url(#a-ink)"/>
+    <line x1="361" y1="258" x2="361" y2="285" marker-end="url(#a-ink)"/>
+    <line x1="483" y1="258" x2="483" y2="285" marker-end="url(#a-ink)"/>
+  </g>
+
+  <!-- MoE layer: EP = 4 -->
+  <rect x="16" y="286" width="536" height="110" rx="8" fill="none" stroke="#64645d" stroke-width="1.4"/>
+  <text x="284" y="308" text-anchor="middle" class="b">MoE layer · EP = DP × TP = 4</text>
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="28" y="318" width="114" height="68" rx="5"/>
+    <rect x="150" y="318" width="114" height="68" rx="5"/>
+    <rect x="304" y="318" width="114" height="68" rx="5"/>
+    <rect x="426" y="318" width="114" height="68" rx="5"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="85" y="338" class="b">GPU0</text>
+    <text x="207" y="338" class="b">GPU1</text>
+    <text x="361" y="338" class="b">GPU2</text>
+    <text x="483" y="338" class="b">GPU3</text>
+    <text x="85" y="356" class="s">experts 0-1</text>
+    <text x="207" y="356" class="s">experts 2-3</text>
+    <text x="361" y="356" class="s">experts 4-5</text>
+    <text x="483" y="356" class="s">experts 6-7</text>
+  </g>
+  <!-- each expert GPU sees tokens from both batches -->
+  <g stroke-width="1.4">
+    <rect x="67" y="364" width="16" height="12" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="87" y="364" width="16" height="12" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="189" y="364" width="16" height="12" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="209" y="364" width="16" height="12" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="343" y="364" width="16" height="12" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="363" y="364" width="16" height="12" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="465" y="364" width="16" height="12" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="485" y="364" width="16" height="12" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <g stroke="#64645d" stroke-width="1.6">
+    <line x1="85" y1="396" x2="85" y2="423" marker-end="url(#a-ink)"/>
+    <line x1="207" y1="396" x2="207" y2="423" marker-end="url(#a-ink)"/>
+    <line x1="361" y1="396" x2="361" y2="423" marker-end="url(#a-ink)"/>
+    <line x1="483" y1="396" x2="483" y2="423" marker-end="url(#a-ink)"/>
+  </g>
+
+  <!-- reduce-scatter -->
+  <rect x="16" y="424" width="536" height="30" rx="5" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="284" y="444" text-anchor="middle"><tspan class="b">ReduceScatter</tspan>: each group gets its own batch back</text>
+  <line x1="146" y1="454" x2="146" y2="481" stroke="#8a6a1f" stroke-width="1.6" marker-end="url(#a-oc)"/>
+  <line x1="422" y1="454" x2="422" y2="481" stroke="#35548a" stroke-width="1.6" marker-end="url(#a-bl)"/>
+
+  <!-- outputs -->
+  <rect x="88" y="482" width="116" height="28" rx="14" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="146" y="501" text-anchor="middle">batch0 out</text>
+  <rect x="364" y="482" width="116" height="28" rx="14" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="422" y="501" text-anchor="middle">batch1 out</text>
+
+  <!-- summary -->
+  <text x="588" y="40" class="b">4 GPUs</text>
+  <text x="588" y="66" class="m">DP = 2</text>
+  <text x="588" y="90" class="m">TP = 2</text>
+  <text x="588" y="114" class="m">EP = 4</text>
+  <text x="588" y="140" class="s mu">EP = DP × TP</text>
+
+  <!-- side note: dense FFN -->
+  <rect x="580" y="172" width="168" height="282" rx="8" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="664" y="196" text-anchor="middle" class="b">Dense FFN layer</text>
+  <text x="664" y="214" text-anchor="middle" class="s mu">(non-MoE)</text>
+  <text x="592" y="244" class="s">DP group 0</text>
+  <text x="592" y="342" class="s">DP group 1</text>
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="592" y="252" width="68" height="30" rx="4"/>
+    <rect x="668" y="252" width="68" height="30" rx="4"/>
+    <rect x="592" y="350" width="68" height="30" rx="4"/>
+    <rect x="668" y="350" width="68" height="30" rx="4"/>
+  </g>
+  <g text-anchor="middle" class="s b">
+    <text x="626" y="272" class="s b">GPU0</text>
+    <text x="702" y="272" class="s b">GPU1</text>
+    <text x="626" y="370" class="s b">GPU2</text>
+    <text x="702" y="370" class="s b">GPU3</text>
+  </g>
+  <g fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4">
+    <rect x="592" y="288" width="144" height="24" rx="4"/>
+    <rect x="592" y="386" width="144" height="24" rx="4"/>
+  </g>
+  <text x="664" y="305" text-anchor="middle" class="s">All-Reduce</text>
+  <text x="664" y="403" text-anchor="middle" class="s">All-Reduce</text>
+  <text x="664" y="430" text-anchor="middle" class="s i mu">only TP inside</text>
+  <text x="664" y="446" text-anchor="middle" class="s i mu">each DP group</text>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" width="760" height="560" role="img" aria-label="Map of where each inference term sits on the request pipeline">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-tc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a4502f"/></marker>
+  </defs>
+  <rect width="760" height="560" fill="#faf9f5"/>
+
+  <!-- column headers -->
+  <text x="140" y="30" text-anchor="middle" class="s b mu">STAGE</text>
+  <text x="255" y="30" class="s b mu">TERMS THAT ATTACH HERE</text>
+  <text x="588" y="30" class="s b mu">LATENCY METRICS</text>
+
+  <!-- stage boxes -->
+  <g stroke="#64645d" stroke-width="1.4">
+    <rect x="60" y="48" width="160" height="44" rx="6" fill="#efeee7"/>
+    <rect x="60" y="113" width="160" height="44" rx="6" fill="#efeee7"/>
+    <rect x="60" y="178" width="160" height="44" rx="6" fill="#ecd5c8"/>
+    <rect x="60" y="243" width="160" height="44" rx="6" fill="#d9e1ee"/>
+    <rect x="60" y="308" width="160" height="44" rx="6" fill="#f0e3bf"/>
+    <rect x="60" y="373" width="160" height="44" rx="6" fill="#efeee7"/>
+  </g>
+  <g text-anchor="middle" class="b">
+    <text x="140" y="75" class="b">Request arrives</text>
+    <text x="140" y="140" class="b">Scheduler</text>
+    <text x="140" y="205" class="b">Prefill</text>
+    <text x="140" y="270" class="b">Decode (1 step)</text>
+    <text x="140" y="335" class="b">Sampling</text>
+    <text x="140" y="400" class="b">Output</text>
+  </g>
+  <g stroke="#64645d" stroke-width="1.4">
+    <line x1="140" y1="92" x2="140" y2="111" marker-end="url(#a-ink)"/>
+    <line x1="140" y1="157" x2="140" y2="176" marker-end="url(#a-ink)"/>
+    <line x1="140" y1="222" x2="140" y2="241" marker-end="url(#a-ink)"/>
+    <line x1="140" y1="287" x2="140" y2="306" marker-end="url(#a-ink)"/>
+    <line x1="140" y1="352" x2="140" y2="371" marker-end="url(#a-ink)"/>
+  </g>
+  <!-- decode loop -->
+  <path d="M60,330 C26,330 26,265 58,265" fill="none" stroke="#a4502f" stroke-width="1.8" marker-end="url(#a-tc)"/>
+  <text transform="translate(22,298) rotate(-90)" text-anchor="middle" class="s i tc">until EOS</text>
+
+  <!-- terms -->
+  <g>
+    <text x="255" y="66">API server · DPLB</text>
+    <text x="255" y="86">RPS · FCFS</text>
+    <text x="255" y="131">continuous batching · chunked prefill</text>
+    <text x="255" y="151">token budget · max-num-seqs</text>
+    <text x="255" y="196">APC · RadixAttention</text>
+    <text x="255" y="216">FlashAttention · FlashInfer</text>
+    <text x="255" y="261">KV cache · PagedAttention · CoW</text>
+    <text x="255" y="281">speculative decoding · Flash-Decoding</text>
+    <text x="255" y="326">temperature · top-k · top-p</text>
+    <text x="255" y="346">min-p · penalties · beam search · EOS</text>
+    <text x="255" y="391">streaming · structured output</text>
+    <text x="255" y="411">tool call</text>
+  </g>
+
+  <!-- metric brackets -->
+  <path d="M568,50 L576,50 L576,220 L568,220" fill="none" stroke="#a4502f" stroke-width="1.8"/>
+  <text x="588" y="128" class="b tc">TTFT</text>
+  <text x="588" y="147" class="s tc">to first token</text>
+
+  <path d="M568,245 L576,245 L576,285 L568,285" fill="none" stroke="#4f6f5c" stroke-width="1.8"/>
+  <text x="588" y="262" class="b sg">ITL · TBT</text>
+  <text x="588" y="281" class="b sg">TPOT</text>
+
+  <path d="M692,50 L700,50 L700,415 L692,415" fill="none" stroke="#35548a" stroke-width="1.8"/>
+  <text x="710" y="222" class="b bl">E2EL</text>
+  <text x="710" y="241" class="s bl">whole</text>
+  <text x="710" y="257" class="s bl">request</text>
+
+  <!-- system level -->
+  <text x="380" y="455" text-anchor="middle" class="i mu">System-wide view: TPS · QPS · MFU · SLO · TP99</text>
+
+  <!-- distribution layer -->
+  <rect x="20" y="478" width="720" height="66" rx="8" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="380" y="503" text-anchor="middle" class="b">Layer that splits the model and the requests across GPUs</text>
+  <text x="380" y="528" text-anchor="middle" class="m">DP · TP · PP · SP · EP · PD disaggregation · AFD · TBO/DBO · EPLB</text>
+</svg>

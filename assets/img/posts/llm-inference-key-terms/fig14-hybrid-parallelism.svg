@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="760" height="340" role="img" aria-label="Hybrid parallelism: a dense model uses TP inside each host and PP across two hosts; a MoE model keeps one attention replica per device and spreads experts across devices with all-to-all traffic">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+  </defs>
+  <rect width="760" height="340" fill="#faf9f5"/>
+
+  <!-- ===== left: dense model ===== -->
+  <text x="20" y="28" class="b">Dense model</text>
+  <text x="20" y="46" class="s mu">(Llama 3 405B class)</text>
+
+  <!-- host 1 = PP stage 0 -->
+  <rect x="20" y="62" width="270" height="98" rx="8" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="34" y="83" class="b">Host 1</text>
+  <text x="276" y="83" text-anchor="end" class="s mu">PP stage 0</text>
+  <g stroke="#8a6a1f" stroke-width="1.4" fill="#f0e3bf">
+    <rect x="34" y="94" width="56" height="26" rx="4"/>
+    <rect x="96" y="94" width="56" height="26" rx="4"/>
+    <rect x="158" y="94" width="56" height="26" rx="4"/>
+    <rect x="220" y="94" width="56" height="26" rx="4"/>
+    <rect x="34" y="126" width="56" height="26" rx="4"/>
+    <rect x="96" y="126" width="56" height="26" rx="4"/>
+    <rect x="158" y="126" width="56" height="26" rx="4"/>
+    <rect x="220" y="126" width="56" height="26" rx="4"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="62" y="112">TP0</text>
+    <text x="124" y="112">TP1</text>
+    <text x="186" y="112">TP2</text>
+    <text x="248" y="112">TP3</text>
+    <text x="62" y="144">TP4</text>
+    <text x="124" y="144">TP5</text>
+    <text x="186" y="144">TP6</text>
+    <text x="248" y="144">TP7</text>
+  </g>
+
+  <line x1="155" y1="160" x2="155" y2="187" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <text x="166" y="179" class="s i mu">activations</text>
+
+  <!-- host 2 = PP stage 1 -->
+  <rect x="20" y="188" width="270" height="98" rx="8" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="34" y="209" class="b">Host 2</text>
+  <text x="276" y="209" text-anchor="end" class="s mu">PP stage 1</text>
+  <g stroke="#35548a" stroke-width="1.4" fill="#d9e1ee">
+    <rect x="34" y="220" width="56" height="26" rx="4"/>
+    <rect x="96" y="220" width="56" height="26" rx="4"/>
+    <rect x="158" y="220" width="56" height="26" rx="4"/>
+    <rect x="220" y="220" width="56" height="26" rx="4"/>
+    <rect x="34" y="252" width="56" height="26" rx="4"/>
+    <rect x="96" y="252" width="56" height="26" rx="4"/>
+    <rect x="158" y="252" width="56" height="26" rx="4"/>
+    <rect x="220" y="252" width="56" height="26" rx="4"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="62" y="238">TP0</text>
+    <text x="124" y="238">TP1</text>
+    <text x="186" y="238">TP2</text>
+    <text x="248" y="238">TP3</text>
+    <text x="62" y="270">TP4</text>
+    <text x="124" y="270">TP5</text>
+    <text x="186" y="270">TP6</text>
+    <text x="248" y="270">TP7</text>
+  </g>
+  <text x="20" y="308" class="s i mu">8 devices (TP0-TP7) split each layer</text>
+  <text x="20" y="325" class="s i mu">inside a host; the hosts split the layers</text>
+
+  <!-- divider -->
+  <line x1="306" y1="16" x2="306" y2="326" stroke="#d8d7d0" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- ===== right: MoE model ===== -->
+  <text x="322" y="28" class="b">MoE model</text>
+  <text x="322" y="46" class="s mu">(DeepSeek-V3 class)</text>
+  <text x="731" y="74" text-anchor="end" class="s mu">experts spread over devices (EP): Expert 0-15</text>
+
+  <!-- device columns -->
+  <g fill="#efeee7">
+    <rect x="322" y="84" width="46" height="204" rx="6"/>
+    <rect x="374" y="84" width="46" height="204" rx="6"/>
+    <rect x="426" y="84" width="46" height="204" rx="6"/>
+    <rect x="478" y="84" width="46" height="204" rx="6"/>
+    <rect x="530" y="84" width="46" height="204" rx="6"/>
+    <rect x="582" y="84" width="46" height="204" rx="6"/>
+    <rect x="634" y="84" width="46" height="204" rx="6"/>
+    <rect x="686" y="84" width="46" height="204" rx="6"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="345" y="101" class="s mu">dev 0</text>
+    <text x="397" y="101" class="s mu">dev 1</text>
+    <text x="449" y="101" class="s mu">dev 2</text>
+    <text x="501" y="101" class="s mu">dev 3</text>
+    <text x="553" y="101" class="s mu">dev 4</text>
+    <text x="605" y="101" class="s mu">dev 5</text>
+    <text x="657" y="101" class="s mu">dev 6</text>
+    <text x="709" y="101" class="s mu">dev 7</text>
+  </g>
+
+  <!-- all-to-all lines -->
+  <g stroke="#4f6f5c" stroke-width="1.2">
+    <line x1="333" y1="252" x2="409" y2="160"/>
+    <line x1="345" y1="252" x2="501" y2="160"/>
+    <line x1="357" y1="252" x2="645" y2="160"/>
+    <line x1="385" y1="252" x2="461" y2="160"/>
+    <line x1="397" y1="252" x2="553" y2="160"/>
+    <line x1="409" y1="252" x2="697" y2="160"/>
+    <line x1="437" y1="252" x2="513" y2="160"/>
+    <line x1="449" y1="252" x2="605" y2="160"/>
+    <line x1="461" y1="252" x2="333" y2="160"/>
+    <line x1="489" y1="252" x2="565" y2="160"/>
+    <line x1="501" y1="252" x2="657" y2="160"/>
+    <line x1="513" y1="252" x2="385" y2="160"/>
+    <line x1="541" y1="252" x2="617" y2="160"/>
+    <line x1="553" y1="252" x2="709" y2="160"/>
+    <line x1="565" y1="252" x2="437" y2="160"/>
+    <line x1="593" y1="252" x2="669" y2="160"/>
+    <line x1="605" y1="252" x2="345" y2="160"/>
+    <line x1="617" y1="252" x2="489" y2="160"/>
+    <line x1="645" y1="252" x2="721" y2="160"/>
+    <line x1="657" y1="252" x2="397" y2="160"/>
+    <line x1="669" y1="252" x2="541" y2="160"/>
+    <line x1="697" y1="252" x2="357" y2="160"/>
+    <line x1="709" y1="252" x2="449" y2="160"/>
+    <line x1="721" y1="252" x2="593" y2="160"/>
+  </g>
+  <rect x="372" y="195" width="316" height="24" rx="4" fill="#faf9f5" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="530" y="212" text-anchor="middle" class="s i sg">all-to-all: each token goes to its experts</text>
+
+  <!-- experts (2 per device) -->
+  <g stroke="#35548a" stroke-width="1.4" fill="#d9e1ee">
+    <rect x="324" y="108" width="42" height="24" rx="4"/>
+    <rect x="324" y="136" width="42" height="24" rx="4"/>
+    <rect x="376" y="108" width="42" height="24" rx="4"/>
+    <rect x="376" y="136" width="42" height="24" rx="4"/>
+    <rect x="428" y="108" width="42" height="24" rx="4"/>
+    <rect x="428" y="136" width="42" height="24" rx="4"/>
+    <rect x="480" y="108" width="42" height="24" rx="4"/>
+    <rect x="480" y="136" width="42" height="24" rx="4"/>
+    <rect x="532" y="108" width="42" height="24" rx="4"/>
+    <rect x="532" y="136" width="42" height="24" rx="4"/>
+    <rect x="584" y="108" width="42" height="24" rx="4"/>
+    <rect x="584" y="136" width="42" height="24" rx="4"/>
+    <rect x="636" y="108" width="42" height="24" rx="4"/>
+    <rect x="636" y="136" width="42" height="24" rx="4"/>
+    <rect x="688" y="108" width="42" height="24" rx="4"/>
+    <rect x="688" y="136" width="42" height="24" rx="4"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="345" y="125" class="s">E0</text>
+    <text x="345" y="153" class="s">E1</text>
+    <text x="397" y="125" class="s">E2</text>
+    <text x="397" y="153" class="s">E3</text>
+    <text x="449" y="125" class="s">E4</text>
+    <text x="449" y="153" class="s">E5</text>
+    <text x="501" y="125" class="s">E6</text>
+    <text x="501" y="153" class="s">E7</text>
+    <text x="553" y="125" class="s">E8</text>
+    <text x="553" y="153" class="s">E9</text>
+    <text x="605" y="125" class="s">E10</text>
+    <text x="605" y="153" class="s">E11</text>
+    <text x="657" y="125" class="s">E12</text>
+    <text x="657" y="153" class="s">E13</text>
+    <text x="709" y="125" class="s">E14</text>
+    <text x="709" y="153" class="s">E15</text>
+  </g>
+
+  <!-- attention replicas -->
+  <g stroke="#64645d" stroke-width="1.4" fill="#faf9f5">
+    <rect x="324" y="252" width="42" height="28" rx="4"/>
+    <rect x="376" y="252" width="42" height="28" rx="4"/>
+    <rect x="428" y="252" width="42" height="28" rx="4"/>
+    <rect x="480" y="252" width="42" height="28" rx="4"/>
+    <rect x="532" y="252" width="42" height="28" rx="4"/>
+    <rect x="584" y="252" width="42" height="28" rx="4"/>
+    <rect x="636" y="252" width="42" height="28" rx="4"/>
+    <rect x="688" y="252" width="42" height="28" rx="4"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="345" y="271" class="s">Attn</text>
+    <text x="397" y="271" class="s">Attn</text>
+    <text x="449" y="271" class="s">Attn</text>
+    <text x="501" y="271" class="s">Attn</text>
+    <text x="553" y="271" class="s">Attn</text>
+    <text x="605" y="271" class="s">Attn</text>
+    <text x="657" y="271" class="s">Attn</text>
+    <text x="709" y="271" class="s">Attn</text>
+  </g>
+  <text x="731" y="308" text-anchor="end" class="s mu">one attention replica per device (DP)</text>
+</svg>
