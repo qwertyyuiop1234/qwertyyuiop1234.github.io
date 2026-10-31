@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 644" width="760" height="644" role="img" aria-label="vLLM request flow with several data-parallel engine_core processes on two nodes: DPAsyncMPClient sends requests one way from a zmq ROUTER socket to the zmq DEALER socket of each engine_core, and each engine_core sends its outputs back over a zmq PUSH socket to a zmq PULL socket in the client that feeds OutputProcessor">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .w { fill: #faf9f5; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-sg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f6f5c"/></marker>
+    <marker id="a-bl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#35548a"/></marker>
+  </defs>
+  <rect width="760" height="644" fill="#faf9f5"/>
+
+  <!-- user -->
+  <rect x="10" y="134" width="54" height="116" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="37" y="197" text-anchor="middle" class="b">User</text>
+
+  <!-- node 0 -->
+  <rect x="92" y="14" width="658" height="330" rx="8" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="104" y="36" class="b mu">node 0</text>
+
+  <!-- front-end process -->
+  <rect x="102" y="46" width="422" height="288" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="114" y="67" class="b">API server process</text>
+
+  <rect x="114" y="80" width="72" height="244" rx="5" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="150" y="198" text-anchor="middle" class="b">API</text>
+  <text x="150" y="216" text-anchor="middle" class="b">server</text>
+
+  <rect x="198" y="80" width="314" height="244" rx="5" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="212" y="100" class="m b">AsyncLLM</text>
+
+  <rect x="210" y="110" width="290" height="46" rx="4" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="362" y="129" text-anchor="middle" class="m b">Processor</text>
+  <text x="362" y="148" text-anchor="middle" class="s mu">tokenize + pre-process</text>
+
+  <rect x="210" y="174" width="290" height="84" rx="4" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="222" y="221" class="m b">DPAsyncMPClient</text>
+  <rect x="376" y="182" width="114" height="28" rx="4" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="433" y="201" text-anchor="middle" class="m">zmq ROUTER</text>
+  <rect x="376" y="220" width="114" height="28" rx="4" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="433" y="239" text-anchor="middle" class="m">zmq PULL</text>
+
+  <rect x="210" y="272" width="290" height="40" rx="4" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="362" y="297" text-anchor="middle" class="m b">OutputProcessor</text>
+
+  <!-- engine_core processes on node 0 -->
+  <g stroke="#64645d" stroke-width="1.4" fill="#efeee7">
+    <rect x="576" y="32" width="164" height="104" rx="6"/>
+    <rect x="576" y="152" width="164" height="104" rx="6"/>
+  </g>
+  <g stroke="#4f6f5c" stroke-width="1.4" fill="#d9e3d9">
+    <rect x="592" y="62" width="132" height="28" rx="4"/>
+    <rect x="592" y="182" width="132" height="28" rx="4"/>
+  </g>
+  <g stroke="#35548a" stroke-width="1.4" fill="#d9e1ee">
+    <rect x="592" y="100" width="132" height="28" rx="4"/>
+    <rect x="592" y="220" width="132" height="28" rx="4"/>
+  </g>
+  <text x="658" y="53" text-anchor="middle" class="m b">engine_core 0</text>
+  <text x="658" y="81" text-anchor="middle" class="m">zmq DEALER</text>
+  <text x="658" y="119" text-anchor="middle" class="m">zmq PUSH</text>
+  <text x="658" y="173" text-anchor="middle" class="m b">engine_core 1</text>
+  <text x="658" y="201" text-anchor="middle" class="m">zmq DEALER</text>
+  <text x="658" y="239" text-anchor="middle" class="m">zmq PUSH</text>
+  <text x="658" y="284" text-anchor="middle" class="s i mu">one engine_core</text>
+  <text x="658" y="302" text-anchor="middle" class="s i mu">process per DP rank</text>
+
+  <!-- node x -->
+  <rect x="566" y="358" width="184" height="272" rx="8" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="578" y="380" class="b mu">node x</text>
+  <g stroke="#64645d" stroke-width="1.4" fill="#efeee7">
+    <rect x="576" y="392" width="164" height="104" rx="6"/>
+    <rect x="576" y="512" width="164" height="104" rx="6"/>
+  </g>
+  <g stroke="#4f6f5c" stroke-width="1.4" fill="#d9e3d9">
+    <rect x="592" y="422" width="132" height="28" rx="4"/>
+    <rect x="592" y="542" width="132" height="28" rx="4"/>
+  </g>
+  <g stroke="#35548a" stroke-width="1.4" fill="#d9e1ee">
+    <rect x="592" y="460" width="132" height="28" rx="4"/>
+    <rect x="592" y="580" width="132" height="28" rx="4"/>
+  </g>
+  <text x="658" y="413" text-anchor="middle" class="m b">engine_core 2</text>
+  <text x="658" y="441" text-anchor="middle" class="m">zmq DEALER</text>
+  <text x="658" y="479" text-anchor="middle" class="m">zmq PUSH</text>
+  <text x="658" y="533" text-anchor="middle" class="m b">engine_core 3</text>
+  <text x="658" y="561" text-anchor="middle" class="m">zmq DEALER</text>
+  <text x="658" y="599" text-anchor="middle" class="m">zmq PUSH</text>
+
+  <!-- flow arrows inside the front end -->
+  <g stroke="#64645d" stroke-width="1.6" fill="none">
+    <line x1="64" y1="150" x2="113" y2="150" marker-end="url(#a-ink)"/>
+    <line x1="114" y1="236" x2="65" y2="236" marker-end="url(#a-ink)"/>
+    <line x1="186" y1="133" x2="209" y2="133" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="156" x2="300" y2="173" marker-end="url(#a-ink)"/>
+    <line x1="433" y1="248" x2="433" y2="271" marker-end="url(#a-ink)"/>
+    <line x1="210" y1="292" x2="187" y2="292" marker-end="url(#a-ink)"/>
+  </g>
+
+  <!-- outputs: each engine_core PUSH to the client PULL -->
+  <g stroke="#35548a" stroke-width="1.6" fill="none">
+    <path d="M592,114 L556,114 L556,234"/>
+    <path d="M592,594 L556,594 L556,234"/>
+    <path d="M592,474 L556,474"/>
+    <path d="M592,234 L491,234" marker-end="url(#a-bl)"/>
+  </g>
+
+  <!-- gaps where request lines cross output lines -->
+  <g stroke="#faf9f5" stroke-width="6" fill="none">
+    <line x1="540" y1="228" x2="540" y2="240"/>
+    <line x1="550" y1="196" x2="562" y2="196"/>
+    <line x1="550" y1="436" x2="562" y2="436"/>
+    <line x1="550" y1="556" x2="562" y2="556"/>
+  </g>
+
+  <!-- requests: client ROUTER to each engine_core DEALER, one way -->
+  <g stroke="#4f6f5c" stroke-width="1.6" fill="none">
+    <path d="M540,196 L540,76 L591,76" marker-end="url(#a-sg)"/>
+    <path d="M490,196 L591,196" marker-end="url(#a-sg)"/>
+    <path d="M540,196 L540,436 L591,436" marker-end="url(#a-sg)"/>
+    <path d="M540,196 L540,556 L591,556" marker-end="url(#a-sg)"/>
+  </g>
+
+  <!-- step badges -->
+  <g fill="#414b48">
+    <circle cx="78" cy="134" r="10"/>
+    <circle cx="228" cy="133" r="10"/>
+    <circle cx="540" cy="54" r="10"/>
+    <circle cx="228" cy="292" r="10"/>
+    <circle cx="78" cy="252" r="10"/>
+  </g>
+  <g text-anchor="middle" class="s b w">
+    <text x="78" y="139" class="s b w">1</text>
+    <text x="228" y="138" class="s b w">2</text>
+    <text x="540" y="59" class="s b w">3</text>
+    <text x="228" y="297" class="s b w">4</text>
+    <text x="78" y="257" class="s b w">5</text>
+  </g>
+
+  <!-- step key -->
+  <g>
+    <circle cx="28" cy="384" r="10" fill="#414b48"/>
+    <text x="28" y="389" text-anchor="middle" class="s b w">1</text>
+    <text x="48" y="389">User sends a request to the API server</text>
+    <circle cx="28" cy="414" r="10" fill="#414b48"/>
+    <text x="28" y="419" text-anchor="middle" class="s b w">2</text>
+    <text x="48" y="419"><tspan class="m">AsyncLLM</tspan> tokenizes and pre-processes it</text>
+    <circle cx="28" cy="444" r="10" fill="#414b48"/>
+    <text x="28" y="449" text-anchor="middle" class="s b w">3</text>
+    <text x="48" y="449"><tspan class="m">DPAsyncMPClient</tspan> sends it over zmq</text>
+    <text x="48" y="469" class="s mu">ROUTER to DEALER, to one engine_core on any node</text>
+    <circle cx="28" cy="494" r="10" fill="#414b48"/>
+    <text x="28" y="499" text-anchor="middle" class="s b w">4</text>
+    <text x="48" y="499"><tspan class="m">OutputProcessor</tspan> collects the results</text>
+    <text x="48" y="519" class="s mu">each engine_core sends them back, PUSH to PULL</text>
+    <circle cx="28" cy="544" r="10" fill="#414b48"/>
+    <text x="28" y="549" text-anchor="middle" class="s b w">5</text>
+    <text x="48" y="549">The response goes back to the user</text>
+  </g>
+
+  <!-- line legend -->
+  <line x1="20" y1="584" x2="55" y2="584" stroke="#4f6f5c" stroke-width="1.6" marker-end="url(#a-sg)"/>
+  <text x="66" y="589" class="s">requests: zmq ROUTER to DEALER (one way)</text>
+  <line x1="20" y1="608" x2="55" y2="608" stroke="#35548a" stroke-width="1.6" marker-end="url(#a-bl)"/>
+  <text x="66" y="613" class="s">outputs: zmq PUSH to PULL</text>
+</svg>

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 284" width="760" height="284" role="img" aria-label="One request timeline with the TTFT span marked from request arrival to the first token out, including queue wait">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; } .ms { font-size: 13px; } .xl { font-size: 17px; } .lg { font-size: 16px; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+  </defs>
+  <rect width="760" height="284" fill="#faf9f5"/>
+  <g stroke-width="1.4">
+    <rect x="112" y="14" width="14" height="14" rx="3" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="204" y="14" width="14" height="14" rx="3" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="420" y="14" width="14" height="14" rx="3" fill="#efeee7" stroke="#64645d"/>
+  </g>
+  <text x="132" y="26" class="s">prefill</text>
+  <text x="224" y="26" class="s">decode step (one token each)</text>
+  <text x="440" y="26" class="s">CPU work (detok = detokenize)</text>
+  <g stroke="#d8d7d0" stroke-width="1">
+    <line x1="20" y1="46" x2="740" y2="46"/>
+    <line x1="20" y1="98" x2="740" y2="98"/>
+    <line x1="20" y1="150" x2="740" y2="150"/>
+  </g>
+  <text x="24" y="77" class="b">GPU</text>
+  <text x="24" y="129" class="b">CPU</text>
+  <g stroke-width="1.4">
+    <rect x="112" y="106" width="84" height="36" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="196" y="54" width="76" height="36" rx="5" fill="#faf9f5" stroke="#d8d7d0"/>
+    <rect x="272" y="54" width="120" height="36" rx="5" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="392" y="54" width="56" height="36" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="452" y="54" width="56" height="36" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="512" y="54" width="56" height="36" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="572" y="54" width="56" height="36" rx="5" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="388" y="106" width="54" height="36" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="448" y="106" width="54" height="36" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="508" y="106" width="54" height="36" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="568" y="106" width="54" height="36" rx="5" fill="#efeee7" stroke="#64645d"/>
+    <rect x="628" y="106" width="54" height="36" rx="5" fill="#efeee7" stroke="#64645d"/>
+  </g>
+  <text x="154" y="129" text-anchor="middle">tokenize</text>
+  <text x="234" y="69" text-anchor="middle" class="s mu">queue</text>
+  <text x="234" y="84" text-anchor="middle" class="s mu">wait</text>
+  <text x="332" y="77" text-anchor="middle">prefill</text>
+  <text x="420" y="77" text-anchor="middle">d1</text>
+  <text x="480" y="77" text-anchor="middle">d2</text>
+  <text x="540" y="77" text-anchor="middle">d3</text>
+  <text x="600" y="77" text-anchor="middle">d4</text>
+  <text x="415" y="128" text-anchor="middle" class="s">detok</text>
+  <text x="475" y="128" text-anchor="middle" class="s">detok</text>
+  <text x="535" y="128" text-anchor="middle" class="s">detok</text>
+  <text x="595" y="128" text-anchor="middle" class="s">detok</text>
+  <text x="655" y="128" text-anchor="middle" class="s">detok</text>
+  <line x1="100" y1="176" x2="712" y2="176" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <text x="718" y="180" class="s mu">time</text>
+  <g stroke="#64645d" stroke-width="1.6">
+    <line x1="438" y1="142" x2="438" y2="171" marker-end="url(#a-ink)"/>
+    <line x1="498" y1="142" x2="498" y2="171" marker-end="url(#a-ink)"/>
+    <line x1="558" y1="142" x2="558" y2="171" marker-end="url(#a-ink)"/>
+    <line x1="618" y1="142" x2="618" y2="171" marker-end="url(#a-ink)"/>
+    <line x1="678" y1="142" x2="678" y2="171" marker-end="url(#a-ink)"/>
+  </g>
+  <circle cx="112" cy="176" r="4.5" fill="#a4502f"/>
+  <circle cx="438" cy="176" r="4.5" fill="#a4502f"/>
+  <circle cx="498" cy="176" r="4.5" fill="#141413"/>
+  <circle cx="558" cy="176" r="4.5" fill="#141413"/>
+  <circle cx="618" cy="176" r="4.5" fill="#141413"/>
+  <circle cx="678" cy="176" r="4.5" fill="#141413"/>
+  <text x="112" y="198" text-anchor="middle" class="s">request in</text>
+  <text x="438" y="198" text-anchor="middle" class="s">tok 1</text>
+  <text x="498" y="198" text-anchor="middle" class="s">tok 2</text>
+  <text x="558" y="198" text-anchor="middle" class="s">tok 3</text>
+  <text x="618" y="198" text-anchor="middle" class="s">tok 4</text>
+  <text x="678" y="198" text-anchor="middle" class="s">tok 5</text>
+  <path d="M112,208 Q112,216.0 120.0,216.0 L267.0,216.0 Q275.0,216.0 275.0,224 Q275.0,216.0 283.0,216.0 L430.0,216.0 Q438,216.0 438,208" fill="none" stroke="#a4502f" stroke-width="1.8"/>
+  <text x="275.0" y="246" text-anchor="middle" class="b lg tc">TTFT (includes queue wait)</text>
+  <text x="275.0" y="266" text-anchor="middle" class="s mu">request in to first token out</text>
+</svg>

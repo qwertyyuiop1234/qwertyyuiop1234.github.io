@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 464" width="760" height="464" role="img" aria-label="Copy-on-write: samples A1 and A2 share physical blocks 7 and 1 until A1 writes a different token, so block 1 is copied to block 3 for A1">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-tc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a4502f"/></marker>
+  </defs>
+  <rect width="760" height="464" fill="#faf9f5"/>
+  <text x="380" y="30" text-anchor="middle" class="s mu">A1 and A2 are two samples of the same prompt "Alice opened the old wooden door and"</text>
+  <text x="380" y="62" text-anchor="middle" class="b">Physical KV blocks in GPU memory</text>
+  <text x="212.0" y="90" text-anchor="middle" class="s mu">block</text>
+  <text x="536.0" y="90" text-anchor="middle" class="s mu">ref count</text>
+  <!-- memory rows -->
+  <rect x="192" y="100" width="376" height="30" fill="none" stroke="#d8d7d0" stroke-width="1.2"/>
+  <line x1="232" y1="100" x2="232" y2="130" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="504" y1="100" x2="504" y2="130" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="300" y1="100" x2="300" y2="130" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="368" y1="100" x2="368" y2="130" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="436" y1="100" x2="436" y2="130" stroke="#d8d7d0" stroke-width="1"/>
+  <text x="212.0" y="120.0" text-anchor="middle" class="mu">0</text>
+  <rect x="192" y="134" width="40" height="30" fill="#efeee7" stroke="#64645d" stroke-width="1"/>
+  <text x="212.0" y="154.0" text-anchor="middle" class="b">1</text>
+  <rect x="232" y="134" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="266.0" y="153.6" text-anchor="middle" class="s">wooden</text>
+  <rect x="300" y="134" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="334.0" y="153.6" text-anchor="middle" class="s">door</text>
+  <rect x="368" y="134" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="402.0" y="153.6" text-anchor="middle" class="s">and</text>
+  <rect x="436" y="134" width="68" height="30" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1"/><text x="470.0" y="153.6" text-anchor="middle" class="s">heard</text>
+  <rect x="504" y="134" width="64" height="30" fill="#faf9f5" stroke="#64645d" stroke-width="1"/>
+  <text x="536.0" y="154.0" text-anchor="middle" class="b tc">2 → 1</text>
+  <rect x="192" y="134" width="376" height="30" fill="none" stroke="#64645d" stroke-width="1.4"/>
+  <rect x="192" y="168" width="376" height="30" fill="none" stroke="#d8d7d0" stroke-width="1.2"/>
+  <line x1="232" y1="168" x2="232" y2="198" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="504" y1="168" x2="504" y2="198" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="300" y1="168" x2="300" y2="198" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="368" y1="168" x2="368" y2="198" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="436" y1="168" x2="436" y2="198" stroke="#d8d7d0" stroke-width="1"/>
+  <text x="212.0" y="188.0" text-anchor="middle" class="mu">2</text>
+  <rect x="192" y="202" width="40" height="30" fill="#efeee7" stroke="#64645d" stroke-width="1"/>
+  <text x="212.0" y="222.0" text-anchor="middle" class="b">3</text>
+  <rect x="232" y="202" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="266.0" y="221.6" text-anchor="middle" class="s">wooden</text>
+  <rect x="300" y="202" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="334.0" y="221.6" text-anchor="middle" class="s">door</text>
+  <rect x="368" y="202" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="402.0" y="221.6" text-anchor="middle" class="s">and</text>
+  <rect x="436" y="202" width="68" height="30" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1"/><text x="470.0" y="221.6" text-anchor="middle" class="s">saw</text>
+  <rect x="504" y="202" width="64" height="30" fill="#faf9f5" stroke="#64645d" stroke-width="1"/>
+  <text x="536.0" y="222.0" text-anchor="middle" class="b">1</text>
+  <rect x="192" y="202" width="376" height="30" fill="none" stroke="#64645d" stroke-width="1.4"/>
+  <rect x="192" y="236" width="376" height="30" fill="none" stroke="#d8d7d0" stroke-width="1.2"/>
+  <line x1="232" y1="236" x2="232" y2="266" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="504" y1="236" x2="504" y2="266" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="300" y1="236" x2="300" y2="266" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="368" y1="236" x2="368" y2="266" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="436" y1="236" x2="436" y2="266" stroke="#d8d7d0" stroke-width="1"/>
+  <text x="212.0" y="256.0" text-anchor="middle" class="mu">4</text>
+  <rect x="192" y="270" width="376" height="30" fill="none" stroke="#d8d7d0" stroke-width="1.2"/>
+  <line x1="232" y1="270" x2="232" y2="300" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="504" y1="270" x2="504" y2="300" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="300" y1="270" x2="300" y2="300" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="368" y1="270" x2="368" y2="300" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="436" y1="270" x2="436" y2="300" stroke="#d8d7d0" stroke-width="1"/>
+  <text x="212.0" y="290.0" text-anchor="middle" class="mu">5</text>
+  <rect x="192" y="304" width="376" height="30" fill="none" stroke="#d8d7d0" stroke-width="1.2"/>
+  <line x1="232" y1="304" x2="232" y2="334" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="504" y1="304" x2="504" y2="334" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="300" y1="304" x2="300" y2="334" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="368" y1="304" x2="368" y2="334" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="436" y1="304" x2="436" y2="334" stroke="#d8d7d0" stroke-width="1"/>
+  <text x="212.0" y="324.0" text-anchor="middle" class="mu">6</text>
+  <rect x="192" y="338" width="40" height="30" fill="#efeee7" stroke="#64645d" stroke-width="1"/>
+  <text x="212.0" y="358.0" text-anchor="middle" class="b">7</text>
+  <rect x="232" y="338" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="266.0" y="357.6" text-anchor="middle" class="s">Alice</text>
+  <rect x="300" y="338" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="334.0" y="357.6" text-anchor="middle" class="s">opened</text>
+  <rect x="368" y="338" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="402.0" y="357.6" text-anchor="middle" class="s">the</text>
+  <rect x="436" y="338" width="68" height="30" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/><text x="470.0" y="357.6" text-anchor="middle" class="s">old</text>
+  <rect x="504" y="338" width="64" height="30" fill="#faf9f5" stroke="#64645d" stroke-width="1"/>
+  <text x="536.0" y="358.0" text-anchor="middle" class="b">2</text>
+  <rect x="192" y="338" width="376" height="30" fill="none" stroke="#64645d" stroke-width="1.4"/>
+  <rect x="192" y="372" width="376" height="30" fill="none" stroke="#d8d7d0" stroke-width="1.2"/>
+  <line x1="232" y1="372" x2="232" y2="402" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="504" y1="372" x2="504" y2="402" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="300" y1="372" x2="300" y2="402" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="368" y1="372" x2="368" y2="402" stroke="#d8d7d0" stroke-width="1"/>
+  <line x1="436" y1="372" x2="436" y2="402" stroke="#d8d7d0" stroke-width="1"/>
+  <text x="212.0" y="392.0" text-anchor="middle" class="mu">8</text>
+  <!-- copy-on-write -->
+  <path d="M192,149.0 C146,149.0 146,211 191,211" fill="none" stroke="#a4502f" stroke-width="1.8" marker-end="url(#a-tc)"/>
+  <text x="148" y="178.0" text-anchor="end" class="b tc">copy-on-write</text>
+  <text x="148" y="196.0" text-anchor="end" class="s tc">into new block 3</text>
+  <!-- sample A1 block table -->
+  <text x="20" y="250" class="b">Sample A1</text>
+  <rect x="20" y="262" width="72" height="60" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <rect x="92" y="262" width="80" height="60" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <line x1="20" y1="292" x2="172" y2="292" stroke="#64645d" stroke-width="1"/>
+  <line x1="132" y1="262" x2="132" y2="322" stroke="#64645d" stroke-width="1"/>
+  <text x="29" y="282" class="s b">logical</text>
+  <text x="29" y="312" class="s b">physical</text>
+  <text x="112" y="282" text-anchor="middle">0</text>
+  <text x="152" y="282" text-anchor="middle">1</text>
+  <text x="112" y="312" text-anchor="middle" class="b">7</text>
+  <text x="152" y="312" text-anchor="middle" class="b">3</text>
+  <g fill="none" stroke="#64645d" stroke-width="1.6">
+    <path d="M152,262 V224 H191" marker-end="url(#a-ink)"/>
+    <path d="M112,322 V353.0 H191" marker-end="url(#a-ink)"/>
+  </g>
+  <text x="20" y="386">A1 writes "saw"</text>
+  <text x="20" y="405" class="s mu">in its own copy, block 3</text>
+  <!-- sample A2 block table -->
+  <text x="588" y="250" class="b">Sample A2</text>
+  <rect x="588" y="262" width="72" height="60" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <rect x="660" y="262" width="80" height="60" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <line x1="588" y1="292" x2="740" y2="292" stroke="#64645d" stroke-width="1"/>
+  <line x1="700" y1="262" x2="700" y2="322" stroke="#64645d" stroke-width="1"/>
+  <text x="597" y="282" class="s b">logical</text>
+  <text x="597" y="312" class="s b">physical</text>
+  <text x="680" y="282" text-anchor="middle">0</text>
+  <text x="720" y="282" text-anchor="middle">1</text>
+  <text x="680" y="312" text-anchor="middle" class="b">7</text>
+  <text x="720" y="312" text-anchor="middle" class="b">1</text>
+  <g fill="none" stroke="#64645d" stroke-width="1.6">
+    <path d="M720,262 V149.0 H569" marker-end="url(#a-ink)"/>
+    <path d="M680,322 V353.0 H569" marker-end="url(#a-ink)"/>
+  </g>
+  <text x="588" y="386">A2 writes "heard"</text>
+  <text x="588" y="405" class="s mu">in place, block 1</text>
+  <!-- legend -->
+  <rect x="196" y="430" width="22" height="16" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1"/>
+  <text x="226" y="443" class="s">prompt token</text>
+  <rect x="326" y="430" width="22" height="16" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1"/>
+  <text x="356" y="443" class="s">token written now</text>
+  <rect x="488" y="430" width="22" height="16" fill="none" stroke="#d8d7d0" stroke-width="1.2"/>
+  <text x="518" y="443" class="s">free block</text>
+</svg>

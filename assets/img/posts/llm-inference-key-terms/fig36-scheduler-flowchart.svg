@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 1160" width="760" height="1160" role="img" aria-label="Flowchart of one vLLM scheduling step: running queue first, then waiting queue, then the scheduler output">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-tc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a4502f"/></marker>
+  </defs>
+  <rect width="760" height="1160" fill="#faf9f5"/>
+
+  <!-- legend -->
+  <rect x="480" y="20" width="14" height="14" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="502" y="32" class="s">running queue part</text>
+  <rect x="480" y="42" width="14" height="14" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="502" y="54" class="s">waiting queue part</text>
+  <rect x="480" y="64" width="14" height="14" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="502" y="76" class="s">finish</text>
+
+  <!-- ===== running queue part (blue) ===== -->
+  <g fill="#d9e1ee" stroke="#35548a" stroke-width="1.4">
+    <rect x="210" y="16" width="180" height="36" rx="18"/>
+    <polygon points="194,78 406,78 420,108 406,138 194,138 180,108"/>
+    <rect x="180" y="164" width="240" height="44" rx="5"/>
+    <polygon points="194,234 406,234 420,259 406,284 194,284 180,259"/>
+    <rect x="180" y="310" width="240" height="44" rx="5"/>
+    <polygon points="194,380 406,380 420,405 406,430 194,430 180,405"/>
+    <rect x="180" y="456" width="240" height="56" rx="5"/>
+  </g>
+  <rect x="470" y="368" width="246" height="74" rx="5" fill="#ecd5c8" stroke="#a4502f" stroke-width="1.4"/>
+  <g text-anchor="middle">
+    <text x="300" y="39" class="b">Running queue</text>
+    <text x="300" y="103">next running request</text>
+    <text x="300" y="122">and budget &gt; 0?</text>
+    <text x="300" y="191">count its new tokens</text>
+    <text x="300" y="264">new tokens = 0?</text>
+    <text x="300" y="337">allocate KV blocks for it</text>
+    <text x="300" y="410">blocks allocated?</text>
+    <text x="300" y="479">add it to this step,</text>
+    <text x="300" y="498">subtract from the budget</text>
+    <text x="593" y="390" class="b">preempt the LAST</text>
+    <text x="593" y="408" class="b">running request (FCFS)</text>
+    <text x="593" y="430" class="s">move it to waiting, free its blocks</text>
+  </g>
+
+  <!-- preemption inset -->
+  <rect x="470" y="150" width="246" height="168" rx="6" fill="none" stroke="#64645d" stroke-width="1.4"/>
+  <text x="484" y="172" class="b">Preemption</text>
+  <text x="484" y="213" class="s">running</text>
+  <text x="484" y="279" class="s">waiting</text>
+  <g stroke-width="1.4">
+    <rect x="548" y="196" width="28" height="24" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="576" y="196" width="28" height="24" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="604" y="196" width="28" height="24" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="632" y="196" width="28" height="24" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="660" y="196" width="28" height="24" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="548" y="262" width="28" height="24" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="576" y="262" width="28" height="24" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="604" y="262" width="28" height="24" fill="#f0e3bf" stroke="#8a6a1f"/>
+    <rect x="632" y="262" width="28" height="24" fill="#f0e3bf" stroke="#8a6a1f"/>
+  </g>
+  <path d="M674,220 C674,250 562,234 562,260" fill="none" stroke="#a4502f" stroke-width="1.6" marker-end="url(#a-tc)"/>
+  <text x="593" y="306" text-anchor="middle" class="s mu">last running → front of waiting</text>
+
+  <!-- running part arrows -->
+  <g stroke="#64645d" stroke-width="1.6" fill="none">
+    <line x1="300" y1="52" x2="300" y2="77" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="138" x2="300" y2="163" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="208" x2="300" y2="233" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="284" x2="300" y2="309" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="354" x2="300" y2="379" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="430" x2="300" y2="455" marker-end="url(#a-ink)"/>
+    <!-- D1 no: go to waiting queue -->
+    <path d="M420,108 L740,108 L740,566 L391,566" marker-end="url(#a-ink)"/>
+    <!-- D2 yes: skip -->
+    <path d="M180,259 L120,259 L120,108 L179,108" marker-end="url(#a-ink)"/>
+    <!-- P4: next request -->
+    <path d="M180,484 L70,484 L70,108 L179,108" marker-end="url(#a-ink)"/>
+    <!-- D3 no: preempt -->
+    <line x1="420" y1="405" x2="469" y2="405" marker-end="url(#a-ink)"/>
+    <!-- retry -->
+    <path d="M593,368 L593,332 L421,332" marker-end="url(#a-ink)"/>
+  </g>
+  <g class="s">
+    <text x="308" y="156" class="s">yes</text>
+    <text x="428" y="100" class="s">no</text>
+    <text x="132" y="251" class="s">yes</text>
+    <text x="95" y="190" text-anchor="middle" class="s">skip</text>
+    <text x="308" y="302" class="s">no</text>
+    <text x="434" y="397" class="s">no</text>
+    <text x="308" y="448" class="s">yes</text>
+    <text x="601" y="356" class="s">retry</text>
+    <text x="125" y="476" text-anchor="middle" class="s">next request</text>
+  </g>
+
+  <!-- ===== waiting queue part (ochre) ===== -->
+  <g fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4">
+    <rect x="210" y="548" width="180" height="36" rx="18"/>
+    <polygon points="194,610 406,610 420,635 406,660 194,660 180,635"/>
+    <polygon points="194,686 406,686 420,716 406,746 194,746 180,716"/>
+    <rect x="180" y="772" width="240" height="44" rx="5"/>
+    <polygon points="194,842 406,842 420,867 406,892 194,892 180,867"/>
+    <rect x="34" y="842" width="112" height="50" rx="5"/>
+    <rect x="180" y="918" width="240" height="56" rx="5"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="300" y="571" class="b">Waiting queue</text>
+    <text x="300" y="640">preemption happened?</text>
+    <text x="300" y="711">waiting queue not empty</text>
+    <text x="300" y="730">and budget &gt; 0?</text>
+    <text x="300" y="799">pop the front request</text>
+    <text x="300" y="872">skip this request?</text>
+    <text x="90" y="863">put it in</text>
+    <text x="90" y="881">skipped list</text>
+    <text x="300" y="941">allocate tokens and blocks,</text>
+    <text x="300" y="960">move it to running</text>
+  </g>
+  <!-- notes -->
+  <text x="434" y="852" class="s b mu">skip if</text>
+  <text x="434" y="869" class="s mu">FSM compile is pending</text>
+  <text x="434" y="886" class="s mu">(structured output), or</text>
+  <text x="434" y="903" class="s mu">too many LoRAs in the batch</text>
+  <text x="434" y="942" class="s"><tspan class="m">WAITING</tspan> → new request</text>
+  <text x="434" y="962" class="s"><tspan class="m">PREEMPTED</tspan> → resumed request</text>
+
+  <g stroke="#64645d" stroke-width="1.6" fill="none">
+    <line x1="300" y1="584" x2="300" y2="609" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="660" x2="300" y2="685" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="746" x2="300" y2="771" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="816" x2="300" y2="841" marker-end="url(#a-ink)"/>
+    <line x1="300" y1="892" x2="300" y2="917" marker-end="url(#a-ink)"/>
+    <!-- D4 yes: skip waiting queue, go to finish -->
+    <path d="M420,635 L712,635 L712,1038 L421,1038" marker-end="url(#a-ink)"/>
+    <!-- D5 no: join the rail -->
+    <line x1="420" y1="716" x2="712" y2="716"/>
+    <!-- D6 yes: skipped list -->
+    <line x1="180" y1="867" x2="147" y2="867" marker-end="url(#a-ink)"/>
+    <!-- skipped: next request -->
+    <path d="M90,842 L90,716 L179,716" marker-end="url(#a-ink)"/>
+    <!-- moved to running: next request -->
+    <path d="M180,946 L20,946 L20,716 L179,716" marker-end="url(#a-ink)"/>
+  </g>
+  <circle cx="712" cy="716" r="3.5" fill="#64645d"/>
+  <g class="s">
+    <text x="430" y="627" class="s">yes: skip the waiting queue</text>
+    <text x="308" y="678" class="s">no</text>
+    <text x="430" y="708" class="s">no</text>
+    <text x="308" y="764" class="s">yes</text>
+    <text x="163" y="859" text-anchor="middle" class="s">yes</text>
+    <text x="308" y="910" class="s">no</text>
+    <text x="103" y="938" text-anchor="middle" class="s">next request</text>
+  </g>
+
+  <!-- ===== finish part (sage) ===== -->
+  <g fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4">
+    <rect x="180" y="1010" width="240" height="56" rx="5"/>
+    <rect x="180" y="1092" width="240" height="52" rx="26"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="300" y="1033">put skipped requests</text>
+    <text x="300" y="1052">back into waiting</text>
+    <text x="300" y="1114" class="b">scheduler output</text>
+    <text x="300" y="1133" class="s">new + resumed + running</text>
+  </g>
+  <line x1="300" y1="1066" x2="300" y2="1091" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+</svg>

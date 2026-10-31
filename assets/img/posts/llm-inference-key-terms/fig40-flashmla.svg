@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="760" height="360" role="img" aria-label="Schematic of the first FlashMLA decode kernel where two warp groups split one K/V block step and meet at sync points">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .dk { fill: #414b48; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+  </defs>
+  <rect width="760" height="360" fill="#faf9f5"/>
+
+  <text x="16" y="28" class="b">First FlashMLA decode kernel (Feb 2025): two warp groups of 128 threads</text>
+
+  <!-- time axis -->
+  <line x1="158" y1="58" x2="744" y2="58" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <text x="150" y="63" text-anchor="end" class="s mu">time</text>
+  <text x="693" y="86" text-anchor="middle" class="s mu">next iteration</text>
+
+  <!-- lane labels -->
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="16" y="96" width="130" height="48" rx="6"/>
+    <rect x="16" y="172" width="130" height="48" rx="6"/>
+  </g>
+  <text x="81" y="116" text-anchor="middle" class="b">warp group 0</text>
+  <text x="81" y="134" text-anchor="middle" class="s mu">threads 0-127</text>
+  <text x="81" y="192" text-anchor="middle" class="b">warp group 1</text>
+  <text x="81" y="210" text-anchor="middle" class="s mu">threads 128-255</text>
+
+  <!-- tensor-core GEMM (grey) -->
+  <g fill="#d8d7d0" stroke="#64645d" stroke-width="1.4">
+    <rect x="158" y="96" width="90" height="48" rx="5"/>
+    <rect x="532" y="96" width="90" height="48" rx="5"/>
+    <rect x="642" y="96" width="102" height="48" rx="5"/>
+    <rect x="532" y="172" width="90" height="48" rx="5"/>
+  </g>
+  <!-- other math (plain) -->
+  <g fill="#faf9f5" stroke="#64645d" stroke-width="1.4">
+    <rect x="256" y="96" width="60" height="48" rx="5"/>
+    <rect x="324" y="96" width="84" height="48" rx="5"/>
+  </g>
+  <!-- shared-memory traffic (sage) -->
+  <g fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4">
+    <rect x="416" y="96" width="96" height="48" rx="5"/>
+    <rect x="158" y="172" width="158" height="48" rx="5"/>
+    <rect x="642" y="172" width="102" height="48" rx="5"/>
+  </g>
+  <!-- waiting -->
+  <rect x="324" y="172" width="188" height="48" rx="5" fill="#efeee7" stroke="#d8d7d0" stroke-width="1.4"/>
+
+  <!-- lane 0 text -->
+  <g text-anchor="middle">
+    <text x="203" y="116" class="m">gemm_qk</text>
+    <text x="203" y="135" class="s">QKᵀ</text>
+    <text x="286" y="125">mask</text>
+    <text x="366" y="125">softmax</text>
+    <text x="464" y="116">store p</text>
+    <text x="464" y="135" class="s">to SMEM</text>
+    <text x="577" y="116" class="m">gemm_pv</text>
+    <text x="577" y="135" class="s">part 1</text>
+    <text x="693" y="116" class="m">gemm_qk</text>
+    <text x="693" y="135" class="s">QKᵀ</text>
+  </g>
+  <!-- lane 1 text -->
+  <g text-anchor="middle">
+    <text x="237" y="201">load next K block</text>
+    <text x="418" y="201" class="i mu">wait for p</text>
+    <text x="577" y="192" class="m">gemm_pv</text>
+    <text x="577" y="211" class="s">part 2</text>
+    <text x="693" y="192">load next</text>
+    <text x="693" y="211" class="s">K block</text>
+  </g>
+
+  <!-- sync lines -->
+  <g stroke="#414b48" stroke-width="1.6" stroke-dasharray="5 4">
+    <line x1="522" y1="90" x2="522" y2="230"/>
+    <line x1="632" y1="90" x2="632" y2="230"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="522" y="250" class="s b dk">sync</text>
+    <text x="522" y="266" class="s dk">p is ready</text>
+    <text x="632" y="250" class="s b dk">sync</text>
+    <text x="632" y="266" class="s dk">block done</text>
+  </g>
+
+  <!-- legend -->
+  <rect x="16" y="290" width="28" height="18" rx="3" fill="#d8d7d0" stroke="#64645d" stroke-width="1.4"/>
+  <text x="52" y="304" class="s">tensor-core GEMM</text>
+  <rect x="190" y="290" width="28" height="18" rx="3" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="226" y="304" class="s">shared-memory traffic</text>
+  <rect x="390" y="290" width="28" height="18" rx="3" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="426" y="304" class="s">other math</text>
+  <rect x="530" y="290" width="28" height="18" rx="3" fill="#efeee7" stroke="#d8d7d0" stroke-width="1.4"/>
+  <text x="566" y="304" class="s">waiting</text>
+
+  <text x="16" y="340" class="i sg">Memory loads and math overlap between the two groups.</text>
+</svg>

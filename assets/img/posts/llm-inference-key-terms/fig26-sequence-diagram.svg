@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" width="760" height="470" role="img" aria-label="Sequence diagram between user and server showing TTFT, ITL_0, ITL_1 and end-to-end latency">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; } .ms { font-size: 13px; } .xl { font-size: 17px; } .lg { font-size: 16px; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+  </defs>
+  <rect width="760" height="470" fill="#faf9f5"/>
+  <g stroke-width="1.4">
+    <rect x="270" y="16" width="120" height="36" rx="6" fill="#efeee7" stroke="#64645d"/>
+    <rect x="580" y="16" width="120" height="36" rx="6" fill="#efeee7" stroke="#64645d"/>
+  </g>
+  <text x="330" y="39" text-anchor="middle" class="b">User</text>
+  <text x="640" y="39" text-anchor="middle" class="b">Server</text>
+  <g stroke="#64645d" stroke-width="1.4" stroke-dasharray="5 4">
+    <line x1="330" y1="52" x2="330" y2="452"/>
+    <line x1="640" y1="52" x2="640" y2="452"/>
+  </g>
+  <g stroke-width="1.4">
+    <rect x="632" y="96" width="16" height="100" fill="#ecd5c8" stroke="#a4502f"/>
+    <rect x="632" y="200" width="16" height="50" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="632" y="254" width="16" height="50" fill="#d9e1ee" stroke="#35548a"/>
+    <rect x="632" y="372" width="16" height="50" fill="#d9e1ee" stroke="#35548a"/>
+  </g>
+  <text x="658" y="151.0" class="s i tc">prefill</text>
+  <text x="658" y="230.0" class="s i bl">decode</text>
+  <text x="658" y="284.0" class="s i bl">decode</text>
+  <text x="658" y="402.0" class="s i bl">decode</text>
+  <g stroke="#64645d" stroke-width="1.6">
+    <line x1="330" y1="96" x2="632" y2="96" marker-end="url(#a-ink)"/>
+    <line x1="632" y1="196" x2="330" y2="196" marker-end="url(#a-ink)"/>
+    <line x1="632" y1="250" x2="330" y2="250" marker-end="url(#a-ink)"/>
+    <line x1="632" y1="304" x2="330" y2="304" marker-end="url(#a-ink)"/>
+    <line x1="632" y1="422" x2="330" y2="422" marker-end="url(#a-ink)"/>
+  </g>
+  <text x="481.0" y="87" text-anchor="middle">query (prompt)</text>
+  <text x="481.0" y="187" text-anchor="middle">token 0</text>
+  <text x="481.0" y="241" text-anchor="middle">token 1</text>
+  <text x="481.0" y="295" text-anchor="middle">token 2</text>
+  <text x="481.0" y="413" text-anchor="middle">token n-1</text>
+  <circle cx="481.0" cy="330" r="2.2" fill="#64645d"/>
+  <circle cx="481.0" cy="343" r="2.2" fill="#64645d"/>
+  <circle cx="481.0" cy="356" r="2.2" fill="#64645d"/>
+  <path d="M308,98 L300,98 L300,194 L308,194" fill="none" stroke="#a4502f" stroke-width="1.8"/>
+  <text x="290" y="150" text-anchor="end" class="b tc">TTFT</text>
+  <path d="M308,199 L300,199 L300,247 L308,247" fill="none" stroke="#4f6f5c" stroke-width="1.8"/>
+  <text x="290" y="228" text-anchor="end" class="b sg">ITL_0</text>
+  <path d="M308,253 L300,253 L300,301 L308,301" fill="none" stroke="#4f6f5c" stroke-width="1.8"/>
+  <text x="290" y="282" text-anchor="end" class="b sg">ITL_1</text>
+  <path d="M178,98 L170,98 L170,420 L178,420" fill="none" stroke="#35548a" stroke-width="1.8"/>
+  <text x="160" y="264" text-anchor="end" class="b bl">e2e latency</text>
+</svg>

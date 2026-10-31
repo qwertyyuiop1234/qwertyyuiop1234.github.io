@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-llm-from-scratch-1-3-multi-head-self-attention",
+        },{id: "post-llm-inference-core-concepts-and-terms",
+        
+          title: "LLM inference: core concepts and terms",
+        
+        description: "A map of the terms in LLM serving: prefill and decode, batching, KV cache, metrics, sampling, engines and libraries.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/llm-inference-key-terms/";
+          
+        },
+      },{id: "post-llm-from-scratch-1-3-multi-head-self-attention",
         
           title: "LLM from scratch - 1.3 Multi Head Self Attention",
         

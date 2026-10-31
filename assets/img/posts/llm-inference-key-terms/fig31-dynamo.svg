@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 316" width="760" height="316" role="img" aria-label="NVIDIA Dynamo components: API server, Smart Router, disaggregated prefill and decode workers, NIXL, KV Cache Manager and Planner">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-oc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a1f"/></marker>
+  </defs>
+  <rect width="760" height="316" fill="#faf9f5"/>
+
+  <!-- left column: entry path -->
+  <text x="96" y="24" text-anchor="middle" class="s mu">user requests</text>
+  <rect x="16" y="50" width="160" height="46" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="96" y="78" text-anchor="middle" class="b">API server</text>
+  <rect x="16" y="124" width="160" height="80" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="96" y="150" text-anchor="middle" class="b">Smart Router</text>
+  <text x="96" y="172" text-anchor="middle" class="s">KV-cache-aware</text>
+  <text x="96" y="190" text-anchor="middle" class="s">routing</text>
+  <g stroke="#64645d" stroke-width="1.6" fill="none">
+    <line x1="96" y1="31" x2="96" y2="49" marker-end="url(#a-ink)"/>
+    <line x1="96" y1="96" x2="96" y2="123" marker-end="url(#a-ink)"/>
+    <line x1="176" y1="164" x2="203" y2="164" marker-end="url(#a-ink)"/>
+  </g>
+
+  <!-- disaggregated serving -->
+  <rect x="204" y="16" width="348" height="196" rx="8" fill="none" stroke="#64645d" stroke-width="1.4"/>
+  <text x="378" y="40" text-anchor="middle" class="b">Disaggregated serving</text>
+
+  <g fill="#ecd5c8" stroke="#a4502f" stroke-width="1.4">
+    <rect x="236" y="54" width="136" height="96" rx="6"/>
+    <rect x="228" y="62" width="136" height="96" rx="6"/>
+    <rect x="220" y="70" width="136" height="96" rx="6"/>
+  </g>
+  <text x="288" y="104" text-anchor="middle" class="b">Prefill</text>
+  <text x="288" y="122" text-anchor="middle" class="b">workers</text>
+  <text x="288" y="146" text-anchor="middle" class="s">build KV cache</text>
+
+  <g fill="#d9e1ee" stroke="#35548a" stroke-width="1.4">
+    <rect x="404" y="54" width="136" height="96" rx="6"/>
+    <rect x="396" y="62" width="136" height="96" rx="6"/>
+    <rect x="388" y="70" width="136" height="96" rx="6"/>
+  </g>
+  <text x="456" y="104" text-anchor="middle" class="b">Decode</text>
+  <text x="456" y="122" text-anchor="middle" class="b">workers</text>
+  <text x="456" y="146" text-anchor="middle" class="s">one token per step</text>
+
+  <!-- NIXL -->
+  <rect x="204" y="248" width="348" height="52" rx="6" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="378" y="270" text-anchor="middle" class="b">NIXL</text>
+  <text x="378" y="290" text-anchor="middle" class="s">KV transfer between workers</text>
+
+  <g stroke="#8a6a1f" stroke-width="1.6" fill="none">
+    <line x1="288" y1="166" x2="288" y2="247" marker-end="url(#a-oc)"/>
+    <line x1="456" y1="248" x2="456" y2="167" marker-end="url(#a-oc)"/>
+  </g>
+  <text x="298" y="194" class="s i oc">KV out</text>
+  <text x="466" y="194" class="s i oc">KV in</text>
+
+  <!-- planner -->
+  <rect x="584" y="16" width="160" height="92" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="664" y="42" text-anchor="middle" class="b">Planner</text>
+  <text x="664" y="66" text-anchor="middle" class="s">adjusts resources</text>
+  <text x="664" y="84" text-anchor="middle" class="s">in real time</text>
+  <line x1="584" y1="62" x2="553" y2="62" stroke="#64645d" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a-ink)"/>
+
+  <!-- KV cache manager -->
+  <rect x="584" y="130" width="160" height="170" rx="6" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="664" y="156" text-anchor="middle" class="b">KV Cache</text>
+  <text x="664" y="174" text-anchor="middle" class="b">Manager</text>
+  <text x="664" y="198" text-anchor="middle" class="s">offload KV to</text>
+  <rect x="600" y="210" width="128" height="32" rx="4" fill="#faf9f5" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="664" y="231" text-anchor="middle" class="s">host memory</text>
+  <rect x="600" y="252" width="128" height="32" rx="4" fill="#faf9f5" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="664" y="273" text-anchor="middle" class="s">object storage</text>
+  <line x1="554" y1="274" x2="583" y2="274" stroke="#8a6a1f" stroke-width="1.6" marker-start="url(#a-oc)" marker-end="url(#a-oc)"/>
+</svg>

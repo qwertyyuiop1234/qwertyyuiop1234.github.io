@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="How gpu-memory-utilization 0.9 splits an 80 GB GPU: the 72 GB budget holds 14 GB of weights, 4 GB of peak activations, 2 GB for CUDA graphs and other non-torch memory, and a 52 GB KV cache block pool, while 8 GB stays outside the budget">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; }
+  </style>
+  <rect width="760" height="300" fill="#faf9f5"/>
+
+  <text x="40" y="30" class="b">GPU memory: 80 GB (example)</text>
+
+  <!-- callouts for the two thin segments -->
+  <g stroke="#64645d" stroke-width="1.2" fill="none">
+    <path d="M176,120 L176,57 L222,57"/>
+    <path d="M201.5,120 L201.5,85 L222,85"/>
+  </g>
+  <text x="228" y="62">peak activations 4 GB</text>
+  <text x="228" y="90">CUDA graphs + other 2 GB</text>
+  <text x="228" y="107" class="s mu">other = non-torch memory (CUDA context, NCCL)</text>
+  <text x="686" y="110" text-anchor="middle" class="i mu">other processes</text>
+
+  <!-- scale: 8.5 px per GB, bar starts at x=40 -->
+  <!-- weights 14 GB = 119 px -->
+  <rect x="40" y="120" width="119" height="64" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="99.5" y="148" text-anchor="middle">weights</text>
+  <text x="99.5" y="167" text-anchor="middle">14 GB</text>
+
+  <!-- peak activations 4 GB = 34 px -->
+  <rect x="159" y="120" width="34" height="64" fill="#ecd5c8" stroke="#a4502f" stroke-width="1.4"/>
+
+  <!-- CUDA graphs + other 2 GB = 17 px -->
+  <rect x="193" y="120" width="17" height="64" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+
+  <!-- KV cache block pool 52 GB = 442 px = 13 blocks of 34 px -->
+  <g fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4">
+    <rect x="210" y="120" width="34" height="64"/><rect x="244" y="120" width="34" height="64"/>
+    <rect x="278" y="120" width="34" height="64"/><rect x="312" y="120" width="34" height="64"/>
+    <rect x="346" y="120" width="34" height="64"/><rect x="380" y="120" width="34" height="64"/>
+    <rect x="414" y="120" width="34" height="64"/><rect x="448" y="120" width="34" height="64"/>
+    <rect x="482" y="120" width="34" height="64"/><rect x="516" y="120" width="34" height="64"/>
+    <rect x="550" y="120" width="34" height="64"/><rect x="584" y="120" width="34" height="64"/>
+    <rect x="618" y="120" width="34" height="64"/>
+  </g>
+
+  <!-- remainder 8 GB = 68 px, outside the budget -->
+  <rect x="652" y="120" width="68" height="64" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="686" y="157" text-anchor="middle" class="s mu">8 GB</text>
+
+  <text x="431" y="208" text-anchor="middle">KV cache block pool 52 GB <tspan class="s mu">(one block = block-size tokens)</tspan></text>
+
+  <!-- bracket under weights .. KV pool -->
+  <path d="M40,222 L40,234 L652,234 L652,222" fill="none" stroke="#414b48" stroke-width="1.6"/>
+  <text x="346" y="258" text-anchor="middle" class="m b">gpu-memory-utilization = 0.9 → 0.9 × 80 GB = 72 GB</text>
+  <text x="346" y="284" text-anchor="middle" class="m">KV cache = 72 − <tspan class="bl">14</tspan> − <tspan class="tc">4</tspan> − <tspan class="mu">2</tspan> = <tspan class="oc b">52 GB</tspan></text>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 412" width="760" height="412" role="img" aria-label="Standard prompting answers 21 (wrong); chain-of-thought prompting writes the steps and answers 13 (right)">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; } .ms { font-size: 13px; } .xl { font-size: 17px; } .lg { font-size: 16px; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+  </defs>
+  <rect width="760" height="412" fill="#faf9f5"/>
+  <text x="194.0" y="30" text-anchor="middle" class="b xl">Standard prompting</text>
+  <text x="18" y="60" class="s b mu">MODEL INPUT</text>
+  <rect x="16" y="68" width="356" height="214" rx="8" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="32" y="96">Q: Tom has 3 boxes with 4 pens each.</text>
+  <text x="32" y="118">He gives away 5 pens. How many pens</text>
+  <text x="32" y="140">does he have?</text>
+  <text x="32" y="166">A: The answer is 7.</text>
+  <line x1="32" y1="196" x2="356" y2="196" stroke="#d8d7d0" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="32" y="220">Q: A shop has 15 apples. It sells 8</text>
+  <text x="32" y="242">and gets 6 more. How many apples</text>
+  <text x="32" y="264">does it have?</text>
+  <line x1="194.0" y1="282" x2="194.0" y2="322" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <text x="18" y="314" class="s b mu">MODEL OUTPUT</text>
+  <rect x="16" y="322" width="356" height="72" rx="8" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="32" y="350">A: The answer is 21.</text>
+  <g stroke="#a4502f" stroke-width="3" stroke-linecap="round">
+    <line x1="330" y1="337" x2="346" y2="353"/><line x1="346" y1="337" x2="330" y2="353"/>
+  </g>
+  <text x="566.0" y="30" text-anchor="middle" class="b xl">Chain-of-thought prompting</text>
+  <text x="390" y="60" class="s b mu">MODEL INPUT</text>
+  <rect x="388" y="68" width="356" height="214" rx="8" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="404" y="96">Q: Tom has 3 boxes with 4 pens each.</text>
+  <text x="404" y="118">He gives away 5 pens. How many pens</text>
+  <text x="404" y="140">does he have?</text>
+  <rect x="426" y="150" width="302" height="22" rx="3" fill="#d9e1ee"/>
+  <text x="404" y="166">A:</text>
+  <text x="432" y="166">3 × 4 = 12 pens. 12 − 5 = 7.</text>
+  <text x="432" y="188">The answer is 7.</text>
+  <line x1="404" y1="196" x2="728" y2="196" stroke="#d8d7d0" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="404" y="220">Q: A shop has 15 apples. It sells 8</text>
+  <text x="404" y="242">and gets 6 more. How many apples</text>
+  <text x="404" y="264">does it have?</text>
+  <line x1="566.0" y1="282" x2="566.0" y2="322" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <text x="390" y="314" class="s b mu">MODEL OUTPUT</text>
+  <rect x="388" y="322" width="356" height="72" rx="8" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <rect x="426" y="334" width="302" height="22" rx="3" fill="#d9e3d9"/>
+  <text x="404" y="350">A:</text>
+  <text x="432" y="350">15 − 8 = 7. 7 + 6 = 13.</text>
+  <text x="432" y="372">The answer is 13.</text>
+  <path d="M701,366 L707,372 L719,359" fill="none" stroke="#4f6f5c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

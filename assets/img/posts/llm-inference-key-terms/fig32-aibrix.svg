@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 544" width="760" height="544" role="img" aria-label="AIBrix architecture: API gateway, multi-LoRA services on vLLM pods, control plane and distributed KV cache runtime">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-oc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a1f"/></marker>
+  </defs>
+  <rect width="760" height="544" fill="#faf9f5"/>
+
+  <!-- request in -->
+  <text x="380" y="18" text-anchor="middle" class="s mu">request</text>
+  <line x1="380" y1="24" x2="380" y2="41" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+
+  <!-- API gateway -->
+  <rect x="16" y="42" width="728" height="114" rx="8" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="380" y="68" text-anchor="middle" class="b">API gateway</text>
+  <g fill="#faf9f5" stroke="#64645d" stroke-width="1.4">
+    <rect x="32" y="84" width="224" height="56" rx="5"/>
+    <rect x="268" y="84" width="224" height="56" rx="5"/>
+    <rect x="504" y="84" width="224" height="56" rx="5"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="144" y="107">OpenAI-compatible</text>
+    <text x="144" y="127">API</text>
+    <text x="380" y="107">Fairness and</text>
+    <text x="380" y="127">TPM / RPM limits</text>
+    <text x="616" y="107">Prefix-cache-aware and</text>
+    <text x="616" y="127">load-aware routing</text>
+  </g>
+  <line x1="288" y1="156" x2="288" y2="183" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+
+  <!-- services -->
+  <rect x="16" y="184" width="544" height="60" rx="8" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="32" y="210" class="b">Services</text>
+  <text x="32" y="230" class="s mu">multi-LoRA</text>
+  <rect x="128" y="200" width="96" height="28" rx="14" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <g fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4">
+    <rect x="236" y="200" width="96" height="28" rx="14"/>
+    <rect x="344" y="200" width="96" height="28" rx="14"/>
+    <rect x="452" y="200" width="96" height="28" rx="14"/>
+  </g>
+  <g text-anchor="middle" class="s">
+    <text x="176" y="219" class="s">base</text>
+    <text x="284" y="219" class="s">LoRA-1</text>
+    <text x="392" y="219" class="s">LoRA-2</text>
+    <text x="500" y="219" class="s">LoRA-3</text>
+  </g>
+  <g stroke="#64645d" stroke-width="1.6">
+    <line x1="102" y1="244" x2="102" y2="271" marker-end="url(#a-ink)"/>
+    <line x1="288" y1="244" x2="288" y2="271" marker-end="url(#a-ink)"/>
+    <line x1="474" y1="244" x2="474" y2="271" marker-end="url(#a-ink)"/>
+  </g>
+
+  <!-- pods -->
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="16" y="272" width="172" height="166" rx="8"/>
+    <rect x="202" y="272" width="172" height="166" rx="8"/>
+    <rect x="388" y="272" width="172" height="166" rx="8"/>
+  </g>
+  <g fill="#faf9f5" stroke="#64645d" stroke-width="1.4">
+    <rect x="26" y="304" width="152" height="122" rx="5"/>
+    <rect x="212" y="304" width="152" height="122" rx="5"/>
+    <rect x="398" y="304" width="152" height="122" rx="5"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="102" y="294" class="b">Pod 1</text>
+    <text x="288" y="294" class="b">Pod 2</text>
+    <text x="474" y="294" class="b">Pod 3</text>
+    <text x="102" y="322" class="s b">vLLM engine</text>
+    <text x="288" y="322" class="s b">vLLM engine</text>
+    <text x="474" y="322" class="s b">vLLM engine</text>
+  </g>
+  <!-- base model rows -->
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="36" y="332" width="132" height="24" rx="4"/>
+    <rect x="222" y="332" width="132" height="24" rx="4"/>
+    <rect x="408" y="332" width="132" height="24" rx="4"/>
+  </g>
+  <!-- adapter rows -->
+  <g fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4">
+    <rect x="36" y="362" width="132" height="24" rx="12"/>
+    <rect x="36" y="392" width="132" height="24" rx="12"/>
+    <rect x="222" y="362" width="132" height="24" rx="12"/>
+    <rect x="222" y="392" width="132" height="24" rx="12"/>
+    <rect x="408" y="362" width="132" height="24" rx="12"/>
+    <rect x="408" y="392" width="132" height="24" rx="12"/>
+  </g>
+  <g text-anchor="middle" class="s">
+    <text x="102" y="349" class="s">base model</text>
+    <text x="102" y="379" class="s">LoRA-1</text>
+    <text x="102" y="409" class="s">LoRA-2</text>
+    <text x="288" y="349" class="s">base model</text>
+    <text x="288" y="379" class="s">LoRA-2</text>
+    <text x="288" y="409" class="s">LoRA-3</text>
+    <text x="474" y="349" class="s">base model</text>
+    <text x="474" y="379" class="s">LoRA-1</text>
+    <text x="474" y="409" class="s">LoRA-3</text>
+  </g>
+
+  <!-- control plane -->
+  <rect x="574" y="250" width="174" height="196" rx="8" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="588" y="272" class="b mu">Control plane</text>
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <rect x="586" y="282" width="152" height="74" rx="6"/>
+    <rect x="586" y="364" width="152" height="74" rx="6"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="662" y="304" class="b">Cold start</text>
+    <text x="662" y="322" class="b">manager</text>
+    <text x="662" y="344" class="s mu">fast model loading</text>
+    <text x="662" y="386" class="b">LLM-specific</text>
+    <text x="662" y="404" class="b">autoscaler</text>
+    <text x="662" y="426" class="s mu">scales pods on load</text>
+  </g>
+  <g stroke="#64645d" stroke-width="1.6" stroke-dasharray="5 4">
+    <line x1="586" y1="319" x2="561" y2="319" marker-end="url(#a-ink)"/>
+    <line x1="586" y1="401" x2="561" y2="401" marker-end="url(#a-ink)"/>
+  </g>
+
+  <!-- distributed KV cache runtime -->
+  <g stroke="#8a6a1f" stroke-width="1.6">
+    <line x1="102" y1="439" x2="102" y2="477" marker-start="url(#a-oc)" marker-end="url(#a-oc)"/>
+    <line x1="288" y1="439" x2="288" y2="477" marker-start="url(#a-oc)" marker-end="url(#a-oc)"/>
+    <line x1="474" y1="439" x2="474" y2="477" marker-start="url(#a-oc)" marker-end="url(#a-oc)"/>
+  </g>
+  <rect x="16" y="478" width="728" height="52" rx="8" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4"/>
+  <text x="380" y="500" text-anchor="middle" class="b">Distributed KV cache runtime</text>
+  <text x="380" y="520" text-anchor="middle" class="s">KV cache shared across pods</text>
+</svg>

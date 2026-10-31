@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 450" width="760" height="450" role="img" aria-label="FlashAttention processes K and V in two blocks and rescales the first partial output when the second block arrives">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .xl { font-size: 17px; }
+    .lv { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; }
+    .oc { fill: #8a6a1f; } .dk { fill: #414b48; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-oc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a6a1f"/></marker>
+    <marker id="a-dk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#414b48"/></marker>
+  </defs>
+  <rect width="760" height="450" fill="#faf9f5"/>
+
+  <text x="16" y="24" class="s mu">K and V are split into two blocks. Block (1) is processed first, then block (2).</text>
+
+  <!-- HBM boxes (solid blue) -->
+  <g fill="#d9e1ee" stroke="#35548a" stroke-width="1.4">
+    <rect x="16" y="102" width="48" height="238" rx="6"/>
+    <rect x="125" y="44" width="64" height="34" rx="6"/>
+    <rect x="448" y="44" width="60" height="34" rx="6"/>
+    <rect x="125" y="240" width="64" height="36" rx="6"/>
+    <rect x="448" y="240" width="60" height="36" rx="6"/>
+    <rect x="528" y="290" width="216" height="60" rx="6"/>
+  </g>
+
+  <!-- SRAM-only intermediates (dashed ochre) -->
+  <g fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4" stroke-dasharray="6 4">
+    <rect x="92" y="102" width="130" height="40" rx="6"/>
+    <rect x="254" y="102" width="136" height="40" rx="6"/>
+    <rect x="217" y="168" width="210" height="36" rx="6"/>
+    <rect x="217" y="240" width="210" height="36" rx="6"/>
+    <rect x="92" y="300" width="130" height="40" rx="6"/>
+    <rect x="254" y="300" width="136" height="40" rx="6"/>
+    <rect x="528" y="102" width="216" height="40" rx="6"/>
+  </g>
+
+  <!-- multiply nodes -->
+  <g fill="#efeee7" stroke="#64645d" stroke-width="1.4">
+    <circle cx="478" cy="122" r="13"/>
+    <circle cx="478" cy="320" r="13"/>
+  </g>
+  <g text-anchor="middle">
+    <text class="b xl" x="478" y="128">×</text>
+    <text class="b xl" x="478" y="326">×</text>
+  </g>
+
+  <!-- labels -->
+  <g text-anchor="middle">
+    <text x="40" y="227" class="xl b">Q</text>
+    <text class="xl" x="157" y="67">K⁽¹⁾</text>
+    <text class="xl" x="478" y="67">V⁽¹⁾</text>
+    <text class="xl" x="157" y="264">K⁽²⁾</text>
+    <text class="xl" x="478" y="264">V⁽²⁾</text>
+    <text class="xl" x="157" y="128">S⁽¹⁾ = Q·K⁽¹⁾ᵀ</text>
+    <text class="xl" x="322" y="128">A⁽¹⁾ = exp(S⁽¹⁾)</text>
+    <text class="xl" x="322" y="192"><tspan class="lv">l</tspan>⁽¹⁾ = Σ exp(S⁽¹⁾)</text>
+    <text class="xl" x="322" y="264"><tspan class="lv">l</tspan>⁽²⁾ = <tspan class="lv">l</tspan>⁽¹⁾ + Σ exp(S⁽²⁾)</text>
+    <text class="xl" x="157" y="326">S⁽²⁾ = Q·K⁽²⁾ᵀ</text>
+    <text class="xl" x="322" y="326">A⁽²⁾ = exp(S⁽²⁾)</text>
+    <text class="xl" x="636" y="128">O⁽¹⁾ = (A⁽¹⁾/<tspan class="lv">l</tspan>⁽¹⁾)·V⁽¹⁾</text>
+    <text class="xl" x="636" y="314">O⁽²⁾ = (<tspan class="lv">l</tspan>⁽¹⁾/<tspan class="lv">l</tspan>⁽²⁾)·O⁽¹⁾</text>
+    <text class="xl" x="636" y="338">+ (A⁽²⁾/<tspan class="lv">l</tspan>⁽²⁾)·V⁽²⁾</text>
+  </g>
+
+  <!-- data-flow arrows -->
+  <g stroke="#64645d" stroke-width="1.6" fill="none" marker-end="url(#a-ink)">
+    <line x1="64" y1="122" x2="92" y2="122"/>
+    <line x1="64" y1="320" x2="92" y2="320"/>
+    <line x1="157" y1="78" x2="157" y2="102"/>
+    <line x1="157" y1="276" x2="157" y2="300"/>
+    <line x1="478" y1="78" x2="478" y2="109"/>
+    <line x1="478" y1="276" x2="478" y2="307"/>
+    <line x1="222" y1="122" x2="254" y2="122"/>
+    <line x1="222" y1="320" x2="254" y2="320"/>
+    <line x1="390" y1="122" x2="465" y2="122"/>
+    <line x1="390" y1="320" x2="465" y2="320"/>
+    <line x1="491" y1="122" x2="528" y2="122"/>
+    <line x1="491" y1="320" x2="528" y2="320"/>
+    <line x1="322" y1="142" x2="322" y2="168"/>
+    <line x1="322" y1="300" x2="322" y2="276"/>
+  </g>
+
+  <!-- carry l(1) into block 2 -->
+  <line x1="322" y1="204" x2="322" y2="240" stroke="#8a6a1f" stroke-width="1.6" marker-end="url(#a-oc)"/>
+  <text x="332" y="227" class="s i oc">carried to block (2)</text>
+
+  <!-- rescale O(1) -->
+  <line x1="560" y1="142" x2="560" y2="290" stroke="#414b48" stroke-width="1.8" marker-end="url(#a-dk)"/>
+  <text x="574" y="208" class="b dk">rescale</text>
+  <text x="574" y="230" class="dk">old O⁽¹⁾ by <tspan class="lv">l</tspan>⁽¹⁾/<tspan class="lv">l</tspan>⁽²⁾</text>
+
+  <!-- legend -->
+  <rect x="16" y="384" width="34" height="20" rx="4" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="58" y="399">stored in HBM</text>
+  <rect x="196" y="384" width="34" height="20" rx="4" fill="#f0e3bf" stroke="#8a6a1f" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="238" y="399">kept in on-chip SRAM only, never written to HBM</text>
+  <text x="16" y="432" class="s i mu">Real kernels also track a running row max m for numerical stability (left out here).</text>
+</svg>

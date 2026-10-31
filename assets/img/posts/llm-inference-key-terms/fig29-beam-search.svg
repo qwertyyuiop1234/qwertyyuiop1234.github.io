@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 500" width="760" height="500" role="img" aria-label="Beam search with beam width 2: cumulative scores per sequence, the I like cats branch is pruned at step 3">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .oc { fill: #8a6a1f; } .ms { font-size: 13px; } .xl { font-size: 17px; } .lg { font-size: 16px; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-tc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a4502f"/></marker>
+    <marker id="a-sg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4f6f5c"/></marker>
+  </defs>
+  <rect width="760" height="500" fill="#faf9f5"/>
+  <text x="38.0" y="30" text-anchor="middle" class="s b mu">START</text>
+  <text x="141.0" y="30" text-anchor="middle" class="s b mu">STEP 1</text>
+  <text x="320.0" y="30" text-anchor="middle" class="s b mu">STEP 2</text>
+  <text x="557.0" y="30" text-anchor="middle" class="s b mu">STEP 3</text>
+  <line x1="60" y1="260" x2="96" y2="125" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <line x1="60" y1="260" x2="96" y2="305" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <line x1="60" y1="260" x2="96" y2="400" stroke="#64645d" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a-ink)"/>
+  <line x1="186" y1="125" x2="232" y2="90" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <line x1="186" y1="125" x2="232" y2="160" stroke="#64645d" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a-ink)"/>
+  <line x1="186" y1="305" x2="232" y2="270" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <line x1="186" y1="305" x2="232" y2="340" stroke="#64645d" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a-ink)"/>
+  <line x1="408" y1="90" x2="464" y2="90" stroke="#a4502f" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#a-tc)"/>
+  <line x1="408" y1="270" x2="464" y2="236" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <line x1="408" y1="270" x2="464" y2="304" stroke="#4f6f5c" stroke-width="1.8" marker-end="url(#a-sg)"/>
+  <rect x="16" y="240" width="44" height="40" rx="6" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="38.0" y="265" text-anchor="middle" class="b">I</text>
+  <rect x="96" y="100.0" width="90" height="50" rx="6" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="141.0" y="121" text-anchor="middle" class="b">I like</text>
+  <text x="141.0" y="141" text-anchor="middle" class="m ms">0.6</text>
+  <rect x="96" y="280.0" width="90" height="50" rx="6" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="141.0" y="301" text-anchor="middle" class="b">I love</text>
+  <text x="141.0" y="321" text-anchor="middle" class="m ms">0.3</text>
+  <rect x="96" y="375.0" width="90" height="50" rx="6" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="141.0" y="396" text-anchor="middle" class="b mu">I am</text>
+  <text x="141.0" y="416" text-anchor="middle" class="m ms mu">0.1</text>
+  <rect x="232" y="65.0" width="176" height="50" rx="6" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="320.0" y="86" text-anchor="middle" class="b">I like cats</text>
+  <text x="320.0" y="106" text-anchor="middle" class="m ms">0.6 × 0.3 = 0.18</text>
+  <rect x="232" y="135.0" width="176" height="50" rx="6" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="320.0" y="156" text-anchor="middle" class="b mu">I like to</text>
+  <text x="320.0" y="176" text-anchor="middle" class="m ms mu">0.6 × 0.25 = 0.15</text>
+  <rect x="232" y="245.0" width="176" height="50" rx="6" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="320.0" y="266" text-anchor="middle" class="b">I love to</text>
+  <text x="320.0" y="286" text-anchor="middle" class="m ms">0.3 × 0.7 = 0.21</text>
+  <rect x="232" y="315.0" width="176" height="50" rx="6" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="320.0" y="336" text-anchor="middle" class="b mu">I love cats</text>
+  <text x="320.0" y="356" text-anchor="middle" class="m ms mu">0.3 × 0.2 = 0.06</text>
+  <rect x="464" y="65.0" width="186" height="50" rx="6" fill="none" stroke="#a4502f" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="557.0" y="86" text-anchor="middle" class="b mu">I like cats .</text>
+  <text x="557.0" y="106" text-anchor="middle" class="m ms mu">0.18 × 0.3 = 0.054</text>
+  <rect x="464" y="211.0" width="186" height="50" rx="6" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="557.0" y="232" text-anchor="middle" class="b">I love to cook</text>
+  <text x="557.0" y="252" text-anchor="middle" class="m ms">0.21 × 0.4 = 0.084</text>
+  <rect x="464" y="279.0" width="186" height="50" rx="6" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="557.0" y="300" text-anchor="middle" class="b">I love to read</text>
+  <text x="557.0" y="320" text-anchor="middle" class="m ms">0.21 × 0.3 = 0.063</text>
+  <g stroke="#a4502f" stroke-width="3" stroke-linecap="round">
+    <line x1="428.0" y1="82" x2="444.0" y2="98"/>
+    <line x1="444.0" y1="82" x2="428.0" y2="98"/>
+  </g>
+  <text x="557.0" y="138" text-anchor="middle" class="s i tc">0.054 is 3rd: whole branch pruned</text>
+  <text x="662" y="241" class="b sg">#1</text>
+  <text x="662" y="309" class="b sg">#2</text>
+  <text x="557" y="356" text-anchor="middle" class="s i sg">the 2 best sequences survive</text>
+  <rect x="96" y="446" width="28" height="16" rx="3" fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.4"/>
+  <text x="132" y="459" class="s">kept in the beam</text>
+  <rect x="270" y="446" width="28" height="16" rx="3" fill="none" stroke="#64645d" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="306" y="459" class="s">dropped (not in top 2)</text>
+  <g stroke="#a4502f" stroke-width="3" stroke-linecap="round">
+    <line x1="480" y1="448" x2="492" y2="460"/><line x1="492" y1="448" x2="480" y2="460"/>
+  </g>
+  <text x="502" y="459" class="s">pruned branch</text>
+  <text x="380" y="486" text-anchor="middle" class="s mu">beam width = 2 · score = product of token probabilities along the path</text>
+</svg>

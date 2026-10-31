@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 462" width="760" height="462" role="img" aria-label="A host launches a kernel that runs as a grid of blocks; inside one block CUDA code handles each thread while Triton code handles one tile of data">
+  <style>
+    text { font-family: "Helvetica Neue", Helvetica, Arial, "DejaVu Sans", sans-serif; fill: #141413; font-size: 15px; }
+    .b { font-weight: 700; }
+    .s { font-size: 13px; }
+    .m { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; font-size: 14px; }
+    .mu { fill: #64645d; }
+    .i { font-style: italic; }
+    .tc { fill: #a4502f; } .bl { fill: #35548a; } .sg { fill: #4f6f5c; }
+    .xl { font-size: 17px; }
+    .lv { font-family: "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; }
+  </style>
+  <defs>
+    <marker id="a-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64645d"/></marker>
+    <marker id="a-dk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#414b48"/></marker>
+  </defs>
+  <rect width="760" height="462" fill="#faf9f5"/>
+  <!-- host -->
+  <rect x="16" y="16" width="170" height="130" rx="8" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="101" y="40" text-anchor="middle" class="b">Host (CPU)</text>
+  <rect x="32" y="70" width="138" height="38" rx="6" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="101" y="94" text-anchor="middle">launch kernel</text>
+  <line x1="170" y1="89" x2="230" y2="89" stroke="#64645d" stroke-width="1.6" marker-end="url(#a-ink)"/>
+  <!-- device -->
+  <rect x="230" y="16" width="514" height="130" rx="8" fill="#efeee7" stroke="#64645d" stroke-width="1.4"/>
+  <text x="246" y="40"><tspan class="b">Device (GPU)</tspan><tspan class="mu"> runs the kernel as a grid of blocks</tspan></text>
+  <rect x="272" y="54" width="100" height="32" rx="4" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="322" y="75" text-anchor="middle" class="s">block (0,0)</text>
+  <rect x="382" y="54" width="100" height="32" rx="4" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="432" y="75" text-anchor="middle" class="s">block (0,1)</text>
+  <rect x="492" y="54" width="100" height="32" rx="4" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="542" y="75" text-anchor="middle" class="s">block (0,2)</text>
+  <rect x="602" y="54" width="100" height="32" rx="4" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="652" y="75" text-anchor="middle" class="s">block (0,3)</text>
+  <rect x="272" y="94" width="100" height="32" rx="4" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="322" y="115" text-anchor="middle" class="s">block (1,0)</text>
+  <rect x="382" y="94" width="100" height="32" rx="4" fill="#faf9f5" stroke="#414b48" stroke-width="2.4"/>
+  <text x="432" y="115" text-anchor="middle" class="s b">block (1,1)</text>
+  <rect x="492" y="94" width="100" height="32" rx="4" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="542" y="115" text-anchor="middle" class="s">block (1,2)</text>
+  <rect x="602" y="94" width="100" height="32" rx="4" fill="#faf9f5" stroke="#64645d" stroke-width="1.4"/>
+  <text x="652" y="115" text-anchor="middle" class="s">block (1,3)</text>
+  <!-- zoom into block (1,1) -->
+  <path d="M432,126 V178 M194,178 H566" fill="none" stroke="#414b48" stroke-width="1.6"/>
+  <g stroke="#414b48" stroke-width="1.6" marker-end="url(#a-dk)">
+    <line x1="194" y1="178" x2="194" y2="206"/>
+    <line x1="566" y1="178" x2="566" y2="206"/>
+  </g>
+  <text x="442" y="168" class="s i mu">zoom into block (1,1)</text>
+  <!-- panels -->
+  <rect x="16" y="206" width="356" height="240" rx="8" fill="none" stroke="#4f6f5c" stroke-width="1.4"/>
+  <rect x="388" y="206" width="356" height="240" rx="8" fill="none" stroke="#35548a" stroke-width="1.4"/>
+  <text x="194" y="232" text-anchor="middle" class="b xl sg">CUDA</text>
+  <text x="566" y="232" text-anchor="middle" class="b xl bl">Triton</text>
+  <text x="194" y="254" text-anchor="middle" class="s mu">block (1,1) = 32 threads</text>
+  <text x="566" y="254" text-anchor="middle" class="s mu">block (1,1) = one tile of data</text>
+  <rect x="77.5" y="264" width="233" height="125" rx="4" fill="none" stroke="#64645d" stroke-width="1.4"/>
+  <rect x="449.5" y="264" width="233" height="125" rx="4" fill="none" stroke="#64645d" stroke-width="1.4"/>
+  <g fill="#d9e3d9" stroke="#4f6f5c" stroke-width="1.2">
+    <rect x="88.5" y="275" width="22" height="22" rx="2"/>
+    <rect x="115.5" y="275" width="22" height="22" rx="2"/>
+    <rect x="142.5" y="275" width="22" height="22" rx="2"/>
+    <rect x="169.5" y="275" width="22" height="22" rx="2"/>
+    <rect x="196.5" y="275" width="22" height="22" rx="2"/>
+    <rect x="223.5" y="275" width="22" height="22" rx="2"/>
+    <rect x="250.5" y="275" width="22" height="22" rx="2"/>
+    <rect x="277.5" y="275" width="22" height="22" rx="2"/>
+    <rect x="88.5" y="302" width="22" height="22" rx="2"/>
+    <rect x="115.5" y="302" width="22" height="22" rx="2"/>
+    <rect x="142.5" y="302" width="22" height="22" rx="2"/>
+    <rect x="169.5" y="302" width="22" height="22" rx="2"/>
+    <rect x="196.5" y="302" width="22" height="22" rx="2"/>
+    <rect x="223.5" y="302" width="22" height="22" rx="2"/>
+    <rect x="250.5" y="302" width="22" height="22" rx="2"/>
+    <rect x="277.5" y="302" width="22" height="22" rx="2"/>
+    <rect x="88.5" y="329" width="22" height="22" rx="2"/>
+    <rect x="115.5" y="329" width="22" height="22" rx="2"/>
+    <rect x="142.5" y="329" width="22" height="22" rx="2"/>
+    <rect x="169.5" y="329" width="22" height="22" rx="2"/>
+    <rect x="196.5" y="329" width="22" height="22" rx="2"/>
+    <rect x="223.5" y="329" width="22" height="22" rx="2"/>
+    <rect x="250.5" y="329" width="22" height="22" rx="2"/>
+    <rect x="277.5" y="329" width="22" height="22" rx="2"/>
+    <rect x="88.5" y="356" width="22" height="22" rx="2"/>
+    <rect x="115.5" y="356" width="22" height="22" rx="2"/>
+    <rect x="142.5" y="356" width="22" height="22" rx="2"/>
+    <rect x="169.5" y="356" width="22" height="22" rx="2"/>
+    <rect x="196.5" y="356" width="22" height="22" rx="2"/>
+    <rect x="223.5" y="356" width="22" height="22" rx="2"/>
+    <rect x="250.5" y="356" width="22" height="22" rx="2"/>
+    <rect x="277.5" y="356" width="22" height="22" rx="2"/>
+  </g>
+  <rect x="460.5" y="275" width="211" height="103" rx="3" fill="#d9e1ee" stroke="#35548a" stroke-width="1.4"/>
+  <text x="566" y="322" text-anchor="middle" class="b bl">one range of data</text>
+  <text x="566" y="344" text-anchor="middle" class="s bl">handled as a whole</text>
+  <text x="194" y="412" text-anchor="middle" class="b">you program each thread</text>
+  <text x="194" y="432" text-anchor="middle" class="s mu"><tspan class="lv">threadIdx</tspan> picks one element</text>
+  <text x="566" y="412" text-anchor="middle" class="b">you program the block;</text>
+  <text x="566" y="433" text-anchor="middle" class="b">the compiler maps threads</text>
+</svg>
