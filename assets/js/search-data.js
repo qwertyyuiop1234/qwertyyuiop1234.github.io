@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-llm-inference-core-concepts-and-terms",
+        },{id: "post-스킬-에이전트의-kv-캐시-재사용-지금까지-한-실험",
+        
+          title: "스킬 에이전트의 KV 캐시 재사용: 지금까지 한 실험",
+        
+        description: "2026-11-06 연구실 세미나 자료. 스킬 에이전트가 프롬프트에 넣는 스킬의 KV 캐시를 얼마나 다시 쓸 수 있는지 잰 실험.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/skill-agent-kv-seminar/";
+          
+        },
+      },{id: "post-llm-inference-core-concepts-and-terms",
         
           title: "LLM inference: core concepts and terms",
         
