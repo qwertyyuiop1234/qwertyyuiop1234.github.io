@@ -2,7 +2,7 @@
 layout: post
 title: "스킬 에이전트의 KV 캐시 재사용: 지금까지 한 실험"
 date: 2026-11-05 00:00:00 +0900
-description: "연구실 세미나 (2026-11-06). 스킬 에이전트는 요청마다 긴 스킬 글을 프롬프트에 넣습니다. 이 발표는 그 글의 계산 결과를 얼마나 다시 쓸 수 있는지 잰 실험을 보고합니다. 마지막에는 연구 질문에 대한 고민과 3년 계획 주제를 나눕니다."
+description: "2026-11-06 연구실 세미나 자료. 스킬 에이전트가 프롬프트에 넣는 스킬의 KV 캐시를 얼마나 다시 쓸 수 있는지 잰 실험."
 tags: [llm-inference, kv-cache, vllm, skill-agent]
 categories: [LLM]
 toc:
@@ -290,19 +290,32 @@ html[data-theme="dark"] .seminar{--s3-soft:#123a2b}
 .seminar .srow{grid-template-columns:1fr}
 .seminar .chain.lay{grid-template-columns:1fr}
 }
-.seminar .lede{font-size:1.05rem}
-.seminar h2 .no{display:block}
 
+/* blog-format overrides */
+.seminar h2{margin-top:2.5rem}
+.seminar .read,.seminar .note,.seminar .mine{border:1px solid var(--global-divider-color);border-radius:3px;background:transparent;padding:1.1rem 1.4rem;margin:1rem 0 1.5rem;font-size:inherit;line-height:inherit;color:var(--global-text-color)}
+.seminar .read > b:first-child,.seminar .note > b:first-child,.seminar .mine > b:first-child{display:block;margin:0 0 .5rem;font-size:1rem;font-weight:600;color:var(--global-text-color);letter-spacing:0}
+.seminar dl.terms,.seminar .opt,.seminar .fmt{display:block;font-size:inherit;margin:1rem 0}
+.seminar dl.terms dt,.seminar .opt dt,.seminar .fmt dt{font-weight:600}
+.seminar dl.terms dd,.seminar .opt dd,.seminar .fmt dd{margin:0 0 .6rem;color:var(--global-text-color)}
+.seminar .small{font-size:.9rem}
+.seminar .box p,.seminar .box li{font-size:.95rem}
+.seminar figure.sfig{margin:1.5rem 0}
+.seminar .charts2 figure.sfig{margin:0}
+.seminar .chart{border:0;border-radius:.25rem;margin:0;padding:14px 16px 10px;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)}
+.seminar figcaption.caption{color:var(--global-text-color)}
+.seminar .chain .row{margin-left:0;margin-right:0}
 </style>
 
 <div class="seminar">
-<div class="meta">
-  <span><b>GPU</b> H100 80GB 1장 (VESSL)</span>
-  <span><b>서빙 엔진</b> vLLM 0.11.0</span>
-</div>
+<p>스킬 에이전트는 요청마다 긴 스킬 글을 프롬프트에 넣습니다. 이 발표는 그 글의 계산 결과를 얼마나 다시 쓸 수 있는지 잰 실험을 보고합니다. 마지막에는 연구 질문에 대한 고민과 3년 계획 주제를 나눕니다.</p>
 
-<p class="part first">1 · 기본 지식</p>
-<h2 id="t1" data-toc-text="1-1 용어: 실제 프롬프트 하나로 설명합니다"><span class="no">1-1</span>용어: 실제 프롬프트 하나로 설명합니다</h2>
+<blockquote class="block-note">
+<h5 data-toc-skip>이 글에 대해</h5>
+<p>2026-11-06 연구실 세미나에서 발표한 자료입니다. 실험은 H100 80GB 1장(VESSL)과 vLLM 0.11.0에서 했습니다. 1장은 기본 지식, 2장은 실험, 3장과 4장은 연구 질문에 대한 고민과 3년 계획입니다. 수치는 진행 중인 실험의 결과입니다.</p>
+</blockquote>
+
+<h2 id="t1" data-toc-text="1-1 용어: 실제 프롬프트 하나로 설명합니다">1-1 용어: 실제 프롬프트 하나로 설명합니다</h2>
 <p>실험 환경은 ALFWorld입니다. ALFWorld는 글로 하는 집안일 게임입니다. 모델은 방 설명을 읽고 <code>go to sinkbasin 1</code> 같은 명령을 보냅니다. 아래는 실제 게임 한 판의 처음 세 번입니다.</p>
 <div class="steps3"><div class="scard"><div class="st">step 0</div><div class="io"><b>모델이 받은 것</b><span>방 설명과 과제: &quot;put a clean cloth in cabinet&quot;. 가능한 행동 16개.</span>
 <b>모델의 행동</b><span><code>go to handtowelholder 1</code></span><b>환경의 답</b><span>You arrive at handtowelholder 1. On the handtowelholder 1, you see a handtowel 1.</span></div></div><div class="scard"><div class="st">step 1</div><div class="io"><b>모델이 받은 것</b><span>위 관찰 + 스킬 + 최근 이력 1개 + 가능한 행동 17개.</span>
@@ -406,7 +419,7 @@ Once you&#x27;ve finished your reasoning, you should choose an admissible action
 </dl>
 <p>모델은 세 개를 씁니다. 학습하지 않은 Qwen2.5-7B-Instruct(원본 모델), SkillRL의 SFT 모델, SkillRL의 RL 모델입니다. RL 모델이 SkillRL 논문의 최종 모델입니다.</p>
 
-<h2 id="t2" data-toc-text="1-2 세 논문: 무엇을 풀었고 어떻게 풀었나"><span class="no">1-2</span>세 논문: 무엇을 풀었고 어떻게 풀었나</h2>
+<h2 id="t2" data-toc-text="1-2 세 논문: 무엇을 풀었고 어떻게 풀었나">1-2 세 논문: 무엇을 풀었고 어떻게 풀었나</h2>
 <p>세 시스템은 모두 경험에서 스킬을 만들고, 그 스킬을 프롬프트에 넣습니다. 가장 큰 차이는 무엇을 바꾸는가입니다. 아래 그림에서 주황 상자가 각 시스템이 바꾸는 쪽입니다.</p>
 <div class="sys" role="table" aria-label="세 시스템이 바꾸는 것">
   <span class="h" role="columnheader"></span><span class="h" role="columnheader">경험을 정리하는 곳</span><span class="h" role="columnheader">스킬</span><span class="h" role="columnheader">실행 모델</span>
@@ -452,13 +465,13 @@ Once you&#x27;ve finished your reasoning, you should choose an admissible action
 </dl>
 <p class="note"><b>세 시스템을 한 환경에서 비교한 방법</b>WikiSkill과 EvoSkill의 스킬 넣는 방식만 SkillRL의 ALFWorld 환경에 옮겼습니다. 스킬 문서는 SkillRL 스킬 뱅크로 만든 합성 <code>SKILL.md</code>입니다 (2-3절).</p>
 
-<h2 id="t3" data-toc-text="1-3 vLLM 기초"><span class="no">1-3</span>vLLM 기초</h2>
+<h2 id="t3" data-toc-text="1-3 vLLM 기초">1-3 vLLM 기초</h2>
 <dl class="terms">
   <dt>prefill과 decode</dt><dd>prefill은 프롬프트 전체를 한 번에 읽고 KV 캐시를 만드는 단계입니다. decode는 응답 토큰을 하나씩 만드는 단계입니다. 재사용은 prefill 계산만 줄입니다.</dd>
   <dt>KV 캐시 용량</dt><dd>vLLM은 시작할 때 GPU 메모리 일부를 KV 캐시용으로 미리 잡습니다. 우리 설정에서는 41.9만 토큰입니다.</dd>
 </dl>
-<div class="chart"><h4 data-toc-skip>vLLM에 준 GPU 메모리 (H100의 50 %)</h4><p class="sub">로그 값: 모델 가중치 14.2 GiB, KV 캐시 22.36 GiB = 418,592토큰 (토큰당 약 57 KB) <code>run.log</code></p>
-<div class="mem" aria-label="GPU 메모리 나눔"><div class="w" style="flex:14.25">가중치 14.2 GiB</div><div class="kv" style="flex:22.36">KV 캐시 22.36 GiB</div><div class="o" style="flex:3.4">나머지</div></div></div>
+<figure class="sfig"><div class="chart">
+<div class="mem" aria-label="GPU 메모리 나눔"><div class="w" style="flex:14.25">가중치 14.2 GiB</div><div class="kv" style="flex:22.36">KV 캐시 22.36 GiB</div><div class="o" style="flex:3.4">나머지</div></div></div><figcaption class="caption"><b>Figure 1.</b> vLLM에 준 GPU 메모리 (H100의 50 %). 로그 값: 모델 가중치 14.2 GiB, KV 캐시 22.36 GiB = 418,592토큰 (토큰당 약 57 KB) <code>run.log</code></figcaption></figure>
 <p class="read"><b>해석</b>H100 메모리 80GB의 절반을 vLLM에 주었습니다. 그중 가중치를 뺀 22.36 GiB가 KV 캐시입니다. 토큰 하나의 KV가 약 57 KB라서 캐시에는 41.9만 토큰이 들어갑니다. 2-3절의 빨간 용량선이 이 값입니다.</p>
 <dl class="terms">
   <dt>16토큰 블록</dt><dd>KV 캐시는 16토큰 단위 블록으로 나뉩니다. 재사용도 블록 단위로 합니다.</dd>
@@ -476,8 +489,7 @@ Once you&#x27;ve finished your reasoning, you should choose an admissible action
 </dl>
 <p>1-1절의 step 2 요청은 1,421토큰이고 928토큰을 캐시에서 가져왔습니다. 직전 요청과는 "Prior to this step, you have already taken N step(s)"의 숫자 N 앞까지 같습니다. 그 지점을 16의 배수로 내린 값이 928입니다.</p>
 
-<p class="part">2 · 실험</p>
-<h2 id="x0" data-toc-text="2-0 측정 방법"><span class="no">2-0</span>측정 방법</h2>
+<h2 id="x0" data-toc-text="2-0 측정 방법">2-0 측정 방법</h2>
 <ul>
   <li>SkillRL의 공식 실행 경로(verl)는 스텝마다 캐시를 비웁니다. 그래서 verl 없이 같은 프롬프트를 만드는 실행기(하네스)를 따로 만들었습니다.</li>
   <li>하네스는 공식 경로와 프롬프트 1,259개가 글자 단위로 같았습니다. 성공률은 80.2 ± 2.4 %로 공식 경로의 79.2 ± 3.3 %와 같은 범위였습니다.</li>
@@ -485,8 +497,8 @@ Once you&#x27;ve finished your reasoning, you should choose an admissible action
   <li>조건 하나는 게임 64개 × seed 3개입니다. seed는 모델이 응답을 고를 때 쓰는 난수의 시작값입니다 (1-1절). seed가 3개뿐이라서 8~10 %p보다 작은 성공률 차이는 우연과 구별하지 못합니다.</li>
 </ul>
 
-<h2 id="x1" data-toc-text="2-1 재사용이 끊기는 곳"><span class="no">2-1</span>재사용이 끊기는 곳</h2>
-<div class="chart" id="c-e2"><h4 data-toc-skip>step 1 이후 요청의 재사용률 (RL 모델, SkillRL 원래 형식)</h4><p class="sub">seed 3개 평균. 캐시에서 가져온 토큰 ÷ 프롬프트 토큰</p><div class="plot"></div></div>
+<h2 id="x1" data-toc-text="2-1 재사용이 끊기는 곳">2-1 재사용이 끊기는 곳</h2>
+<figure class="sfig"><div class="chart" id="c-e2"><div class="plot"></div></div><figcaption class="caption"><b>Figure 2.</b> step 1 이후 요청의 재사용률 (RL 모델, SkillRL 원래 형식). seed 3개 평균. 캐시에서 가져온 토큰 ÷ 프롬프트 토큰</figcaption></figure>
 <p class="read"><b>해석</b>가로축은 재사용률입니다 (0~1). 공식 경로처럼 스텝마다 캐시를 비우면 프롬프트의 16 %만 캐시에서 가져옵니다. 캐시를 스텝 사이에 남겨 두면 63 %를 가져옵니다. 같은 프롬프트, 같은 모델이고 캐시를 지우는지만 다릅니다.</p>
 <ul>
   <li>캐시를 스텝 사이에 남겨 두면 재사용률이 0.160에서 0.633으로 오릅니다.</li>
@@ -494,9 +506,9 @@ Once you&#x27;ve finished your reasoning, you should choose an admissible action
   <li>그래서 이 형식에서 재사용률의 실질 상한은 약 0.64입니다.</li>
 </ul>
 
-<h2 id="x2" data-toc-text="2-2 순서를 바꾸면 얼마나 줄고, 무엇을 잃나"><span class="no">2-2</span>순서를 바꾸면 얼마나 줄고, 무엇을 잃나</h2>
+<h2 id="x2" data-toc-text="2-2 순서를 바꾸면 얼마나 줄고, 무엇을 잃나">2-2 순서를 바꾸면 얼마나 줄고, 무엇을 잃나</h2>
 <h3 data-toc-skip>정적 분석: 다른 에피소드와 공유하는 앞부분</h3>
-<div class="chart" id="c-static"><h4 data-toc-skip>두 에피소드의 step 2 프롬프트가 앞에서부터 같은 토큰 수</h4><p class="sub">구간 순서별. 이력과 관찰은 짧은 자리표시자로 고정했고, 프롬프트는 1,061토큰입니다. 프롬프트 문자열을 만들어 토큰을 셌습니다 <code>SKILLRL_INTERNALS.md</code> 6.1절</p><div class="plot"></div></div>
+<figure class="sfig"><div class="chart" id="c-static"><div class="plot"></div></div><figcaption class="caption"><b>Figure 3.</b> 두 에피소드의 step 2 프롬프트가 앞에서부터 같은 토큰 수. 구간 순서별. 이력과 관찰은 짧은 자리표시자로 고정했고, 프롬프트는 1,061토큰입니다. 프롬프트 문자열을 만들어 토큰을 셌습니다 <code>SKILLRL_INTERNALS.md</code> 6.1절</figcaption></figure>
 <p class="read"><b>해석</b>막대는 두 에피소드의 프롬프트가 처음부터 몇 토큰까지 같은지를 나타냅니다. 길수록 다른 에피소드가 만든 캐시를 많이 쓸 수 있습니다. 원래 순서는 44토큰에서 끝납니다. 두 번째 줄의 task 문장이 에피소드마다 다르기 때문입니다. 스킬을 task 앞으로 옮기면 같은 카테고리끼리 920토큰, 곧 프롬프트의 87 %가 같습니다. 다른 카테고리끼리는 카테고리 스킬에서 갈라져서 263토큰 또는 541토큰입니다.</p>
 <h4 data-toc-skip class="sh">두 에피소드의 프롬프트를 앞에서부터 비교</h4>
 <p class="small">G = General Principles, C = 카테고리 스킬, M = Mistakes to Avoid. 에피소드 B의 색은 A와 비교한 결과입니다.</p>
@@ -516,7 +528,7 @@ Once you&#x27;ve finished your reasoning, you should choose an admissible action
 <p class="small">앞에서부터 같은 토큰: <b>541</b></p></div></div>
 <p>원래 순서에서는 task 문장이 스킬 앞에 있습니다. 그래서 다른 에피소드와는 44토큰만 같습니다. 스킬을 task 문장 앞으로 옮기면 같은 카테고리끼리 920토큰이 같아집니다.</p>
 <h3 data-toc-skip>GPU 실험: 순서를 바꿔도 성공률이 유지되나</h3>
-<div class="chart" id="c-e9"><h4 data-toc-skip>형식별 성공률 (RL 모델, 캐시 유지)</h4><p class="sub">점은 seed 3개 평균, 가로선은 ± 표준편차. 세로 점선은 원래 순서</p><div class="plot"></div></div>
+<figure class="sfig"><div class="chart" id="c-e9"><div class="plot"></div></div><figcaption class="caption"><b>Figure 4.</b> 형식별 성공률 (RL 모델, 캐시 유지). 점은 seed 3개 평균, 가로선은 ± 표준편차. 세로 점선은 원래 순서</figcaption></figure>
 <p class="read"><b>해석</b>점이 세로 점선(원래 순서 79.2 %)에 가까우면 성공률이 유지된 것입니다. 가로선은 seed 3개의 표준편차입니다. 위의 세 형식은 점선과 2 %p 안에 있습니다. 이동 목록 분리만 31.2 %로 크게 떨어졌습니다.</p>
 <h4 data-toc-skip class="sh">형식별 user 메시지 구조 (step 1 이후)</h4>
 <div class="legend"><span><i class="sw-fixed"></i>고정 텍스트</span><span><i class="sw-task"></i>task 문장</span><span><i class="sw-skill"></i>스킬</span><span><i class="sw-hist"></i>이력</span><span><i class="sw-cur"></i>현재 관찰·행동 목록</span></div>
@@ -538,7 +550,7 @@ Once you&#x27;ve finished your reasoning, you should choose an admissible action
   <li>행동 목록의 모양을 바꾼 형식은 성공률이 79.2 %에서 31.2 %로 떨어졌습니다. 모델이 새 장소로 거의 가지 않았습니다 (에피소드당 9.6회 → 3.7회).</li>
 </ul>
 
-<h2 id="x3" data-toc-text="2-3 세 시스템 방식 × 모델 세 개 (GPU)"><span class="no">2-3</span>세 시스템 방식 × 모델 세 개 (GPU)</h2>
+<h2 id="x3" data-toc-text="2-3 세 시스템 방식 × 모델 세 개 (GPU)">2-3 세 시스템 방식 × 모델 세 개 (GPU)</h2>
 <div class="tbl"><table><thead><tr><th>방식 이름</th><th>스킬을 넣는 방법</th></tr></thead><tbody>
 <tr><td>SkillRL 원래</td><td>매 스텝 user 메시지를 새로 만듭니다. 스킬은 task 문장 뒤에 있습니다.</td></tr>
 <tr><td>WikiSkill·뒤</td><td>스킬 문서 전체를 매 스텝 user 메시지에 넣습니다. 스킬은 task 문장 뒤에 있습니다.</td></tr>
@@ -552,8 +564,8 @@ Once you&#x27;ve finished your reasoning, you should choose an admissible action
   <li>형식마다 run이 다릅니다. 그래서 이력의 내용이 형식마다 다릅니다.</li>
   <li>구간별 토큰 수의 합은 다섯 요청 모두 덤프의 프롬프트 토큰 수와 같습니다.</li>
 </ul>
-<div class="chart" id="c-fmt"><h4 data-toc-skip>같은 요청의 형식별 구성</h4><p class="sub">막대 길이는 토큰 수입니다. 왼쪽 끝이 프롬프트의 처음입니다.</p>
-<div class="legend"><span><i class='sw-fixed'></i>고정 텍스트</span><span><i class='sw-task'></i>task 문장</span><span><i class='sw-skill'></i>스킬</span><span><i class='sw-hist'></i>이력·이전 대화</span><span><i class='sw-cur'></i>현재 관찰·행동 목록</span></div><div class="plot"></div></div>
+<figure class="sfig"><div class="chart" id="c-fmt">
+<div class="legend"><span><i class='sw-fixed'></i>고정 텍스트</span><span><i class='sw-task'></i>task 문장</span><span><i class='sw-skill'></i>스킬</span><span><i class='sw-hist'></i>이력·이전 대화</span><span><i class='sw-cur'></i>현재 관찰·행동 목록</span></div><div class="plot"></div></div><figcaption class="caption"><b>Figure 5.</b> 같은 요청의 형식별 구성. 막대 길이는 토큰 수입니다. 왼쪽 끝이 프롬프트의 처음입니다.</figcaption></figure>
 <p class="read"><b>해석</b>막대 하나가 요청 하나입니다. 왼쪽 끝이 프롬프트의 처음입니다. 파란 스킬 구간의 크기와 위치가 형식마다 다릅니다. SkillRL 원래는 스킬이 871토큰이고 프롬프트 가운데에 있습니다. WikiSkill 두 방식은 스킬 문서 전체를 넣어서 프롬프트의 대부분이 스킬입니다. EvoSkill 두 방식은 tool 결과로 들어온 스킬 문서가 이전 대화(주황) 사이에 있습니다.</p>
 <details><summary>표로 보기</summary><div class='tbl'><table><thead><tr><th>형식</th><th class='num'>고정 텍스트</th><th class='num'>task 문장</th><th class='num'>스킬</th><th class='num'>이력·이전 대화</th><th class='num'>현재 관찰·행동 목록</th><th class='num'>합계 (덤프 값)</th><th class='num'>캐시에서 가져온 토큰</th></tr></thead><tbody><tr><td>SkillRL 원래</td><td class='num'>176</td><td class='num'>11</td><td class='num'>871</td><td class='num'>202</td><td class='num'>161</td><td class='num'>1,421</td><td class='num'>928</td></tr><tr><td>WikiSkill·뒤</td><td class='num'>171</td><td class='num'>11</td><td class='num'>2,555</td><td class='num'>187</td><td class='num'>144</td><td class='num'>3,068</td><td class='num'>2,608</td></tr><tr><td>WikiSkill·앞</td><td class='num'>170</td><td class='num'>12</td><td class='num'>2,555</td><td class='num'>187</td><td class='num'>144</td><td class='num'>3,068</td><td class='num'>2,608</td></tr><tr><td>EvoSkill</td><td class='num'>109</td><td class='num'>12</td><td class='num'>1,781</td><td class='num'>601</td><td class='num'>162</td><td class='num'>2,665</td><td class='num'>2,480</td></tr><tr><td>EvoSkill·공통 위</td><td class='num'>109</td><td class='num'>12</td><td class='num'>1,804</td><td class='num'>604</td><td class='num'>162</td><td class='num'>2,691</td><td class='num'>2,512</td></tr></tbody></table></div></details>
 <p>형식을 고르면 아래에 그 요청의 실제 프롬프트가 나옵니다. 배경색은 막대의 구간 색과 같습니다. 글자에 포인터를 올리면 구간 이름과 토큰 수가 나옵니다.</p>
@@ -1439,9 +1451,9 @@ Admissible actions: [&#x27;examine bathtubbasin 1&#x27;
 
 <h3 data-toc-skip>성공률</h3>
 <div class="panels">
-  <div class="chart" id="c-succ-C2"><h4 data-toc-skip>RL 모델 + 스킬</h4><p class="sub">성공률 %, 게임 64개 × seed 3</p><div class="plot"></div></div>
-  <div class="chart" id="c-succ-C1"><h4 data-toc-skip>원본 모델 + 스킬</h4><p class="sub">성공률 %, 게임 64개 × seed 3</p><div class="plot"></div></div>
-  <div class="chart" id="c-succ-C4"><h4 data-toc-skip>SFT 모델 + 스킬</h4><p class="sub">성공률 %, 게임 64개 × seed 3</p><div class="plot"></div></div>
+  <figure class="sfig"><div class="chart" id="c-succ-C2"><div class="plot"></div></div><figcaption class="caption"><b>Figure 6.</b> RL 모델 + 스킬. 성공률 %, 게임 64개 × seed 3</figcaption></figure>
+  <figure class="sfig"><div class="chart" id="c-succ-C1"><div class="plot"></div></div><figcaption class="caption"><b>Figure 7.</b> 원본 모델 + 스킬. 성공률 %, 게임 64개 × seed 3</figcaption></figure>
+  <figure class="sfig"><div class="chart" id="c-succ-C4"><div class="plot"></div></div><figcaption class="caption"><b>Figure 8.</b> SFT 모델 + 스킬. 성공률 %, 게임 64개 × seed 3</figcaption></figure>
 </div>
 <p class="read"><b>해석</b>진한 점은 seed 3개의 평균이고, 작은 빈 원은 seed별 값입니다. 세로 점선은 그 모델의 SkillRL 원래 형식 성공률입니다. RL 모델은 WikiSkill 두 방식에서 74.5~82.8 %로 원래(79.2 %)와 비슷합니다. EvoSkill 두 방식에서는 30.7~37.5 %로 떨어집니다. 원본·SFT 모델은 모든 방식이 18.2 % 이하라서 방식 사이의 차이를 읽기 어렵습니다.</p>
 <ul>
@@ -1451,7 +1463,7 @@ Admissible actions: [&#x27;examine bathtubbasin 1&#x27;
 </ul>
 
 <h3 data-toc-skip>재사용률</h3>
-<div class="chart" id="c-apc"><h4 data-toc-skip>run 전체의 재사용률 (seed 3개 평균)</h4><p class="sub">캐시에서 가져온 토큰 ÷ 프롬프트 토큰</p><div class="plot"></div></div>
+<figure class="sfig"><div class="chart" id="c-apc"><div class="plot"></div></div><figcaption class="caption"><b>Figure 9.</b> run 전체의 재사용률 (seed 3개 평균). 캐시에서 가져온 토큰 ÷ 프롬프트 토큰</figcaption></figure>
 <p class="read"><b>해석</b>막대가 길수록 run 전체에서 캐시를 많이 썼습니다. 모델 세 개 모두 순서가 같습니다: WikiSkill·앞 &gt; WikiSkill·뒤 &gt; SkillRL 원래 &gt; EvoSkill·공통 위 &gt; EvoSkill.</p>
 <ul>
   <li>SkillRL 원래 형식과 WikiSkill 방식은 모델 세 개에서 0.63~0.86입니다.</li>
@@ -1466,9 +1478,9 @@ Admissible actions: [&#x27;examine bathtubbasin 1&#x27;
   <button type="button" data-model="C4" aria-pressed="false">SFT 모델</button>
 </div>
 <div class="legend"><span><i class="ln-key k-s1"></i>SkillRL 원래</span><span><i class="ln-key k-s2"></i>WikiSkill·뒤</span><span><i class="ln-key k-s3"></i>EvoSkill</span><span><i class="ln-key k-s4"></i>EvoSkill·공통 위</span></div>
-<div class="chart" id="c-conc"><h4 data-toc-skip>한 스텝의 토큰 합</h4><p class="sub">seed 3개 평균</p><div class="plot"></div></div>
+<figure class="sfig"><div class="chart" id="c-conc"><div class="plot"></div></div><figcaption class="caption"><b>Figure 10.</b> 한 스텝의 토큰 합. seed 3개 평균</figcaption></figure>
 <p class="read"><b>해석</b>선 하나가 스킬을 넣는 방식 하나입니다. 세로축은 한 스텝에서 진행 중인 게임 전체의 프롬프트·응답 토큰을 더한 값이고, 빨간 가로선은 KV 캐시 용량(41.9만 토큰)입니다. SkillRL 원래와 WikiSkill·뒤는 step 2에서 가장 크고 그 뒤로 줄어듭니다. 끝난 게임은 더 요청하지 않기 때문입니다. EvoSkill 두 방식은 대화가 쌓여서 스텝마다 커집니다. 용량선을 처음 넘는 스텝은 EvoSkill / EvoSkill·공통 위 순서로 RL 모델 22 / 27, 원본 모델 16 / 16, SFT 모델 17 / 16입니다. 위의 모델 버튼으로 바꿔 볼 수 있습니다.</p>
-<div class="chart" id="c-hit"><h4 data-toc-skip>스텝별 실측 재사용률</h4><p class="sub">seed 3개를 합해 계산</p><div class="plot"></div></div>
+<figure class="sfig"><div class="chart" id="c-hit"><div class="plot"></div></div><figcaption class="caption"><b>Figure 11.</b> 스텝별 실측 재사용률. seed 3개를 합해 계산</figcaption></figure>
 <p class="read"><b>해석</b>세로축은 그 스텝 요청들의 재사용률입니다. SkillRL 원래(약 0.66)와 WikiSkill·뒤(약 0.85)는 스텝이 지나도 거의 평평합니다. EvoSkill 두 방식은 초반에 0.93~0.97로 가장 높습니다. 그런데 위 그래프에서 토큰 합이 용량선을 넘은 뒤에 크게 떨어집니다. 예를 들어 RL 모델의 EvoSkill은 step 20에서 0.97, step 30에서 0.23입니다. 두 일이 같은 시기에 일어난다는 것만 보입니다. 원인은 아직 확인하지 않았습니다.</p>
 <ul>
   <li>EvoSkill 방식은 이전 메시지를 지우지 않습니다. 그래서 스텝이 갈수록 토큰 합이 커지고, step 47~49에서 가장 큽니다.</li>
@@ -1478,10 +1490,10 @@ Admissible actions: [&#x27;examine bathtubbasin 1&#x27;
 </ul>
 
 <h3 data-toc-skip>다시 계산한 토큰</h3>
-<div class="chart" id="c-recomp"><h4 data-toc-skip>다시 계산한 토큰 / run (seed 3개 평균)</h4><p class="sub">단위 백만 토큰 (M). 성공률이 낮은 모델은 에피소드가 길어서 요청이 많습니다</p><div class="plot"></div></div>
+<figure class="sfig"><div class="chart" id="c-recomp"><div class="plot"></div></div><figcaption class="caption"><b>Figure 12.</b> 다시 계산한 토큰 / run (seed 3개 평균). 단위 백만 토큰 (M). 성공률이 낮은 모델은 에피소드가 길어서 요청이 많습니다</figcaption></figure>
 <p class="read"><b>해석</b>막대가 길수록 run 하나에서 GPU가 새로 계산한 프롬프트 토큰이 많습니다. EvoSkill 두 방식은 7.9M~26.1M 토큰으로, 다른 방식(0.6M~1.5M)의 5배 이상입니다.</p>
 
-<h2 id="x4" data-toc-text="2-4 앞부분이 아닌 곳의 재사용"><span class="no">2-4</span>앞부분이 아닌 곳의 재사용</h2>
+<h2 id="x4" data-toc-text="2-4 앞부분이 아닌 곳의 재사용">2-4 앞부분이 아닌 곳의 재사용</h2>
 <p>앞부분 재사용은 프롬프트 앞쪽이 같을 때만 됩니다. 스킬 구간이 프롬프트 가운데에 있으면 쓸 수 없습니다. 그래서 다른 곳에서 계산한 스킬 KV를 가져다 붙이면 무엇이 달라지는지 쟀습니다. 이런 재사용은 CacheBlend 같은 기법이 씁니다.</p>
 <ol class="steps">
   <li>원래 형식 프롬프트에서 구간 다섯 개를 고릅니다. 이 구간을 청크라고 부릅니다.</li>
@@ -1522,12 +1534,12 @@ Admissible actions: [&#x27;examine bathtubbasin 1&#x27;
 </ul>
 <div class="legend"><span><i class="sw-s1"></i>RL 모델</span><span><i class="sw-s2"></i>원본 모델</span><span><i class="sw-s3"></i>SFT 모델</span></div>
 <div class="charts2">
-  <div class="chart" id="c-e7rel"><h4 data-toc-skip>① RL 궤적 · K rel</h4><p class="sub">청크 · 재사용 문맥. 작을수록 원래 KV와 가깝습니다</p><div class="plot"></div></div>
-  <div class="chart" id="c-e7big"><h4 data-toc-skip>① RL 궤적 · 행동이 크게 바뀐 표본 수</h4><p class="sub">보정 없이 재사용. 막대 옆 숫자는 크게 바뀐 수 / 형식을 지킨 응답 수</p><div class="plot"></div></div>
+  <figure class="sfig"><div class="chart" id="c-e7rel"><div class="plot"></div></div><figcaption class="caption"><b>Figure 13.</b> ① RL 궤적 · K rel. 청크 · 재사용 문맥. 작을수록 원래 KV와 가깝습니다</figcaption></figure>
+  <figure class="sfig"><div class="chart" id="c-e7big"><div class="plot"></div></div><figcaption class="caption"><b>Figure 14.</b> ① RL 궤적 · 행동이 크게 바뀐 표본 수. 보정 없이 재사용. 막대 옆 숫자는 크게 바뀐 수 / 형식을 지킨 응답 수</figcaption></figure>
 </div>
 <div class="charts2">
-  <div class="chart" id="c-e7rel2"><h4 data-toc-skip>② 자기 궤적 · K rel</h4><p class="sub">청크 · 재사용 문맥. 작을수록 원래 KV와 가깝습니다</p><div class="plot"></div></div>
-  <div class="chart" id="c-e7own"><h4 data-toc-skip>② 자기 궤적 · 행동이 크게 바뀐 표본 수</h4><p class="sub">보정 없이 재사용. 막대 옆 숫자는 크게 바뀐 수 / 형식을 지킨 응답 수</p><div class="plot"></div></div>
+  <figure class="sfig"><div class="chart" id="c-e7rel2"><div class="plot"></div></div><figcaption class="caption"><b>Figure 15.</b> ② 자기 궤적 · K rel. 청크 · 재사용 문맥. 작을수록 원래 KV와 가깝습니다</figcaption></figure>
+  <figure class="sfig"><div class="chart" id="c-e7own"><div class="plot"></div></div><figcaption class="caption"><b>Figure 16.</b> ② 자기 궤적 · 행동이 크게 바뀐 표본 수. 보정 없이 재사용. 막대 옆 숫자는 크게 바뀐 수 / 형식을 지킨 응답 수</figcaption></figure>
 </div>
 <p class="read"><b>해석 · K rel</b>막대가 짧을수록 다른 곳에서 계산한 KV가 원래 자리의 KV와 비슷합니다. ①에서 앞 문맥이 조금만 다른 경우(other_*, A · prev_step)는 0.02~0.13으로 짧습니다. 청크만 따로 계산한 경우(alone_*)는 0.15~0.42로 깁니다. 같은 청크·문맥에서 세 모델의 차이는 0.05 이하입니다. ②에서도 스킬 청크는 ①과 거의 같습니다. 이력 첫 항목(H)은 원본·SFT 모델에서 0.40~0.43으로 조금 깁니다. 이 두 모델의 궤적에서는 H 청크가 24~29토큰으로 RL 궤적(40토큰)보다 짧습니다.</p>
 <div class="tbl"><table><thead><tr><th>모델</th><th>궤적</th><th>형식을 지킨 응답</th><th><code>[action&gt;</code> 등 깨진 태그</th><th>행동 태그 없음</th></tr></thead><tbody>
@@ -1550,7 +1562,7 @@ Admissible actions: [&#x27;examine bathtubbasin 1&#x27;
   <li>② 자기 궤적에서 SFT 모델의 스킬 청크 값은 0~2개, 행동 목록(A) · alone_sys는 10개입니다. RL 모델은 0~1개, 12개입니다.</li>
 </ul>
 
-<h2 id="x5" data-toc-text="2-5 한계"><span class="no">2-5</span>한계</h2>
+<h2 id="x5" data-toc-text="2-5 한계">2-5 한계</h2>
 <ul>
   <li>환경은 ALFWorld 하나입니다. WebShop과 OfficeQA는 아직 돌리지 않았습니다.</li>
   <li>WikiSkill과 EvoSkill 방식의 스킬 문서는 합성 문서입니다. 실제 EvoSkill 스킬은 3K~23K 문자로 더 큽니다.</li>
@@ -1559,14 +1571,12 @@ Admissible actions: [&#x27;examine bathtubbasin 1&#x27;
   <li>vLLM 0.11.0 한 버전, 게임 64개를 같은 걸음으로 돌린 조건입니다. 실제 서비스처럼 요청이 제각각 들어오는 조건이 아닙니다.</li>
 </ul>
 
-<p class="part">3 · 고민</p>
-<h2 id="r" data-toc-text="3 연구 질문에 대한 고민"><span class="no">3</span>연구 질문에 대한 고민</h2>
+<h2 id="r" data-toc-text="3 연구 질문에 대한 고민">3 연구 질문에 대한 고민</h2>
 <div class="mine"><b>지금 제 생각</b>
 <p>제 연구 질문은 스킬 에이전트에서 KV 캐시를 더 많이 다시 쓰도록 스킬을 배치하는 방법(skill schema)을 설계하는 것입니다. 그런데 공통 부분을 앞으로 빼면 끝나는 문제라면, 연구 주제가 될 수 있는지 의문입니다.</p>
 <p>그래서 두 가지를 생각합니다. 첫째, vLLM과 SGLang 같은 서빙 엔진의 특징을 근거로 KV 캐시를 더 잘 쓰는 방법을 찾는 것입니다 (RQ1). 둘째, 스킬 에이전트마다 상황과 프롬프트 구조가 다릅니다. ALFWorld에 맞춘 방법이 다른 곳에서는 맞지 않을 수 있습니다. 일반화를 할지, 벤치마크마다 해결책을 정리할지 고민입니다.</p></div>
 
-<p class="part">4 · 3년 계획</p>
-<h2 id="plan" data-toc-text="4 skill agent 3년 계획"><span class="no">4</span>skill agent 3년 계획</h2>
+<h2 id="plan" data-toc-text="4 skill agent 3년 계획">4 skill agent 3년 계획</h2>
 <p>KV 재사용과 별개로, skill을 쓰는 에이전트로 3년 동안 무엇을 할 수 있을지 같이 브레인스토밍하려 합니다. 아래 주제들은 출발점일 뿐입니다. 아직 고른 것은 없습니다.</p>
 <div class="note"><b>방향</b>
 <ul>
