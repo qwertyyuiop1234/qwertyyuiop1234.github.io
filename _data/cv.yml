@@ -3,6 +3,7 @@ cv:
   label: Undergraduate Researcher
   email: dltmdgus6665@gmail.com
   location: Seoul, Korea
+  website: https://qwertyyuiop1234.github.io
   # image: "me.JPG"
 
   social_networks:
@@ -20,19 +21,15 @@ cv:
 
   sections:
     Experience:
-      - company: ELION LAB
-        position: Undergraduate Researcher
+      - company: ELION LAB, Konkuk University
+        position: Undergraduate Researcher (Advisor - Prof. Jaehyung Seo)
+        location: Seoul, Korea
         start_date: 2026
         end_date: present
-        summary: Undergraduate researcher at ELION LAB.
-
-      - company: Konkuk University
-        position: Undergraduate Student
-        location: Seoul, Korea
-        start_date: 2022-03
-        end_date: present
         highlights:
-          - Currently pursuing a degree in Computer Science.
+          - Researching KV cache reuse in multi-agent LLMs and presented the cross-lingual study as first author at HCLT 2026 (Oral).
+          - "Participating researcher in three funded projects: NRF Excellent Young Researcher Program, KOCCA, and NRF Basic Research Program."
+          - "**KV-cache-friendly skill schemas for skill-based agents** (ongoing): reordering prompt segments to raise prefix-cache hit rate for SkillRL agents (Qwen2.5-7B-Instruct RL checkpoint) on ALFWorld. Found the action segment to be uniquely position-sensitive and now designing controlled experiments to verify it."
 
       - company: Republic of Korea Army (KATUSA)
         position: Combat Medic
@@ -46,23 +43,80 @@ cv:
       - company: Google Developer Groups on Campus (GDGoC)
         position: Member
         location: Seoul, Korea
-        start_date: 2025-07
-        end_date: present
+        start_date: 2025
+        end_date: 2026
         summary: Participated in a developer community hosted by Google, focusing on AI research and paper reviews.
         highlights:
           - Studied and analyzed research papers on AI topics including LLMs and Computer Vision.
           - Engaged in collaborative discussions and knowledge sharing with colleagues.
 
-    Awards:
-      - name: K-Hackathon
-        date: 2025
-        awarder: MSIT (Ministry of Science and ICT)
-        summary: Ranked in the top 20 out of 550 teams nationwide.
+    Interests:
+      - name: AI Systems
+        icon: fa-solid fa-microchip
+        keywords: "AI Performance Optimization, AI Hardware Accelerator"
+        summary: "AI Performance Optimization, AI Hardware Accelerator"
 
+      - name: Models
+        icon: fa-solid fa-brain
+        keywords: "Large Language Models (LLM), World Model"
+        summary: "Large Language Models (LLM), World Model"
+
+    Education:
+      - institution: Konkuk University
+        area: Computer Science and Engineering
+        studyType: B.S.
+        location: Seoul, Korea
+        start_date: 2022
+        end_date: present
+        highlights:
+          - "Cumulative GPA: 4.24 / 4.5"
+          - "Major GPA: 4.46 / 4.5"
+
+    Publications:
+      - title: "KV Cache Reuse in Korean Multi-Agent Systems: A Cross-Lingual Difference in Entropy-Gate Decisions"
+        publisher: Annual Conference on Human and Cognitive Language Technology (HCLT 2026) – Oral Presentation
+        date: 2026
+        summary: "**Seunghyun Lee**, Jaehyung Seo. Analyzed how KVCOMM-style KV cache sharing behaves on paired English–Korean HRM8K (Llama-3.1-8B-Instruct); found Korean reuses KV cache more often despite 1.34× more tokens, traced the gap to the entropy gate and to length-driven distance spread in layers 22–31, and showed it costs more accuracy. *Related patent application pending.*"
+
+    Projects:
+      - name: InfraTech-KR
+        position: Personal study project
+        start_date: "2026-11"
+        end_date: present
+        summary: "Translating the open AI-infrastructure curriculum *InfraTech* (Chinese) into Korean while studying LLM serving internals: vLLM/SGLang schedulers, KV cache management, prefix caching, and speculative decoding. Notes are published on my blog."
+
+      - name: LLM from Scratch
+        position: Personal project
+        start_date: "2026-03"
+        end_date: present
+        summary: Building a GPT-style language model from scratch in PyTorch without high-level libraries, currently implemented up to multi-head self-attention.
+
+      - name: Bargate – AI consultation assistant for lawyers
+        position: Tech Lead
+        start_date: "2025-12"
+        end_date: "2026-04"
+        summary: Led development as tech lead, built the backend, and integrated ElevenLabs speech-to-text for consultation transcription.
+        highlights:
+          - Passed the first round of the national startup program 모두의 창업.
+
+      - name: Juchajang – AI vacant parking spot finder
+        position: Tech Lead
+        start_date: "2025"
+        end_date: "2025"
+        summary: Led a team building an AI service that guides drivers to vacant parking spots, implemented with FastAPI, React, and PostgreSQL.
+        highlights:
+          - Ranked in the top 20 of 550 teams at the 2025 K-Hackathon (Ministry of Science and ICT).
+
+    Awards:
       - name: Academic Scholarship (70% Tuition Waiver)
         date: 2026
         awarder: Konkuk University
         summary: Awarded for outstanding academic performance in the second semester of sophomore year.
+
+      - name: Academic Scholarship (30% Tuition Waiver)
+        date: 2026
+        awarder: Konkuk University
+        summary: Awarded in the first semester of junior year for outstanding academic performance.
 
       - name: Dean's List (Two-Time Recipient)
         date: 2026
@@ -74,16 +128,15 @@ cv:
         awarder: Gwacheon Aehyang Scholarship Association
         summary: Awarded for outstanding academic performance in the second semester of sophomore year.
 
+      - name: K-Hackathon
+        date: 2025
+        awarder: MSIT (Ministry of Science and ICT)
+        summary: Ranked in the top 20 out of 550 teams nationwide.
+
       - name: Certificate of Appreciation (COA)
-        date: 2025-01
+        date: 2025
         awarder: 1-23 Infantry Battalion, United States Army
         summary: Received for outstanding service and dedication to duty as a KATUSA Medic in the 7th Infantry Division.
-
-    GPA:
-      - label: Cumulative GPA
-        details: 4.24 / 4.5
-      - label: Major GPA
-        details: 4.46 / 4.5
 
     Skills:
       - name: Programming Languages
@@ -101,36 +154,11 @@ cv:
         summary: "Native speaker"
 
       - name: English
-        summary: "Conversational (Casual daily conversation)"
-
-    Interests:
-      - name: AI & Machine Learning
-        icon: fa-solid fa-microchip
-        keywords: "AI Performance Optimization, AI Hardware Accelerator, AI System, Robotics, DRL, Computer Vision (CV), Large Language Models (LLM), Reinforcement Learning(RL), World Model"
-        summary: "AI Performance Optimization, AI Hardware Accelerators, AI Systems, Robotics, Deep Reinforcement Learning, Computer Vision, Large Language Models, Reinforcement Learning, and World Models"
+        summary: "Conversational"
 
     Certificates:
       - name: Google Developer Groups on Campus (GDGoC) Program Completion
         icon: fa-solid fa-certificate
 
-      - name: "BOOSTRUN : 인공지능 전문가 특강 1기"
+      - name: "BOOSTRUN: 인공지능 전문가 특강 1기 (AI Expert Lecture Series, 1st Cohort)"
         icon: fa-solid fa-certificate
-
-    Projects:
-      - name: juchajang
-        position: Tech Lead
-        summary: A solution for finding vacant parking spots.
-        start_date: "2025"
-        end_date: "2025"
-
-      - name: bargate
-        position: Tech Lead
-        summary: A specialized consultation assistant for lawyers.
-        start_date: "2025-12"
-        end_date: present
-
-      - name: LLM from Scratch
-        position: Personal project
-        summary: Implementing a Large Language Model from scratch using PyTorch.
-        start_date: "2026-03"
-        end_date: present
